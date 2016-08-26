@@ -19,7 +19,7 @@ UltraModernUI include three NSIS plug-ins:
 [![Download UltraModernUI][4]][3]
 
   [3]: https://sourceforge.net/projects/ultramodernui/files/UltraModernUI/
-  [4]: http://ultramodernui.sourceforge.net/images/download.png ()
+  [4]: http://ultramodernui.sourceforge.net/images/download.png (Download UltraModernUI)
 
 # What’s new in UltraModernUI version 2.0 ?
 
