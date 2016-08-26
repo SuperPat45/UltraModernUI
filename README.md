@@ -1,9 +1,7 @@
 [![NSIS Ultra-Modern User Interface][2]][1]
 
   [1]: http://ultramodernui.sourceforge.net/
-  [2]: http://ultramodernui.sourceforge.net/images/header.gif (Go to the NSIS Ultra-Modern User Interface home page)
-
-![](http://ultramodernui.sourceforge.net/images/SmallScreen.png)
+  [2]: http://ultramodernui.sourceforge.net/images/header.png (Go to the NSIS Ultra-Modern User Interface home page)
 
 The Ultra-Modern User Interface is a new interface with a style like the most recent installers for NSIS 3 (Nullsoft Scriptable Install System), the tool that allows programmers to create such installers for Windows. UltraModernUI and NSIS are released under an open source license.
 
@@ -15,6 +13,13 @@ UltraModernUI include three NSIS plug-ins:
 * [SkinnedControls](http://nsis.sourceforge.net/SkinnedControls_plug-in): a plug-in, natively integrated to UmtraModernUI, to skin all buttons and scroll bars of your installer;
 * [InstallOptionsEx](http://nsis.sourceforge.net/InstallOptionsEx_plug-in): an extension, natively integrated to UmtraModernUI, of the original [InstallOptions](http://nsis.sourceforge.net/Docs/InstallOptions/Readme.html) plug-in with more feature to create custom pages;
 * [nsArray](http://nsis.sourceforge.net/Arrays_in_NSIS): needed by some UltraModernUI features, provide less out-of-the-box arrays and map features.
+
+![](http://ultramodernui.sourceforge.net/images/screenshots/UMUI01.png)
+
+[![Download UltraModernUI][4]][3]
+
+  [3]: https://sourceforge.net/projects/ultramodernui/files/UltraModernUI/
+  [4]: http://ultramodernui.sourceforge.net/images/download.png ()
 
 # What’s new in UltraModernUI version 2.0 ?
 

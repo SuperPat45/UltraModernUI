@@ -12,8 +12,8 @@ UltraModernUI include also ModernUIEx. ModernUIEx is the same User Interface as 
 Using the UltraModernUI macros and language files, writing scripts with an ultra-modern interface is easy. A lot of examples are available to show the different features and the documentation contains all information about writing UltraModernUI scripts and a reference of all settings.
 
 
-What's new in UltraModernUI version 2.0 ?
------------------------------------------
+What's new in UltraModernUI version 2.0?
+----------------------------------------
 
   o  UltraModernUI is now fully compatible with NSIS version 3 x86 edition and now with the large string special build;
   o  The NSISArray plug-in was replaced by the new nsArray plug-in in version 1.1.1.7 who is faster and uses less memory;
@@ -28,5 +28,5 @@ What's new in UltraModernUI version 2.0 ?
   o  Added an example for nsDialogs based custom page and documentation;
   o  The default install directory for the NSIS + UltraModernUI package is now C:\ProgramData on Windows Vista and upper to allow examples to be compiled without access rights errors;
   o  A lot of bug fixes and optimizations;
-  o  Source code now on GitHub https://github.com/SuperPat45/UltraModernUI.
+  o  Source code now on GitHub: https://github.com/SuperPat45/UltraModernUI.
   
