@@ -12,7 +12,7 @@ UltraModernUI include also ModernUIEx. ModernUIEx is the same User Interface as 
 Using the UltraModernUI macros and language files, writing scripts with an ultra-modern interface is easy. A lot of examples are available to show the different features and the documentation contains all information about writing UltraModernUI scripts and a reference of all settings.
 
 
-What's new in version UltraModernUI 2.0 ?
+What's new in UltraModernUI version 2.0 ?
 -----------------------------------------
 
   o  UltraModernUI is now fully compatible with NSIS version 3 x86 edition and now with the large string special build;

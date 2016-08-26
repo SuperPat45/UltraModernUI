@@ -2,7 +2,8 @@
 
   [1]: http://ultramodernui.sourceforge.net/
   [2]: http://ultramodernui.sourceforge.net/images/header.gif (Go to the NSIS Ultra-Modern User Interface home page)
-<img src="http://ultramodernui.sourceforge.net/images/SmallScreen.png" style="float:right; margin-left:15px;"/>
+
+![](http://ultramodernui.sourceforge.net/images/SmallScreen.png)
 
 The Ultra-Modern User Interface is a new interface with a style like the most recent installers for NSIS 3 (Nullsoft Scriptable Install System), the tool that allows programmers to create such installers for Windows. UltraModernUI and NSIS are released under an open source license.
 
@@ -15,7 +16,7 @@ UltraModernUI include three NSIS plug-ins:
 * [InstallOptionsEx](http://nsis.sourceforge.net/InstallOptionsEx_plug-in): an extension, natively integrated to UmtraModernUI, of the original [InstallOptions](http://nsis.sourceforge.net/Docs/InstallOptions/Readme.html) plug-in with more feature to create custom pages;
 * [nsArray](http://nsis.sourceforge.net/Arrays_in_NSIS): needed by some UltraModernUI features, provide less out-of-the-box arrays and map features.
 
-# What’s new in version UltraModernUI 2.0 ?
+# What’s new in UltraModernUI version 2.0 ?
 
 * UltraModernUI is now fully compatible with NSIS version 3 x86 edition and now with the large string special build;
 * The NSISArray plug-in was replaced by the new nsArray plug-in in version 1.1.1.7 who is faster and uses less memory;
