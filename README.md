@@ -16,11 +16,6 @@ UltraModernUI include three NSIS plug-ins:
 
 ![](http://ultramodernui.sourceforge.net/images/screenshots/UMUI01.png)
 
-[![Download UltraModernUI][4]][3]
-
-  [3]: https://sourceforge.net/projects/ultramodernui/files/UltraModernUI/
-  [4]: http://ultramodernui.sourceforge.net/images/download.png (Download UltraModernUI)
-
 # What’s new in UltraModernUI version 2.0 ?
 
 * UltraModernUI is now fully compatible with NSIS version 3 x86 edition and now with the large string special build;
@@ -36,7 +31,7 @@ UltraModernUI include three NSIS plug-ins:
 * Added an example for nsDialogs based custom page and documentation;
 * The default install directory for the NSIS + UltraModernUI package is now C:\ProgramData on Windows Vista and upper to allow examples to be compiled without access rights errors;
 * A lot of bug fixes and optimizations;
-* Source code now on GitHub https://github.com/SuperPat45/UltraModernUI.
+* Source code now on GitHub: https://github.com/SuperPat45/UltraModernUI.
 
 # License
 [zlib/libpng](LICENSE.md)
