@@ -1,7 +1,7 @@
 @echo off
 @echo Creating UltraModernUI zip archive
 
-  del /Q UltraModernUI_2.0b1.zip
+  del /Q UltraModernUI_2.0b2.zip
   rmdir /S /Q temp
 
   mkdir temp
@@ -51,10 +51,10 @@
   copy Docs\SkinnedControls\images\*.gif temp\Docs\SkinnedControls\images
 
   mkdir "temp\Contrib\SkinnedControls\"
-	copy Contrib\SkinnedControls\*.h temp\Contrib\SkinnedControls
-	copy Contrib\SkinnedControls\*.c temp\Contrib\SkinnedControls
-	copy Contrib\SkinnedControls\SkinnedControls.sln temp\Contrib\SkinnedControls
-	copy Contrib\SkinnedControls\SkinnedControls.vcproj temp\Contrib\SkinnedControls
+  copy Contrib\SkinnedControls\*.h temp\Contrib\SkinnedControls
+  copy Contrib\SkinnedControls\*.c temp\Contrib\SkinnedControls
+  copy Contrib\SkinnedControls\SkinnedControls.sln temp\Contrib\SkinnedControls
+  copy Contrib\SkinnedControls\SkinnedControls.vcproj temp\Contrib\SkinnedControls
   mkdir "temp\Contrib\SkinnedControls\coolsb"
   copy Contrib\SkinnedControls\coolsb\*.h temp\Contrib\SkinnedControls\coolsb
   copy Contrib\SkinnedControls\coolsb\*.c temp\Contrib\SkinnedControls\
@@ -62,14 +62,14 @@
   copy Contrib\SkinnedControls\coolsb\coolsb.vcproj temp\Contrib\SkinnedControls\coolsb
 
   mkdir "temp\Contrib\SkinnedControls\skins"
-	copy Contrib\SkinnedControls\skins\*.bmp temp\Contrib\SkinnedControls\skins
-	
+  copy Contrib\SkinnedControls\skins\*.bmp temp\Contrib\SkinnedControls\skins
+  
   mkdir "temp\Examples\SkinnedControls\"
   copy Examples\SkinnedControls\*.nsi temp\Examples\SkinnedControls
 
 rem  mkdir "temp\Contrib\UIs"
-	copy Contrib\UIs\modern_sb.exe temp\Contrib\UIs
-	copy Contrib\UIs\default_sb.exe temp\Contrib\UIs
+  copy Contrib\UIs\modern_sb.exe temp\Contrib\UIs
+  copy Contrib\UIs\default_sb.exe temp\Contrib\UIs
 
 
 rem  mkdir "temp\Plugins\x86-ansi\"
@@ -81,12 +81,12 @@ rem  mkdir "temp\Plugins\x86-unicode\"
   copy Docs\InstallOptionsEx\*.* temp\Docs\InstallOptionsEx
 
   mkdir "temp\Contrib\InstallOptionsEx\"
-	copy Contrib\InstallOptionsEx\*.h temp\Contrib\InstallOptionsEx
-	copy Contrib\InstallOptionsEx\*.cpp temp\Contrib\InstallOptionsEx
-	copy Contrib\InstallOptionsEx\*.c temp\Contrib\InstallOptionsEx
-	copy Contrib\InstallOptionsEx\ioptdll.rc temp\Contrib\InstallOptionsEx
-	copy Contrib\InstallOptionsEx\io.sln temp\Contrib\InstallOptionsEx
-	copy Contrib\InstallOptionsEx\io.vcproj temp\Contrib\InstallOptionsEx
+  copy Contrib\InstallOptionsEx\*.h temp\Contrib\InstallOptionsEx
+  copy Contrib\InstallOptionsEx\*.cpp temp\Contrib\InstallOptionsEx
+  copy Contrib\InstallOptionsEx\*.c temp\Contrib\InstallOptionsEx
+  copy Contrib\InstallOptionsEx\ioptdll.rc temp\Contrib\InstallOptionsEx
+  copy Contrib\InstallOptionsEx\io.sln temp\Contrib\InstallOptionsEx
+  copy Contrib\InstallOptionsEx\io.vcproj temp\Contrib\InstallOptionsEx
   mkdir "temp\Contrib\InstallOptionsEx\Controls"
   copy Contrib\InstallOptionsEx\Controls\*.h temp\Contrib\InstallOptionsEx\Controls
 
@@ -113,7 +113,7 @@ rem  mkdir "temp\Include\"
   copy Contrib\nsArray\*.* temp\Contrib\nsArray
 
   cd temp
-  "C:\Program Files\7-Zip\7z.exe" a -tzip -mx9 ..\UltraModernUI_2.0b1.zip *
+  "C:\Program Files\7-Zip\7z.exe" a -tzip -mx9 ..\UltraModernUI_2.0b2.zip *
   cd ..
 
   rmdir /S /Q temp

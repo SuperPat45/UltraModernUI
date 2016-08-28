@@ -1154,21 +1154,20 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
     ;starting SkinnedControls plugin
     !ifdef UMUI_${UNPREFIX}BUTTONIMAGE_BMP & UMUI_${UNPREFIX}SCROLLBARIMAGE_BMP
-      SkinnedControls::skinit /NOUNLOAD \
+      SkinnedControls::skinit \
         /disabledtextcolor=${UMUI_${UNPREFIX}DISABLED_BUTTON_TEXT_COLOR} \
         /selectedtextcolor=${UMUI_${UNPREFIX}SELECTED_BUTTON_TEXT_COLOR} \
         /textcolor=${UMUI_${UNPREFIX}BUTTON_TEXT_COLOR} \
-        "/button=$PLUGINSDIR\ButtonImg.bmp" \
-        "/scrollbar=$PLUGINSDIR\ScrollBarImg.bmp"
+        /button=$PLUGINSDIR\ButtonImg.bmp \
+        /scrollbar=$PLUGINSDIR\ScrollBarImg.bmp
     !else ifdef UMUI_${UNPREFIX}BUTTONIMAGE_BMP
-      SkinnedControls::skinit /NOUNLOAD \
+      SkinnedControls::skinit \
         /disabledtextcolor=${UMUI_${UNPREFIX}DISABLED_BUTTON_TEXT_COLOR} \
         /selectedtextcolor=${UMUI_${UNPREFIX}SELECTED_BUTTON_TEXT_COLOR} \
         /textcolor=${UMUI_${UNPREFIX}BUTTON_TEXT_COLOR} \
-        "/button=$PLUGINSDIR\ButtonImg.bmp"
+        /button=$PLUGINSDIR\ButtonImg.bmp
     !else
-      SkinnedControls::skinit /NOUNLOAD \
-        "/scrollbar=$PLUGINSDIR\ScrollBarImg.bmp"
+      SkinnedControls::skinit /scrollbar=$PLUGINSDIR\ScrollBarImg.bmp
     !endif
 
   !endif
@@ -2273,17 +2272,12 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
   FunctionEnd
 
-!ifdef UMUI_CUSTOMFUNCTION_GUIEND | UMUI_BUTTONIMAGE_BMP | UMUI_SCROLLBARIMAGE_BMP | UMUI_BGSKIN | UMUI_USE_CUSTOMBG
+!ifdef UMUI_CUSTOMFUNCTION_GUIEND | UMUI_BGSKIN | UMUI_USE_CUSTOMBG
 
   Function .onGUIEnd
 
     !ifdef UMUI_CUSTOMFUNCTION_GUIEND
       Call "${UMUI_CUSTOMFUNCTION_GUIEND}"
-    !endif
-
-    !ifdef UMUI_SCROLLBARIMAGE_BMP | UMUI_BUTTONIMAGE_BMP
-      ;closed SkinnedControls plugin
-      SkinnedControls::unskinit
     !endif
 
     !ifdef UMUI_BGSKIN | UMUI_USE_CUSTOMBG
@@ -2434,17 +2428,12 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
   FunctionEnd
 
 
-  !ifdef UMUI_CUSTOMFUNCTION_UNGUIEND | UMUI_UNBUTTONIMAGE_BMP | UMUI_UNSCROLLBARIMAGE_BMP | UMUI_BGSKIN | UMUI_USE_CUSTOMBG
+  !ifdef UMUI_CUSTOMFUNCTION_UNGUIEND | UMUI_BGSKIN | UMUI_USE_CUSTOMBG
 
     Function un.onGUIEnd
 
       !ifdef UMUI_CUSTOMFUNCTION_UNGUIEND
         Call "${UMUI_CUSTOMFUNCTION_UNGUIEND}"
-      !endif
-
-      !ifdef UMUI_UNBUTTONIMAGE_BMP | UMUI_UNSCROLLBARIMAGE_BMP
-        ;closing SkinnedControls plugin
-        SkinnedControls::unskinit
       !endif
 
       !ifdef UMUI_BGSKIN | UMUI_USE_CUSTOMBG

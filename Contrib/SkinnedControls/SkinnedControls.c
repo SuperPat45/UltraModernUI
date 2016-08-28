@@ -1,6 +1,6 @@
 /*
 o--------------------------------------------------------------------------o
-|SkinnedControls 1.3                                                       |
+|SkinnedControls 1.4                                                       |
 |Based on wansis, a Plug-in written by Saivert that skins NSIS like Winamp.|
 (--------------------------------------------------------------------------)
 | Main source code.                           / A plug-in for NSIS 2 and 3 |
@@ -16,6 +16,7 @@ void main(){}
 // makes a smaller DLL file
 BOOL WINAPI _DllMainCRTStartup(HINSTANCE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
 {
+	g_hInstance = hModule;
 	return 1;
 }
 
@@ -320,42 +321,42 @@ void internal_skin(int isUpdating)
 		popstring(temp);
 
 		lstrcpyn(compstring, temp, lstrlen(tdcp)+1);
-		if (lstrcmp(compstring, tdcp) == 0)
+		if (lstrcmpi(compstring, tdcp) == 0)
 		{
 			textdcolor = myhtoi(&temp[lstrlen(tdcp)]);
 		}
 		else
 		{
 			lstrcpyn(compstring, temp, lstrlen(tscp)+1);
-			if (lstrcmp(compstring, tscp) == 0)
+			if (lstrcmpi(compstring, tscp) == 0)
 			{
 				textscolor = myhtoi(&temp[lstrlen(tscp)]);
 			}
 			else
 			{
 				lstrcpyn(compstring, temp, lstrlen(tcp)+1);
-				if (lstrcmp(compstring, tcp) == 0)
+				if (lstrcmpi(compstring, tcp) == 0)
 				{
 					textcolor = myhtoi(&temp[lstrlen(tcp)]);
 				}
 				else
 				{
 					lstrcpyn(compstring, temp, lstrlen(bcp)+1);
-					if (lstrcmp(compstring, bcp) == 0)
+					if (lstrcmpi(compstring, bcp) == 0)
 					{
 						lstrcpy(fna, &temp[lstrlen(bcp)]);
 					}
 					else
 					{
 						lstrcpyn(compstring, temp, lstrlen(sbcp)+1);
-						if (lstrcmp(compstring, sbcp) == 0)
+						if (lstrcmpi(compstring, sbcp) == 0)
 						{
 							lstrcpy(fnb, &temp[lstrlen(sbcp)]);
 						}
 						else
 						{
 							lstrcpyn(compstring, temp, lstrlen(srcp)+1);
-							if (lstrcmp(compstring, srcp) == 0)
+							if (lstrcmpi(compstring, srcp) == 0)
 							{
 								setReturn = 1;
 							}

@@ -1,5 +1,5 @@
 ; o----------------------------------------o
-; | NSIS Ultra-Modern User Interface 2.0b1 |
+; | NSIS Ultra-Modern User Interface 2.0b2 |
 ; (----------------------------------------)
 ; | Installer script.                      |
 ; | Written by SyperPat                    |
@@ -20,7 +20,7 @@
 ;    !error "VER_MAJOR, VER_MINOR and VER_REV_STR defines does not match the current NSIS version: ${NSIS_VERSION}"
 ;  !endif
 
-  !define UMUI_VERSION "v2.0b1"
+  !define UMUI_VERSION "v2.0b2"
   !define UMUI_VERBUILD "2.0_${NOW}"
 
   !define /date VERIPV "200.%Y.%m.%d"

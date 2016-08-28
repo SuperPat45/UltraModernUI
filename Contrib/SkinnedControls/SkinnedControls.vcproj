@@ -44,7 +44,6 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				UseUnicodeResponseFiles="false"
-				AdditionalOptions="/D &quot;LEGACY_PLUGIN&quot;"
 				Optimization="0"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;SkinnedControls_EXPORTS"
 				MinimalRebuild="true"
@@ -125,7 +124,6 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				UseUnicodeResponseFiles="false"
-				AdditionalOptions="/D &quot;LEGACY_PLUGIN&quot;"
 				Optimization="1"
 				FavorSizeOrSpeed="2"
 				WholeProgramOptimization="true"
@@ -207,7 +205,6 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				UseUnicodeResponseFiles="false"
-				AdditionalOptions="/D &quot;LEGACY_PLUGIN&quot;"
 				Optimization="1"
 				FavorSizeOrSpeed="2"
 				WholeProgramOptimization="true"
@@ -289,7 +286,6 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				UseUnicodeResponseFiles="false"
-				AdditionalOptions="/D &quot;LEGACY_PLUGIN&quot;"
 				Optimization="0"
 				FavorSizeOrSpeed="2"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;SkinnedControls_EXPORTS"

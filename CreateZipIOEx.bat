@@ -1,5 +1,5 @@
 @echo off
-@echo Creating InstallOptionsEx zip archive
+@echo Creating zip archive
 
   del /Q InstallOptionsEx2.4.5b3.zip
   rmdir /S /Q temp
@@ -17,12 +17,12 @@
   copy Docs\InstallOptionsEx\*.* temp\Docs\InstallOptionsEx
 
   mkdir "temp\Contrib\InstallOptionsEx\"
-	copy Contrib\InstallOptionsEx\*.h temp\Contrib\InstallOptionsEx
-	copy Contrib\InstallOptionsEx\*.cpp temp\Contrib\InstallOptionsEx
-	copy Contrib\InstallOptionsEx\*.c temp\Contrib\InstallOptionsEx
-	copy Contrib\InstallOptionsEx\ioptdll.rc temp\Contrib\InstallOptionsEx
-	copy Contrib\InstallOptionsEx\io.sln temp\Contrib\InstallOptionsEx
-	copy Contrib\InstallOptionsEx\io.vcproj temp\Contrib\InstallOptionsEx
+  copy Contrib\InstallOptionsEx\*.h temp\Contrib\InstallOptionsEx
+  copy Contrib\InstallOptionsEx\*.cpp temp\Contrib\InstallOptionsEx
+  copy Contrib\InstallOptionsEx\*.c temp\Contrib\InstallOptionsEx
+  copy Contrib\InstallOptionsEx\ioptdll.rc temp\Contrib\InstallOptionsEx
+  copy Contrib\InstallOptionsEx\io.sln temp\Contrib\InstallOptionsEx
+  copy Contrib\InstallOptionsEx\io.vcproj temp\Contrib\InstallOptionsEx
   mkdir "temp\Contrib\InstallOptionsEx\Controls"
   copy Contrib\InstallOptionsEx\Controls\*.h temp\Contrib\InstallOptionsEx\Controls
 

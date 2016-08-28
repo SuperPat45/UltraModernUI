@@ -21,7 +21,7 @@ UltraModernUI include three NSIS plug-ins:
 * UltraModernUI is now fully compatible with NSIS version 3 x86 edition and now with the large string special build;
 * The NSISArray plug-in was replaced by the new nsArray plug-in in version 1.1.1.7 who is faster and uses less memory;
 * Updated the InstallOptionsEx plug-in to version 2.4.5 beta 3 with full unicode support;
-* Updated the SkinnedControls plug-in to version 2.3 with unicode support, rewritten documentation and button image size are no more limited to allow smoother gradients;
+* Updated the SkinnedControls plug-in to version 1.4 with support of the new NSIS plug-in API, ignore case parameters name support, unicode support, rewritten documentation and button image size are no more limited to allow smoother gradients;
 * The information page is now compatible with UTF16LE text files if compiled in Unicode;
 * The information page is now compatible with Unix style (LF only) line return text files; 
 * The UMUI_CUSTOM_SKIN define is now deprecated, it is no more necessary and you can simply use the UMUI_SKIN define with your custom skin; 

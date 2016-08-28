@@ -109,18 +109,12 @@ FunctionEnd
 Function myGUIInit
   ; start the plugin
   ; the /disabledtextcolor, /selectedtextcolor and /textcolor parameters are optionnal
-  SkinnedControls::skinit /NOUNLOAD \
-        /SetReturn \
+  SkinnedControls::skinit \
         /disabledtextcolor=808080 \
         /selectedtextcolor=000080 \
         /textcolor=000000 \
         "/scrollbar=$PLUGINSDIR\scrollbar.bmp" \
         "/button=$PLUGINSDIR\button.bmp"
-FunctionEnd
-
-Function .onGUIEnd
-  ; stop the plugin
-  SkinnedControls::unskinit
 FunctionEnd
 
 Function un.onInit
@@ -132,15 +126,10 @@ FunctionEnd
 Function un.myGUIInit
   ; start the plugin
   ; the /disabledtextcolor, /selectedtextcolor and /textcolor parameters are optionnal
-  SkinnedControls::skinit /NOUNLOAD \
+  SkinnedControls::skinit \
         /disabledtextcolor=808080 \
         /selectedtextcolor=000080 \
         /textcolor=000000 \
         "/scrollbar=$PLUGINSDIR\scrollbar.bmp" \
         "/button=$PLUGINSDIR\button.bmp"
-FunctionEnd
-
-Function un.onGUIEnd
-  ; stop the plugin
-  SkinnedControls::unskinit
 FunctionEnd

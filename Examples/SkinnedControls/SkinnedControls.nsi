@@ -1,5 +1,5 @@
 ; o-----------------------------------------------------o
-; |   SkinnedControls 1.3                               |
+; |   SkinnedControls 1.4                               |
 ; (-----------------------------------------------------)
 ; | Installer script.      / A plug-in for NSIS 2 and 3 |
 ; |                       ------------------------------|
@@ -9,10 +9,10 @@
 ;--------------------------------
 ;General
 
-  !define VERSION "1.3"
+  !define VERSION "1.4"
   !define NAME "NSIS SkinnedControls plugin"
 
-  !define /date VERIPV "1.3"
+  !define /date VERIPV "1.4"
   VIProductVersion "${VERIPV}.0.0"
   VIAddVersionKey "ProductName" "SkinnedControls plugin for NSIS (Nullsoft Scriptable Install System)."
   VIAddVersionKey "LegalTrademarks" "SkinnedControls is released under the zlib/libpng license"
