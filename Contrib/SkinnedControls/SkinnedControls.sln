@@ -2,9 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual C++ Express 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SkinnedControls", "SkinnedControls.vcproj", "{80973FE4-5C0E-48F7-97EC-F6FEE6A12B31}"
-	ProjectSection(ProjectDependencies) = postProject
-		{5FAA4FEB-2E89-4033-9702-6605B20746A7} = {5FAA4FEB-2E89-4033-9702-6605B20746A7}
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "coolsb", "coolsb\coolsb.vcproj", "{5FAA4FEB-2E89-4033-9702-6605B20746A7}"
 EndProject

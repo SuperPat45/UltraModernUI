@@ -57,7 +57,7 @@
   copy Contrib\SkinnedControls\SkinnedControls.vcproj temp\Contrib\SkinnedControls
   mkdir "temp\Contrib\SkinnedControls\coolsb"
   copy Contrib\SkinnedControls\coolsb\*.h temp\Contrib\SkinnedControls\coolsb
-  copy Contrib\SkinnedControls\coolsb\*.c temp\Contrib\SkinnedControls\
+  copy Contrib\SkinnedControls\coolsb\*.c temp\Contrib\SkinnedControls\coolsb
   copy Contrib\SkinnedControls\coolsb\detours.lib temp\Contrib\SkinnedControls\coolsb
   copy Contrib\SkinnedControls\coolsb\coolsb.vcproj temp\Contrib\SkinnedControls\coolsb
 
