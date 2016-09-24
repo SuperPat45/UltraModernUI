@@ -1,6 +1,6 @@
 /*
 
-NSIS UltraModern User Interface version 2.0 beta 1
+NSIS UltraModern User Interface version 2.0 beta 2
 Copyright 2005-2016 SuperPat
 
 Based on:
@@ -10,7 +10,8 @@ Based on:
 */
 
 !ifndef MUI_INCLUDED
-!echo "NSIS Ultra-Modern User Interface version 2.0 beta 1 - Copyright 2005-2016 SuperPat"
+!echo "NSIS Ultra-Modern User Interface version 2.0 beta 2 - Copyright 2005-2016 SuperPat"
+!echo "  (Bugfixes and some additions: 2015-2016 - Matthias Mohr)"
 !echo "Based on: NSIS Modern User Interface version 1.8 - Copyright 2002-2016 Joost Verburg"
 
 ;--------------------------------
@@ -20,7 +21,7 @@ Based on:
 
 !define MUI_INCLUDED
 
-!define UMUI_SYSVERSION "2.0 beta 1"
+!define UMUI_SYSVERSION "2.0 beta 2"
 !define MUI_SYSVERSION "1.8"
 
 ;--------------------------------
@@ -1129,7 +1130,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
 
   !ifdef UMUI_${UNPREFIX}BUTTONIMAGE_BMP | UMUI_${UNPREFIX}SCROLLBARIMAGE_BMP
-	  !insertmacro UMUI_RESERVEFILE_SKINNEDCONTROLS
+    !insertmacro UMUI_RESERVEFILE_SKINNEDCONTROLS
   !endif
 
   !ifdef UMUI_${UNPREFIX}BUTTONIMAGE_BMP
@@ -1195,6 +1196,8 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 ; Taken from the NSIS Documentation
 !macro UMUI_GET_PARAMETERS
 
+  !define UMUI_UNIQUEID ${__LINE__}
+
   Push $R0
   Push $R1
   Push $R2
@@ -1207,25 +1210,27 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
   StrCpy $R0 $CMDLINE $R2 ; copy the first char
   StrCmp $R0 '"' 0 +3
     StrCpy $R1 '"'
-  Goto loop
+  Goto loop${UMUI_UNIQUEID}
     StrCpy $R1 " "
 
-  loop:
+  loop${UMUI_UNIQUEID}:
     IntOp $R2 $R2 + 1
     StrCpy $R0 $CMDLINE 1 $R2
-    StrCmp $R0 $R1 get ;found the " or space char
-      StrCmp $R2 $R3 get loop ;all the $CMDLINE string was viewed
+    StrCmp $R0 $R1 get${UMUI_UNIQUEID} ;found the " or space char
+      StrCmp $R2 $R3 get${UMUI_UNIQUEID} loop${UMUI_UNIQUEID} ;all the $CMDLINE string was viewed
 
-  get:
+  get${UMUI_UNIQUEID}:
     IntOp $R2 $R2 + 1
     StrCpy $R0 $CMDLINE 1 $R2
-    StrCmp $R0 " " get
+    StrCmp $R0 " " get${UMUI_UNIQUEID}
       StrCpy $R0 $CMDLINE "" $R2
 
   Pop $R3
   Pop $R2
   Pop $R1
   Exch $R0
+
+  !undef UMUI_UNIQUEID
 
 !macroend
 
@@ -3578,6 +3583,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     LockWindow off
 
     !insertmacro UMUI_FIX_BUTTONS_SKIN
+
   FunctionEnd
 
   Function "${LEAVE}"
@@ -3608,6 +3614,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !insertmacro MUI_HEADER_TEXT_PAGE $(MUI_${MUI_PAGE_UNINSTALLER_PREFIX}TEXT_LICENSE_TITLE) $(MUI_${MUI_PAGE_UNINSTALLER_PREFIX}TEXT_LICENSE_SUBTITLE)
 
     !insertmacro UMUI_FIX_BUTTONS_SKIN
+
   FunctionEnd
 
   Function "${SHOW}"
@@ -3719,6 +3726,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !insertmacro MUI_HEADER_TEXT_PAGE $(MUI_${MUI_PAGE_UNINSTALLER_PREFIX}TEXT_COMPONENTS_TITLE) $(MUI_${MUI_PAGE_UNINSTALLER_PREFIX}TEXT_COMPONENTS_SUBTITLE)
 
     !insertmacro UMUI_FIX_BUTTONS_SKIN
+
   FunctionEnd
 
   Function "${SHOW}"
@@ -3908,6 +3916,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !insertmacro MUI_HEADER_TEXT_PAGE $(MUI_${MUI_PAGE_UNINSTALLER_PREFIX}TEXT_DIRECTORY_TITLE) $(MUI_${MUI_PAGE_UNINSTALLER_PREFIX}TEXT_DIRECTORY_SUBTITLE)
 
     !insertmacro UMUI_FIX_BUTTONS_SKIN
+
   FunctionEnd
 
   Function "${SHOW}"
@@ -4016,6 +4025,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
       Pop "${MUI_STARTMENUPAGE_VARIABLE}"
 
     !insertmacro UMUI_FIX_BUTTONS_SKIN
+
   FunctionEnd
 
   Function "${LEAVE}"
@@ -4049,6 +4059,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !insertmacro UMUI_ABORT_IF_INSTALLFLAG_IS ${UMUI_CANCELLED}
 
     !insertmacro MUI_PAGE_FUNCTION_CUSTOM PRE
+
     !insertmacro MUI_HEADER_TEXT_PAGE $(MUI_${MUI_PAGE_UNINSTALLER_PREFIX}TEXT_${MUI_PAGE_UNINSTALLER_PREFIX}INSTALLING_TITLE) $(MUI_${MUI_PAGE_UNINSTALLER_PREFIX}TEXT_${MUI_PAGE_UNINSTALLER_PREFIX}INSTALLING_SUBTITLE)
 
     !ifdef UMUI_INSTALLDIR_REGISTRY_VALUENAME
@@ -4056,8 +4067,8 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !endif
 
     !insertmacro UMUI_FIX_BUTTONS_SKIN
-  FunctionEnd
 
+  FunctionEnd
 
   Function "${SHOW}"
 
@@ -4203,7 +4214,6 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !define UMUI_INTERNAL_FPOSLINKLEFT 130
     !define UMUI_INTERNAL_FOPTIONCHECKLEFT 134
   !endif
-
 
   Function "${PRE}"
 
@@ -4685,6 +4695,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     LockWindow off
 
     !insertmacro UMUI_FIX_BUTTONS_SKIN
+
   FunctionEnd
 
   Function "${LEAVE}"
@@ -4776,6 +4787,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !insertmacro MUI_HEADER_TEXT_PAGE $(MUI_UNTEXT_CONFIRM_TITLE) $(MUI_UNTEXT_CONFIRM_SUBTITLE)
 
     !insertmacro UMUI_FIX_BUTTONS_SKIN
+
   FunctionEnd
 
   Function "${SHOW}"
@@ -5072,6 +5084,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     LockWindow off
 
     !insertmacro UMUI_FIX_BUTTONS_SKIN
+
   FunctionEnd
 
   Function "${LEAVE}"
@@ -5089,7 +5102,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
         nsArray::Iterate LangMap
         Pop $LANGUAGE
         Pop $MUI_TEMP2
-     	  StrCmp $MUI_TEMP1 $MUI_TEMP2 +2 0
+         StrCmp $MUI_TEMP1 $MUI_TEMP2 +2 0
           IfErrors 0 langLoop
 
       nsArray::Clear LangMap
@@ -5108,15 +5121,15 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
         ;Recall this programm and quit
         !insertmacro UMUI_GET_PARAMETERS
-        Pop $MUI_TEMP1
+        Pop $MUI_TEMP2
 
         !insertmacro UMUI_DELETE_PLUGINDIR
-
         HideWindow
+
         !ifndef MUI_UNINSTALLER
-            ExecWait "$EXEPATH $MUI_TEMP1 /L=$LANGUAGE /NCRC"
+          ExecWait "$EXEPATH $MUI_TEMP2 /L=$LANGUAGE /NCRC"
         !else
-            ExecWait "$EXEPATH $MUI_TEMP1 /L=$LANGUAGE _?=$INSTDIR"
+          ExecWait "$EXEPATH $MUI_TEMP2 /L=$LANGUAGE _?=$INSTDIR"
         !endif
         Quit
 
@@ -5206,6 +5219,9 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
     !insertmacro INSTALLOPTIONS_EXTRACT_AS "${UMUI_CONFIRMPAGE_INI}" "Confirm.ini"
 
+    ; MMo-2016-09-15: missing PRE-Function support added:
+    !insertmacro MUI_PAGE_FUNCTION_CUSTOM PRE
+
     !insertmacro MUI_HEADER_TEXT_PAGE "$(UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}TEXT_INSTCONFIRM_TITLE)" "$(UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}TEXT_INSTCONFIRM_SUBTITLE)"
 
     !ifdef UMUI_CONFIRMPAGE_TEXTBOX
@@ -5213,9 +5229,9 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
       FileOpen $MUI_TEMP2 "$PLUGINSDIR\Confirm.ini" a
       !ifdef NSIS_UNICODE
-        FileSeek $MUI_TEMP2 -4 END  
+        FileSeek $MUI_TEMP2 -4 END
       !else
-        FileSeek $MUI_TEMP2 -2 END  
+        FileSeek $MUI_TEMP2 -2 END
       !endif
 
       Call "${UMUI_CONFIRMPAGE_TEXTBOX}"
@@ -5234,6 +5250,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !insertmacro INSTALLOPTIONS_DISPLAY "Confirm.ini"
 
     !insertmacro UMUI_FIX_BUTTONS_SKIN
+
   FunctionEnd
 
   Function "${LEAVE}"
@@ -5355,7 +5372,6 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !insertmacro MUI_HEADER_TEXT_PAGE "" ""
 
     !insertmacro MUI_WELCOMEFINISHPAGE_FUNCTION_CUSTOM
-
 
     !insertmacro INSTALLOPTIONS_WRITE "ioSpecial.ini"  "Settings" NextButtonText "$(^CloseBtn)"
 
@@ -5494,6 +5510,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     LockWindow off
 
     !insertmacro UMUI_FIX_BUTTONS_SKIN
+
   FunctionEnd
 
   Function "${LEAVE}"
@@ -5576,10 +5593,10 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
     !insertmacro INSTALLOPTIONS_EXTRACT_AS "${UMUI_INFORMATIONPAGE_INI}" "Information.ini"
 
-		SetOutPath $PLUGINSDIR
+    SetOutPath $PLUGINSDIR
     File "${FILE}"
 
-		; search file names by removing characters before back-slash
+    ; search file names by removing characters before back-slash
     ; $MUI_TEMP1 : file name
     ; $R0 : character to read
     ; $0 : seek
@@ -5591,15 +5608,15 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     loopfile:
       IntOp $0 $0 - 1
       StrCmp $0 '0' endfile
-		    StrCpy $R0 "${FILE}" 1 $0
-		    StrCmp $R0 '\' endfile
+        StrCpy $R0 "${FILE}" 1 $0
+        StrCmp $R0 '\' endfile
           Goto loopfile
     endfile:
-		StrCpy $MUI_TEMP1 "${FILE}" "" $0
+    StrCpy $MUI_TEMP1 "${FILE}" "" $0
 
-		StrCpy $R0 $MUI_TEMP1 1
-		StrCmp $R0 '\' 0 +2
-		  StrCpy $MUI_TEMP1 $MUI_TEMP1 "" 1
+    StrCpy $R0 $MUI_TEMP1 1
+    StrCmp $R0 '\' 0 +2
+      StrCpy $MUI_TEMP1 $MUI_TEMP1 "" 1
 
     Pop $0
     Pop $R0
@@ -5607,13 +5624,13 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     ; Determine the file name based on the current language
     ; if '*' was used in the file name, it will be replaced by the $LANGUAGE
     !insertmacro UMUI_STRREPLACE $MUI_TEMP2 "*" "$LANGUAGE" $MUI_TEMP1
-		IfFileExists '$PLUGINSDIR\$MUI_TEMP2' fileFound
+    IfFileExists '$PLUGINSDIR\$MUI_TEMP2' fileFound
       ClearErrors
       !insertmacro UMUI_STRREPLACE $MUI_TEMP2 "*" "" $MUI_TEMP1
-			IfFileExists '$PLUGINSDIR\$MUI_TEMP2' fileFound
-				StrCpy $MUI_TEMP2 ""
-		fileFound:
-		StrCpy $MUI_TEMP1 $MUI_TEMP2
+      IfFileExists '$PLUGINSDIR\$MUI_TEMP2' fileFound
+        StrCpy $MUI_TEMP2 ""
+    fileFound:
+    StrCpy $MUI_TEMP1 $MUI_TEMP2
 
     !insertmacro MUI_PAGE_FUNCTION_CUSTOM PRE
 
@@ -5675,10 +5692,10 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
         IfErrors doneWrite ; if End Of File
 
         StrCpy $R1 "$R0" "" -1
-				StrCmp $R1 $\n 0 write
+        StrCmp $R1 $\n 0 write
           StrCpy $R0 "$R0" -1
           StrCpy $R1 "$R0" "" -1
-	  			StrCmp $R1 $\r 0 +2
+          StrCmp $R1 $\r 0 +2
             StrCpy $R0 "$R0" -1
           StrCpy $R0 "$R0\r\n"
 
@@ -5715,6 +5732,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !insertmacro INSTALLOPTIONS_DISPLAY "Information.ini"
 
     !insertmacro UMUI_FIX_BUTTONS_SKIN
+
   FunctionEnd
 
   Function "${LEAVE}"
@@ -5818,6 +5836,9 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
   Function "${PRE}"
 
+    ; MMo-2016-09-15: missing PRE-Function support added:
+    !insertmacro MUI_PAGE_FUNCTION_CUSTOM PRE
+
     !insertmacro MUI_HEADER_TEXT_PAGE "$(UMUI_TEXT_ADDITIONALTASKS_TITLE)" "$(UMUI_TEXT_ADDITIONALTASKS_SUBTITLE)"
 
     IfFileExists "$PLUGINSDIR\AdditionalTasks${ADDTASKS_FUNC}.ini" alreadyExists
@@ -5849,6 +5870,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !insertmacro INSTALLOPTIONS_DISPLAY "AdditionalTasks${ADDTASKS_FUNC}.ini"
 
     !insertmacro UMUI_FIX_BUTTONS_SKIN
+
   FunctionEnd
 
   Function "${LEAVE}"
@@ -6372,6 +6394,9 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     ; IF setup cancelled or setuptype choosen
     !insertmacro UMUI_ABORT_IF_INSTALLFLAG_IS ${UMUI_CANCELLED}|${UMUI_MODIFY}|${UMUI_REPAIR}|${UMUI_UPDATE}
 
+    ; MMo-2016-09-15: missing PRE-Function support added:
+    !insertmacro MUI_PAGE_FUNCTION_CUSTOM PRE
+
     !insertmacro MUI_HEADER_TEXT_PAGE "$(UMUI_TEXT_SERIALNUMBER_TITLE)" "$(UMUI_TEXT_SERIALNUMBER_SUBTITLE)"
 
     IfFileExists "$PLUGINSDIR\SerialNumber_${SERIAL_FUNC}.ini" alreadyExists
@@ -6398,85 +6423,86 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !insertmacro INSTALLOPTIONS_DISPLAY "SerialNumber_${SERIAL_FUNC}.ini"
 
     !insertmacro UMUI_FIX_BUTTONS_SKIN
+
   FunctionEnd
 
   Function "${LEAVE}"
 
     !insertmacro UMUI_IF_INSTALLFLAG_ISNOT ${UMUI_CANCELLED}
 
-		!ifdef UMUI_USE_INSTALLOPTIONSEX
+    !ifdef UMUI_USE_INSTALLOPTIONSEX
 
-		  Push $0
-		  Push $1
-		  Push $2
-		  Push $3
-		  Push $4
+      Push $0
+      Push $1
+      Push $2
+      Push $3
+      Push $4
 
-		  ; $MUI_TEMP1    : Current field number
-		  ; $0            : max lenght
-		  ; $1            : state of the current field
-		  ; $2            : lenght of the state
-		  ; $3            : back/next field number
-		  ; $4            : HWND of the back/next field
+      ; $MUI_TEMP1    : Current field number
+      ; $0            : max lenght
+      ; $1            : state of the current field
+      ; $2            : lenght of the state
+      ; $3            : back/next field number
+      ; $4            : HWND of the back/next field
 
-		  !insertmacro INSTALLOPTIONS_READ $MUI_TEMP1 "SerialNumber_${SERIAL_FUNC}.ini" "Settings" State
-		  StrCmp $MUI_TEMP1 "0" ok 0
+      !insertmacro INSTALLOPTIONS_READ $MUI_TEMP1 "SerialNumber_${SERIAL_FUNC}.ini" "Settings" State
+      StrCmp $MUI_TEMP1 "0" ok 0
 
-			!insertmacro INSTALLOPTIONS_READ $1 "SerialNumber_${SERIAL_FUNC}.ini" "Field $MUI_TEMP1" State
+        !insertmacro INSTALLOPTIONS_READ $1 "SerialNumber_${SERIAL_FUNC}.ini" "Field $MUI_TEMP1" State
 
-			StrCmp $1 "" 0 next
+        StrCmp $1 "" 0 next
 
-			  !insertmacro INSTALLOPTIONS_READ $3 "SerialNumber_${SERIAL_FUNC}.ini" "Field $MUI_TEMP1" BackField
-			  IfErrors abort
+          !insertmacro INSTALLOPTIONS_READ $3 "SerialNumber_${SERIAL_FUNC}.ini" "Field $MUI_TEMP1" BackField
+          IfErrors abort
 
-				!insertmacro INSTALLOPTIONS_READ $4 "SerialNumber_${SERIAL_FUNC}.ini" "Field $3" HWND
-				IfErrors abort
+          !insertmacro INSTALLOPTIONS_READ $4 "SerialNumber_${SERIAL_FUNC}.ini" "Field $3" HWND
+          IfErrors abort
 
-				  !insertmacro UMUI_INSTALLOPTIONSEX_SETFOCUS $4
+            !insertmacro UMUI_INSTALLOPTIONSEX_SETFOCUS $4
 
-			next:
+        next:
 
-			!insertmacro INSTALLOPTIONS_READ $0 "SerialNumber_${SERIAL_FUNC}.ini" "Field $MUI_TEMP1" MaxLen
-			IfErrors abort
+        !insertmacro INSTALLOPTIONS_READ $0 "SerialNumber_${SERIAL_FUNC}.ini" "Field $MUI_TEMP1" MaxLen
+        IfErrors abort
 
-			  StrLen $2 $1
-			  StrCmp $2 $0 0 abort
+          StrLen $2 $1
+          StrCmp $2 $0 0 abort
 
-				!insertmacro INSTALLOPTIONS_READ $3 "SerialNumber_${SERIAL_FUNC}.ini" "Field $MUI_TEMP1" NextField
-				IfErrors abort
+            !insertmacro INSTALLOPTIONS_READ $3 "SerialNumber_${SERIAL_FUNC}.ini" "Field $MUI_TEMP1" NextField
+            IfErrors abort
 
-				  !insertmacro INSTALLOPTIONS_READ $4 "SerialNumber_${SERIAL_FUNC}.ini" "Field $3" HWND
-				  IfErrors abort
+              !insertmacro INSTALLOPTIONS_READ $4 "SerialNumber_${SERIAL_FUNC}.ini" "Field $3" HWND
+              IfErrors abort
 
-					!insertmacro UMUI_INSTALLOPTIONSEX_SETFOCUS $4
+                !insertmacro UMUI_INSTALLOPTIONSEX_SETFOCUS $4
 
-			abort:
+        abort:
 
-			ClearErrors
+        ClearErrors
 
-			Pop $4
-			Pop $3
-			Pop $2
-			Pop $1
-			Pop $0
+        Pop $4
+        Pop $3
+        Pop $2
+        Pop $1
+        Pop $0
 
-			Abort
+        Abort
 
-		  ok:
+      ok:
 
-		  Pop $4
-		  Pop $3
-		  Pop $2
-		  Pop $1
-		  Pop $0
+      Pop $4
+      Pop $3
+      Pop $2
+      Pop $1
+      Pop $0
 
-		!endif
+    !endif
 
-		!insertmacro UMUI_SERIALNUMBERPAGE_APPLYFLAGS "SerialNumber_${SERIAL_FUNC}.ini"
+    !insertmacro UMUI_SERIALNUMBERPAGE_APPLYFLAGS "SerialNumber_${SERIAL_FUNC}.ini"
 
-		!insertmacro UMUI_SERIALNUMBERPAGE_SAVE "SerialNumber_${SERIAL_FUNC}.ini"
+    !insertmacro UMUI_SERIALNUMBERPAGE_SAVE "SerialNumber_${SERIAL_FUNC}.ini"
 
-		!insertmacro MUI_PAGE_FUNCTION_CUSTOM LEAVE
+    !insertmacro MUI_PAGE_FUNCTION_CUSTOM LEAVE
 
     !insertmacro UMUI_ENDIF_INSTALLFLAG
 
@@ -7249,20 +7275,20 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
     ; disable sellvarcontext radio buttons if no admin rights
     !ifdef UMUI_ALTERNATIVESTARTMENUPAGE_SETSHELLVARCONTEXT
-    	UserInfo::GetAccountType
-	    Pop $UMUI_TEMP5
-	    StrCmp $UMUI_TEMP5 "Admin" endcheck
-	    StrCmp $UMUI_TEMP5 "User" endcheck
-	    StrCmp $UMUI_TEMP5 "Power" 0 +3
-		    StrCpy $UMUI_TEMP5 "Admin"
-		    Goto endcheck
-  	  StrCmp $UMUI_TEMP5 "Guest" 0 +3
-	  	  StrCpy $UMUI_TEMP5 "User"
-		    Goto endcheck
-	    ;if error or win 95
-	    StrCpy $UMUI_TEMP5 "Admin"
+      UserInfo::GetAccountType
+      Pop $UMUI_TEMP5
+      StrCmp $UMUI_TEMP5 "Admin" endcheck
+      StrCmp $UMUI_TEMP5 "User" endcheck
+      StrCmp $UMUI_TEMP5 "Power" 0 +3
+        StrCpy $UMUI_TEMP5 "Admin"
+        Goto endcheck
+      StrCmp $UMUI_TEMP5 "Guest" 0 +3
+        StrCpy $UMUI_TEMP5 "User"
+        Goto endcheck
+      ;if error or win 95
+      StrCpy $UMUI_TEMP5 "Admin"
 
-	    endcheck:
+      endcheck:
     !endif
 
     IfFileExists "$PLUGINSDIR\AlternativeStartMenu${ID}.ini" alreadyExists
@@ -7436,7 +7462,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
           !insertmacro INSTALLOPTIONS_WRITE "AlternativeStartMenu${ID}.ini" "Field ${UMUI_INTERNAL_ASMCURRENTOPTFIELD}" Flags "DISABLED"
         !endif
         Goto endnodisable
-			nodisable:
+      nodisable:
         !insertmacro INSTALLOPTIONS_READ $MUI_TEMP2 "AlternativeStartMenu${ID}.ini" "Field 2" "State"
         StrCmp $MUI_TEMP2 "" 0 +3
           GetDlgItem $MUI_HWND $HWNDPARENT 1 ;next
@@ -7469,6 +7495,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !insertmacro INSTALLOPTIONS_DISPLAY_RETURN "AlternativeStartMenu${ID}.ini"
 
     !insertmacro UMUI_FIX_BUTTONS_SKIN
+
   FunctionEnd
 
   Function "${LEAVE}"
@@ -7549,7 +7576,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
           endcheckbox:
 
-					Abort
+          Abort
 
         !endif
 
@@ -7609,7 +7636,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
     !insertmacro MUI_PAGE_FUNCTION_CUSTOM LEAVE
 
-		end:
+    end:
 
   FunctionEnd
 
@@ -7972,8 +7999,8 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
           StrCpy $UMUI_TEMP4 ${UMUI_CUSTOM}
         endreg:
 
-        ClearErrors     
-        
+        ClearErrors
+
         ; IF page skipped save
         !insertmacro UMUI_ADDPARAMTOSAVETOREGISTRYKEY ${UMUI_SETUPTYPEPAGE_REGISTRY_ROOT} "${UMUI_SETUPTYPEPAGE_REGISTRY_KEY}" "${UMUI_SETUPTYPEPAGE_REGISTRY_VALUENAME}" $MUI_TEMP1
 
@@ -8012,6 +8039,9 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     ; IF setup cancelled
     !insertmacro UMUI_ABORT_IF_INSTALLFLAG_IS ${UMUI_CANCELLED}|${UMUI_REPAIR}|${UMUI_UPDATE}
 
+    ; MMo-2016-09-15: missing PRE-Function support added:
+    !insertmacro MUI_PAGE_FUNCTION_CUSTOM PRE
+
     !insertmacro MUI_HEADER_TEXT_PAGE "$(UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}TEXT_SETUPTYPE_TITLE)" "$(UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}TEXT_SETUPTYPE_SUBTITLE)"
 
     !insertmacro MUI_PAGE_FUNCTION_CUSTOM SHOW
@@ -8019,6 +8049,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !insertmacro INSTALLOPTIONS_DISPLAY "SetupType.ini"
 
     !insertmacro UMUI_FIX_BUTTONS_SKIN
+
   FunctionEnd
 
   Function "${LEAVE}"
@@ -8276,16 +8307,26 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
       !endif
 
       !insertmacro UMUI_IF_INSTALLFLAG_IS ${UMUI_MODIFY}
+        ;Recall this programm and quit
+        !insertmacro UMUI_GET_PARAMETERS
+        Pop $MUI_TEMP2
+
         !insertmacro UMUI_DELETE_PLUGINDIR
         HideWindow
-        ExecWait '"$${UMUI_FILEDISKREQUESTPAGE_VARIABLE}\${UMUI_FILEDISKREQUESTPAGE_FILE_NAME}" /modify /L=$LANGUAGE'
+
+        ExecWait '"$${UMUI_FILEDISKREQUESTPAGE_VARIABLE}\${UMUI_FILEDISKREQUESTPAGE_FILE_NAME}" $MUI_TEMP2 /modify /L=$LANGUAGE'
         Quit
       !insertmacro UMUI_ENDIF_INSTALLFLAG
 
       !insertmacro UMUI_IF_INSTALLFLAG_IS ${UMUI_REPAIR}
+        ;Recall this programm and quit
+        !insertmacro UMUI_GET_PARAMETERS
+        Pop $MUI_TEMP2
+
         !insertmacro UMUI_DELETE_PLUGINDIR
         HideWindow
-        ExecWait '"$${UMUI_FILEDISKREQUESTPAGE_VARIABLE}\${UMUI_FILEDISKREQUESTPAGE_FILE_NAME}" /repair /L=$LANGUAGE'
+
+        ExecWait '"$${UMUI_FILEDISKREQUESTPAGE_VARIABLE}\${UMUI_FILEDISKREQUESTPAGE_FILE_NAME}" $MUI_TEMP2 /repair /L=$LANGUAGE'
         Quit
       !insertmacro UMUI_ENDIF_INSTALLFLAG
 
@@ -8316,9 +8357,14 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
         !insertmacro UMUI_IF_INSTALLFLAG_IS ${UMUI_REMOVE}
 
           IfFileExists "${UMUI_UNINSTALL_FULLPATH}" 0 uninstaller_not_found
+            ;Recall this programm and quit
+            !insertmacro UMUI_GET_PARAMETERS
+            Pop $MUI_TEMP2
+
             !insertmacro UMUI_DELETE_PLUGINDIR
             HideWindow
-            ExecWait '"${UMUI_UNINSTALL_FULLPATH}" /remove /L=$LANGUAGE'
+
+            ExecWait '"${UMUI_UNINSTALL_FULLPATH}" $MUI_TEMP2 /remove /L=$LANGUAGE'
             Quit
           uninstaller_not_found:
           ClearErrors
@@ -8332,24 +8378,27 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
         ReadRegStr $MUI_TEMP1 ${UMUI_PARAMS_REGISTRY_ROOT} "${UMUI_PARAMS_REGISTRY_KEY}" "${UMUI_INSTALLERFULLPATH_REGISTRY_VALUENAME}"
         IfFileExists "$MUI_TEMP1" 0 installer_not_found
 
-          !insertmacro UMUI_IF_INSTALLFLAG_IS ${UMUI_MODIFY}
+          !insertmacro UMUI_IF_INSTALLFLAG_IS ${UMUI_MODIFY}|${UMUI_REPAIR}|${UMUI_CONTINUE_SETUP}
+            ;Recall this programm and quit
+            !insertmacro UMUI_GET_PARAMETERS
+            Pop $MUI_TEMP2
+
             !insertmacro UMUI_DELETE_PLUGINDIR
             HideWindow
-            ExecWait '"$MUI_TEMP1" /modify /L=$LANGUAGE'
+          !insertmacro UMUI_ENDIF_INSTALLFLAG
+
+          !insertmacro UMUI_IF_INSTALLFLAG_IS ${UMUI_MODIFY}
+            ExecWait '"$MUI_TEMP1" $MUI_TEMP2 /modify /L=$LANGUAGE'
             Quit
           !insertmacro UMUI_ENDIF_INSTALLFLAG
 
           !insertmacro UMUI_IF_INSTALLFLAG_IS ${UMUI_REPAIR}
-            !insertmacro UMUI_DELETE_PLUGINDIR
-            HideWindow
-            ExecWait '"$MUI_TEMP1" /repair /L=$LANGUAGE'
+            ExecWait '"$MUI_TEMP1" $MUI_TEMP2 /repair /L=$LANGUAGE'
             Quit
           !insertmacro UMUI_ENDIF_INSTALLFLAG
 
           !insertmacro UMUI_IF_INSTALLFLAG_IS ${UMUI_CONTINUE_SETUP}
-            !insertmacro UMUI_DELETE_PLUGINDIR
-            HideWindow
-            ExecWait '"$MUI_TEMP1" /continue /L=$LANGUAGE'
+            ExecWait '"$MUI_TEMP1" $MUI_TEMP2 /continue /L=$LANGUAGE'
             Quit
           !insertmacro UMUI_ENDIF_INSTALLFLAG
 
@@ -8369,6 +8418,9 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
       !insertmacro UMUI_UNSET_INSTALLFLAG ${UMUI_ABORTFIRSTTIME}
       Abort
     !insertmacro UMUI_ENDIF_INSTALLFLAG
+
+    ; MMo-2016-09-15: missing PRE-Function support added:
+    !insertmacro MUI_PAGE_FUNCTION_CUSTOM PRE
 
     !insertmacro MUI_HEADER_TEXT_PAGE "$(UMUI_TEXT_MAINTENANCE_TITLE)" "$(UMUI_TEXT_MAINTENANCE_SUBTITLE)"
 
@@ -8412,6 +8464,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !insertmacro INSTALLOPTIONS_DISPLAY "Maintenance.ini"
 
     !insertmacro UMUI_FIX_BUTTONS_SKIN
+
   FunctionEnd
 
   Function "${LEAVE}"
@@ -8428,9 +8481,14 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
       !insertmacro UMUI_IF_INSTALLFLAG_ISNOT ${UMUI_CANCELLED}
 
         !insertmacro UMUI_IF_INSTALLFLAG_IS ${UMUI_REMOVE}
+          ;Recall this programm and quit
+          !insertmacro UMUI_GET_PARAMETERS
+          Pop $MUI_TEMP2
+
           !insertmacro UMUI_DELETE_PLUGINDIR
           HideWindow
-          ExecWait  '"${UMUI_UNINSTALL_FULLPATH}" /remove /L=$LANGUAGE'
+
+          ExecWait '"${UMUI_UNINSTALL_FULLPATH}" $MUI_TEMP2 /remove /L=$LANGUAGE'
           Quit
         !insertmacro UMUI_ENDIF_INSTALLFLAG
         ;else continue
@@ -8445,24 +8503,27 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
         ReadRegStr $MUI_TEMP1 ${UMUI_PARAMS_REGISTRY_ROOT} "${UMUI_PARAMS_REGISTRY_KEY}" "${UMUI_INSTALLERFULLPATH_REGISTRY_VALUENAME}"
         IfFileExists "$MUI_TEMP1" 0 installer_not_found
 
-          !insertmacro UMUI_IF_INSTALLFLAG_IS ${UMUI_MODIFY}
+          !insertmacro UMUI_IF_INSTALLFLAG_IS ${UMUI_MODIFY}|${UMUI_REPAIR}|${UMUI_CONTINUE_SETUP}
+            ;Recall this programm and quit
+            !insertmacro UMUI_GET_PARAMETERS
+            Pop $MUI_TEMP2
+
             !insertmacro UMUI_DELETE_PLUGINDIR
             HideWindow
-            ExecWait '"$MUI_TEMP1" /modify /L=$LANGUAGE'
+          !insertmacro UMUI_ENDIF_INSTALLFLAG
+
+          !insertmacro UMUI_IF_INSTALLFLAG_IS ${UMUI_MODIFY}
+            ExecWait '"$MUI_TEMP1" $MUI_TEMP2 /modify /L=$LANGUAGE'
             Quit
           !insertmacro UMUI_ENDIF_INSTALLFLAG
 
           !insertmacro UMUI_IF_INSTALLFLAG_IS ${UMUI_REPAIR}
-            !insertmacro UMUI_DELETE_PLUGINDIR
-            HideWindow
-            ExecWait '"$MUI_TEMP1" /repair /L=$LANGUAGE'
+            ExecWait '"$MUI_TEMP1" $MUI_TEMP2 /repair /L=$LANGUAGE'
             Quit
           !insertmacro UMUI_ENDIF_INSTALLFLAG
 
           !insertmacro UMUI_IF_INSTALLFLAG_IS ${UMUI_CONTINUE_SETUP}
-            !insertmacro UMUI_DELETE_PLUGINDIR
-            HideWindow
-            ExecWait '"$MUI_TEMP1" /continue /L=$LANGUAGE'
+            ExecWait '"$MUI_TEMP1" $MUI_TEMP2 /continue /L=$LANGUAGE'
             Quit
           !insertmacro UMUI_ENDIF_INSTALLFLAG
 
@@ -8630,9 +8691,14 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !insertmacro UMUI_IF_INSTALLFLAG_IS ${UMUI_REMOVE}
 
       IfFileExists "${UMUI_UNINSTALL_FULLPATH}" 0 uninstaller_not_found
+        ;Recall this programm and quit
+        !insertmacro UMUI_GET_PARAMETERS
+        Pop $MUI_TEMP2
+
         !insertmacro UMUI_DELETE_PLUGINDIR
         HideWindow
-        ExecWait '"${UMUI_UNINSTALL_FULLPATH}" /remove /L=$LANGUAGE'
+
+        ExecWait '"${UMUI_UNINSTALL_FULLPATH}" $MUI_TEMP2 /remove /L=$LANGUAGE'
         Quit
       uninstaller_not_found:
       ClearErrors
@@ -8641,6 +8707,9 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     ;else continue
 
     !insertmacro UMUI_ABORT_IF_INSTALLFLAG_ISNOT ${UMUI_DIFFVERSION}
+
+    ; MMo-2016-09-15: missing PRE-Function support added:
+    !insertmacro MUI_PAGE_FUNCTION_CUSTOM PRE
 
     !insertmacro MUI_HEADER_TEXT_PAGE "$(UMUI_TEXT_UPDATE_TITLE)" "$(UMUI_TEXT_UPDATE_SUBTITLE)"
 
@@ -8696,6 +8765,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !insertmacro INSTALLOPTIONS_DISPLAY "Update.ini"
 
     !insertmacro UMUI_FIX_BUTTONS_SKIN
+
   FunctionEnd
 
   Function "${LEAVE}"
@@ -8709,9 +8779,14 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !insertmacro UMUI_IF_INSTALLFLAG_ISNOT ${UMUI_CANCELLED}
 
       !insertmacro UMUI_IF_INSTALLFLAG_IS ${UMUI_REMOVE}
+        ;Recall this programm and quit
+        !insertmacro UMUI_GET_PARAMETERS
+        Pop $MUI_TEMP2
+
         !insertmacro UMUI_DELETE_PLUGINDIR
         HideWindow
-        ExecWait '"${UMUI_UNINSTALL_FULLPATH}" /remove /L=$LANGUAGE'
+
+        ExecWait '"${UMUI_UNINSTALL_FULLPATH}" $MUI_TEMP2 /remove /L=$LANGUAGE'
         Quit
       !insertmacro UMUI_ENDIF_INSTALLFLAG
       ;else continue
@@ -8858,6 +8933,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !endif
 
     !insertmacro UMUI_FIX_BUTTONS_SKIN
+
   FunctionEnd
 
   Function "${SHOW}"
@@ -9310,9 +9386,9 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
   !verbose ${MUI_VERBOSE}
 
   !ifdef UMUI_USE_INSTALLOPTIONSEX
-   ReserveFile /plugin InstallOptionsEx.dll
+    ReserveFile /plugin InstallOptionsEx.dll
   !else
-   ReserveFile /plugin InstallOptions.dll
+    ReserveFile /plugin InstallOptions.dll
   !endif
 
   !verbose pop
@@ -9438,7 +9514,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
   !endif
 
   ClearErrors
-    
+
   ; create a map that contain the langid => langstring
   nsArray::SetList LangMap ${UMUI_MULTILANG_LANGMAP} /end
 
@@ -9625,14 +9701,14 @@ Copyright 2008-2016 Joost Verburg, Anders Kjersem
 
 * There are two types of language header files:
 
-  - NSIS multi-lang support; these must start with the LANGFILE macro and 
-    provide strings for features like MUI and MultiUser. If you are adding 
-    support for a new language to NSIS you should make a copy of English.nsh 
+  - NSIS multi-lang support; these must start with the LANGFILE macro and
+    provide strings for features like MUI and MultiUser. If you are adding
+    support for a new language to NSIS you should make a copy of English.nsh
     and translate this .nsh along with the .nlf.
-  - Custom installer strings; these must start with the LANGFILE_EXT macro and 
-    contain translated versions of 
+  - Custom installer strings; these must start with the LANGFILE_EXT macro and
+    contain translated versions of
     custom strings used in a particular installer.
-    This is useful if you want to put the translations for each language in 
+    This is useful if you want to put the translations for each language in
     their own separate file.
 
 * Example:
@@ -9992,9 +10068,9 @@ FunctionEnd
     StrCmp $R1 "ListBox" input 0
     ;else if DropList
     StrCmp $R1 "DropList" input 0
-    ;else if DateTime 
+    ;else if DateTime
     StrCmp $R1 "DateTime" input 0
-    ;else if  ComboBox 
+    ;else if  ComboBox
     StrCmp $R1 "ComboBox" input 0
     ;else if TreeView
     StrCmp $R1 "TreeView" input 0

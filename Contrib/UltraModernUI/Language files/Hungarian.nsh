@@ -36,33 +36,33 @@
   ${LangFileString} UMUI_TEXT_SERIALNUMBER_SERIALNUMBER "Sorozatszám"
   ${LangFileString} UMUI_TEXT_SERIALNUMBER_ACTIVATIONCODE "Aktivációs kód"
   ${LangFileString} UMUI_TEXT_SERIALNUMBER_PASSWORD "Jelszó"
-!endif 
+!endif
 
 
 !ifdef UMUI_CONFIRMPAGE
   ${LangFileString} UMUI_TEXT_INSTCONFIRM_SUBTITLE "A telepítõ begyûjtötte az információkat és készen áll a(z) $(^NameDA) telepítésére."
   ${LangFileString} UMUI_TEXT_INSTCONFIRM_TITLE "Telepítés megerõsítése"
   ${LangFileString} UMUI_TEXT_INSTCONFIRM_TEXT_TOP "A telepítõ készen áll a(z) $(^NameDA) telepítésére.$\r$\nHa át akarja nézni vagy módosítani a telepítési beállításokat, kattintson a Vissza gombra. $_CLICK"
-!endif 
+!endif
 
 !ifdef UMUI_UNCONFIRMPAGE
   ${LangFileString} UMUI_UNTEXT_INSTCONFIRM_SUBTITLE "A telepítõ begyûjtötte az információkat és készen áll a(z) $(^NameDA) eltávolítására."
   ${LangFileString} UMUI_UNTEXT_INSTCONFIRM_TITLE "Eltávolítás megerõsítése"
   ${LangFileString} UMUI_UNTEXT_INSTCONFIRM_TEXT_TOP "A telepítõ készen áll a(z) $(^NameDA) eltávolítására.$\r$\nHa át akarja nézni vagy módosítani az eltávolítási beállításokat, kattintson a Vissza gombra. A Tovább gombbal elkezdõdik az eltávolítás."
-!endif 
+!endif
 
 !ifdef UMUI_CONFIRMPAGE | UMUI_UNCONFIRMPAGE
   ${LangFileString} UMUI_TEXT_INSTCONFIRM_TEXTBOX_TITLE "Aktuális beállítás:"
   ${LangFileString} UMUI_TEXT_INSTCONFIRM_TEXTBOX_DESTINATION_LOCATION "Telepítési hely:"
   ${LangFileString} UMUI_TEXT_INSTCONFIRM_TEXTBOX_START_MENU_FOLDER "Start menü mappa:"
   ${LangFileString} UMUI_TEXT_INSTCONFIRM_TEXTBOX_COMPNENTS "A következõ összetevõk lesznek telepítve:"
-!endif 
+!endif
 
 
 !ifdef UMUI_ABORTPAGE
   ${LangFileString} UMUI_TEXT_ABORT_INFO_TITLE "A(z) $(^NameDA) Telepítõ Varázsló befejezõdött"
   ${LangFileString} UMUI_TEXT_ABORT_INFO_TEXT "A varázsló megszakadt, mielõtt a(z) $(^NameDA) sikeresen telepítésre került volna.$\r$\n$\r$\nA program késõbbi telepítéséhez, futtassa újra a telepítõt.$\r$\n$\r$\n$\r$\n$\r$\nA $(^CloseBtn) gombbal kiléphet a Telepítõ Varázslóból."
-!endif 
+!endif
 
 !ifdef UMUI_UNABORTPAGE
   ${LangFileString} UMUI_UNTEXT_ABORT_INFO_TITLE "A(z) $(^NameDA) Eltávolítás Varázsló befejezõdött"
@@ -78,7 +78,7 @@
   ${LangFileString} UMUI_TEXT_SETUPTYPE_STANDARD_TEXT "Minden fõ szolgáltatás telepítve lesz. A legtöbb felhasználónak ajánlott."
   ${LangFileString} UMUI_TEXT_SETUPTYPE_COMPLETE_TEXT "Minden szolgáltatás telepítve lesz. (A legtöbb lemezterület szükséges)"
   ${LangFileString} UMUI_TEXT_SETUPTYPE_CUSTOM_TEXT "Kiválasztható mely program szolgáltatások települjenek és hova. Haladó felhasználóknak ajánlott."
-!endif 
+!endif
 
 !ifdef UMUI_UNSETUPTYPEPAGE
   ${LangFileString} UMUI_UNTEXT_SETUPTYPE_TITLE "Eltávolítási típus"
@@ -88,37 +88,37 @@
   ${LangFileString} UMUI_UNTEXT_SETUPTYPE_STANDARD_TEXT "Csak a szükséges szolgáltatások maradnak meg."
   ${LangFileString} UMUI_UNTEXT_SETUPTYPE_COMPLETE_TEXT "Minden program szolgáltatás el lesz távolítva."
   ${LangFileString} UMUI_UNTEXT_SETUPTYPE_CUSTOM_TEXT "Kiválasztható mely program szolgáltatások kerüljenek eltávolításra."
-!endif 
+!endif
 
 !ifdef UMUI_SETUPTYPEPAGE | UMUI_UNSETUPTYPEPAGE
   ${LangFileString} UMUI_TEXT_SETUPTYPE_MINIMAL_TITLE "Minimális"
   ${LangFileString} UMUI_TEXT_SETUPTYPE_STANDARD_TITLE "Általános"
   ${LangFileString} UMUI_TEXT_SETUPTYPE_COMPLETE_TITLE "Teljes"
   ${LangFileString} UMUI_TEXT_SETUPTYPE_CUSTOM_TITLE "Egyéni"
-!endif 
+!endif
 
 
 !ifdef UMUI_INFORMATIONPAGE
   ${LangFileString} UMUI_TEXT_INFORMATION_SUBTITLE "Olvassa el a(z) $(^NameDA) telepítésére vonatkozó információkat."
-!endif 
+!endif
 
 !ifdef UMUI_UNINFORMATIONPAGE
   ${LangFileString} UMUI_UNTEXT_INFORMATION_SUBTITLE "Olvassa el a(z) $(^NameDA) eltávolítására vonatkozó információkat."
-!endif 
+!endif
 
 !ifdef UMUI_INFORMATIONPAGE | UMUI_UNINFORMATIONPAGE
   ${LangFileString} UMUI_TEXT_INFORMATION_TITLE "Információ"
   ${LangFileString} UMUI_TEXT_INFORMATION_INFO_TEXT "A(z) $(^NameDA) kapcsolódó információi."
-!endif 
+!endif
 
 
 !ifdef UMUI_ADDITIONALTASKSPAGE
   ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_INFO_TEXT "Válasszon további feladatot, melyet a telepítõ végrehajt a(z) $(^NameDA) telepítése során. $_CLICK"
-!endif 
+!endif
 
 !ifdef UMUI_UNADDITIONALTASKSPAGE
   ${LangFileString} UMUI_UNTEXT_ADDITIONALTASKS_INFO_TEXT "Válasszon további feladatot, melyet a telepítõ végrehajt a(z) $(^NameDA) eltávolítása során. $_CLICK"
-!endif 
+!endif
 
 !ifdef UMUI_ADDITIONALTASKSPAGE | UMUI_UNADDITIONALTASKSPAGE
   ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_TITLE "További feladatok"
@@ -131,7 +131,7 @@
   ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_FILE_ASSOCIATION "Fájl társítása:"
   ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_ASSOCIATE_WITH "$(^NameDA) társítása a(z) "
   ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_ASSOCIATE_WITH_END " fájltípussal"
-!endif 
+!endif
   
   
 !ifdef UMUI_CONFIRMPAGE | UMUI_UNCONFIRMPAGE | UMUI_ALTERNATIVESTARTMENUPAGE | UMUI_UNALTERNATIVESTARTMENUPAGE
@@ -148,7 +148,7 @@
   ${LangFileString} UMUI_TEXT_UPDATE_UPDATE_TITLE "Frissítés"
   ${LangFileString} UMUI_TEXT_UPDATE_UPDATE_TEXT "A(z) $(^NameDA) minden, már telepített elemének frissítése $NEWVERSION verzióra."
   ${LangFileString} UMUI_TEXT_UPDATE_REMOVE_TITLE "Eltávolítás"
-  ${LangFileString} UMUI_TEXT_UPDATE_REMOVE_TEXT "A(z) $(^NameDA) eltávolítása a számítógéprõl."
+  ${LangFileString} UMUI_TEXT_UPDATE_REMOVE_TEXT "A(z) $OLDVERSION verzióra eltávolítása a számítógéprõl."
   ${LangFileString} UMUI_TEXT_UPDATE_CONTINUE_TITLE "Telepítés folytatása"
   ${LangFileString} UMUI_TEXT_UPDATE_CONTINUE_TEXT "Telepítés folytatása a megszokott módon. Ez az opció akkor ajánlott, ha egy létezõ telepítésre akarja újratelepíteni a programot vagy ezúttal egy másik mappába telepítené."
 !endif

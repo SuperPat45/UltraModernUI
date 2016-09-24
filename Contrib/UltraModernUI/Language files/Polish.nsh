@@ -36,32 +36,32 @@
   ${LangFileString} UMUI_TEXT_SERIALNUMBER_SERIALNUMBER "Numer Seryjny"
   ${LangFileString} UMUI_TEXT_SERIALNUMBER_ACTIVATIONCODE "Kod Aktywacyjny"
   ${LangFileString} UMUI_TEXT_SERIALNUMBER_PASSWORD "Has³o"
-!endif 
+!endif
 
 
 !ifdef UMUI_CONFIRMPAGE
   ${LangFileString} UMUI_TEXT_INSTCONFIRM_SUBTITLE "Instalator zakoñczy³ zbieranie informacji i jest gotowy do instalacji $(^NameDA)."
   ${LangFileString} UMUI_TEXT_INSTCONFIRM_TITLE "PotwierdŸ chêæ instalacji"
   ${LangFileString} UMUI_TEXT_INSTCONFIRM_TEXT_TOP "Instalator jest gotowy do instalacji $(^NameDA) na Twoim komputerze.$\r$\nJeœli chcesz sprawdziæ lub zmieniæ ustawienia instalatora, kliknij Wstecz. $_CLICK"
-!endif 
+!endif
 
 !ifdef UMUI_UNCONFIRMPAGE
   ${LangFileString} UMUI_UNTEXT_INSTCONFIRM_SUBTITLE "Instalator zakoñczy³ zbieranie informacji i jest gotowy do deinstalacji $(^NameDA)."
   ${LangFileString} UMUI_UNTEXT_INSTCONFIRM_TITLE "PotwierdŸ chêæ Deinstalacji"
   ${LangFileString} UMUI_UNTEXT_INSTCONFIRM_TEXT_TOP "Instalator jest gotowy do deinstalacji $(^NameDA) z Twojego komputera.$\r$\nJeœli chcesz sprawdziæ lub zmieniæ ustawienia deinstalatora, kliknij Wstecz. Kliknij Dalej aby rozpocz¹æ deinstalacjê."
-!endif 
+!endif
 
 !ifdef UMUI_CONFIRMPAGE | UMUI_UNCONFIRMPAGE
   ${LangFileString} UMUI_TEXT_INSTCONFIRM_TEXTBOX_TITLE "Obecna konfiguracja:"
   ${LangFileString} UMUI_TEXT_INSTCONFIRM_TEXTBOX_DESTINATION_LOCATION "Lokalizacja docelowa:"
   ${LangFileString} UMUI_TEXT_INSTCONFIRM_TEXTBOX_START_MENU_FOLDER "Katalog w Menu Start:"
   ${LangFileString} UMUI_TEXT_INSTCONFIRM_TEXTBOX_COMPNENTS "Natêpuj¹ce sk³¹dniki zostan¹ zainstalowane:"
-!endif 
+!endif
 
 
 !ifdef UMUI_ABORTPAGE
   ${LangFileString} UMUI_TEXT_ABORT_INFO_TITLE "Koñczenie instalacji $(^NameDA)"
-!endif 
+!endif
   ${LangFileString} UMUI_TEXT_ABORT_INFO_TEXT "Praca instalatora $(^NameDA) zosta³a przerwana przed zakoñczeniem instalcji.$\r$\n$\r$\nAby póŸnije zainstalowaæ program, proszê uruchomiæ instalator ponownie.$\r$\n$\r$\n$\r$\n$\r$\nKliknij $(^CloseBtn) aby opuœciæ instalator."
 
 !ifdef UMUI_UNABORTPAGE
@@ -78,7 +78,7 @@
   ${LangFileString} UMUI_TEXT_SETUPTYPE_STANDARD_TEXT "Najwa¿niejsze sk³adniki programu zostanê zainstalowane. Sugerowana dla wiekszoœci u¿ytkowników."
   ${LangFileString} UMUI_TEXT_SETUPTYPE_COMPLETE_TEXT "Wszystkie sk³adniki programu zostan¹ zainstalowane. (Wymaga najwiecej miejsca na dysku)"
   ${LangFileString} UMUI_TEXT_SETUPTYPE_CUSTOM_TEXT "Wybierz które sk³¹dniki programu chcesz zainstalowaæ i gdzie maj¹ byæ zainstalowane. Zalecane dla u¿ytkowników zaawansowanych."
-!endif 
+!endif
 
 !ifdef UMUI_UNSETUPTYPEPAGE
   ${LangFileString} UMUI_UNTEXT_SETUPTYPE_TITLE "Typ deinstalacji"
@@ -88,37 +88,37 @@
   ${LangFileString} UMUI_UNTEXT_SETUPTYPE_STANDARD_TEXT "Tylko niezbêdne sk³adniki programu zostan¹ zachowane."
   ${LangFileString} UMUI_UNTEXT_SETUPTYPE_COMPLETE_TEXT "Wszystkie sk³adniki programu zostan¹ odinstalowane."
   ${LangFileString} UMUI_UNTEXT_SETUPTYPE_CUSTOM_TEXT "Wybierz które sk³adniki programu chcesz odinstalowaæ."
-!endif 
+!endif
 
 !ifdef UMUI_SETUPTYPEPAGE | UMUI_UNSETUPTYPEPAGE
   ${LangFileString} UMUI_TEXT_SETUPTYPE_MINIMAL_TITLE "Minimalna"
   ${LangFileString} UMUI_TEXT_SETUPTYPE_STANDARD_TITLE "Standardowa"
   ${LangFileString} UMUI_TEXT_SETUPTYPE_COMPLETE_TITLE "Kompletna"
   ${LangFileString} UMUI_TEXT_SETUPTYPE_CUSTOM_TITLE "U¿ytkownika"
-!endif 
+!endif
 
 
 !ifdef UMUI_INFORMATIONPAGE
   ${LangFileString} UMUI_TEXT_INFORMATION_SUBTITLE "SprawdŸ informacje dotycz¹ce instalacji programu $(^NameDA)."
-!endif 
+!endif
 
 !ifdef UMUI_UNINFORMATIONPAGE
   ${LangFileString} UMUI_UNTEXT_INFORMATION_SUBTITLE "SprawdŸ informacje dotycz¹ce deinstalacji programu $(^NameDA)."
-!endif 
+!endif
 
 !ifdef UMUI_INFORMATIONPAGE | UMUI_UNINFORMATIONPAGE
   ${LangFileString} UMUI_TEXT_INFORMATION_TITLE "Informacje"
   ${LangFileString} UMUI_TEXT_INFORMATION_INFO_TEXT "Informacje dotycz¹ce $(^NameDA)."
-!endif 
+!endif
 
 
 !ifdef UMUI_ADDITIONALTASKSPAGE
   ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_INFO_TEXT "Wybierz dodatkowe zadania, które powinny byæ wykonane podczas procesu instalcji $(^NameDA). $_CLICK"
-!endif 
+!endif
 
 !ifdef UMUI_UNADDITIONALTASKSPAGE
   ${LangFileString} UMUI_UNTEXT_ADDITIONALTASKS_INFO_TEXT "Wybierz dodatkowe zadania, które powinny byæ wykonane podczas procesu deinstalcji $(^NameDA). $_CLICK"
-!endif 
+!endif
 
 !ifdef UMUI_ADDITIONALTASKSPAGE | UMUI_UNADDITIONALTASKSPAGE
   ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_TITLE "Dodatkowe Zadania"
@@ -131,7 +131,7 @@
   ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_FILE_ASSOCIATION "Skojarzenia plików:"
   ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_ASSOCIATE_WITH "Skojarz $(^NameDA) z "
   ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_ASSOCIATE_WITH_END " typem pliku"
-!endif 
+!endif
   
   
 !ifdef UMUI_CONFIRMPAGE | UMUI_UNCONFIRMPAGE | UMUI_ALTERNATIVESTARTMENUPAGE | UMUI_UNALTERNATIVESTARTMENUPAGE
@@ -148,7 +148,7 @@
   ${LangFileString} UMUI_TEXT_UPDATE_UPDATE_TITLE "Aktualizuj"
   ${LangFileString} UMUI_TEXT_UPDATE_UPDATE_TEXT "Aktualizuj wszystkie zainstalowne sk³adniki $(^NameDA) do wersji $NEWVERSION.."
   ${LangFileString} UMUI_TEXT_UPDATE_REMOVE_TITLE "Usuñ"
-  ${LangFileString} UMUI_TEXT_UPDATE_REMOVE_TEXT "Odinstaluj $(^NameDA) z Twojego komputera."
+  ${LangFileString} UMUI_TEXT_UPDATE_REMOVE_TEXT "Odinstaluj wersjê $OLDVERSION z Twojego komputera."
   ${LangFileString} UMUI_TEXT_UPDATE_CONTINUE_TITLE "Kontynuowanie instalacji"
   ${LangFileString} UMUI_TEXT_UPDATE_CONTINUE_TEXT "Kontynuuj normaln¹ instalacje. U¿yj tej opcji aby zainstalowaæ nowasz¹ wersjê w innym katalogu ni¿ dotychczasowa instalacja."
 !endif
@@ -157,7 +157,7 @@
 !ifdef UMUI_MAINTENANCEPAGE | UMUI_UNMAINTENANCEPAGE
   ${LangFileString} UMUI_TEXT_MAINTENANCE_TITLE "Konserwacja"
   ${LangFileString} UMUI_TEXT_MAINTENANCE_SUBTITLE "Modyfikuj, napraw, lub usuñ program."
-  ${LangFileString} UMUI_TEXT_MAINTENANCE_INFO_TEXT "Witamy w instalatorze programu $(^NameDA) .$\r$\nTen program umo¿liwi Ci modyfikacjê obecnej instalacji."
+  ${LangFileString} UMUI_TEXT_MAINTENANCE_INFO_TEXT "Witamy w instalatorze programu $(^NameDA).$\r$\nTen program umo¿liwi Ci modyfikacjê obecnej instalacji."
   ${LangFileString} UMUI_TEXT_MAINTENANCE_MODIFY_TITLE "Modyfikuj"
   ${LangFileString} UMUI_TEXT_MAINTENANCE_MODIFY_TEXT "Zaznacz nowe sk³adniki do dodanie lub zaznacz ju¿ zainstalowane aby je usun¹æ."
   ${LangFileString} UMUI_TEXT_MAINTENANCE_REPAIR_TITLE "Napraw"

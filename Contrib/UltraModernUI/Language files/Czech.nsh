@@ -36,33 +36,33 @@
   ${LangFileString} UMUI_TEXT_SERIALNUMBER_SERIALNUMBER "Sériové èíslo"
   ${LangFileString} UMUI_TEXT_SERIALNUMBER_ACTIVATIONCODE "Aktivaèní kód"
   ${LangFileString} UMUI_TEXT_SERIALNUMBER_PASSWORD "Heslo"
-!endif 
+!endif
 
 
 !ifdef UMUI_CONFIRMPAGE
   ${LangFileString} UMUI_TEXT_INSTCONFIRM_SUBTITLE "Prùvodce získal všechny potøebné informace a je pøipraven nainstalovat produkt $(^NameDA)."
   ${LangFileString} UMUI_TEXT_INSTCONFIRM_TITLE "Potvrdit instalaci"
   ${LangFileString} UMUI_TEXT_INSTCONFIRM_TEXT_TOP "Prùvodce je pøipraven nainstalovat $(^NameDA) na váš poèítaè.$\r$\nPokud chcete zkontrolovat nebo zmìnit nìkteré parametry instalace, kliknìte na Zpìt. $_CLICK"
-!endif 
+!endif
 
 !ifdef UMUI_UNCONFIRMPAGE
   ${LangFileString} UMUI_UNTEXT_INSTCONFIRM_SUBTITLE "Prùvodce získal všechny potøebné informace a je pøipraven odebrat produkt $(^NameDA)."
   ${LangFileString} UMUI_UNTEXT_INSTCONFIRM_TITLE "Potvrdit odebrání"
   ${LangFileString} UMUI_UNTEXT_INSTCONFIRM_TEXT_TOP "Prùvodce je pøipraven odebrat $(^NameDA) na váš poèítaè.$\r$\nPokud chcete zkontrolovat nebo zmìnit nìkteré parametry odebrat, kliknìte na Zpìt. Kliknìte na Další pro odebrání."
-!endif 
+!endif
 
 !ifdef UMUI_CONFIRMPAGE | UMUI_UNCONFIRMPAGE
   ${LangFileString} UMUI_TEXT_INSTCONFIRM_TEXTBOX_TITLE "Stávající nastavení:"
   ${LangFileString} UMUI_TEXT_INSTCONFIRM_TEXTBOX_DESTINATION_LOCATION "Cílová složka:"
   ${LangFileString} UMUI_TEXT_INSTCONFIRM_TEXTBOX_START_MENU_FOLDER "Nabídka Start:"
   ${LangFileString} UMUI_TEXT_INSTCONFIRM_TEXTBOX_COMPNENTS "Budou instalovány následující komponenty:"
-!endif 
+!endif
 
 
 !ifdef UMUI_ABORTPAGE
   ${LangFileString} UMUI_TEXT_ABORT_INFO_TITLE "Dokonèování prùvodce instalací $(^NameDA)"
   ${LangFileString} UMUI_TEXT_ABORT_INFO_TEXT "Prùvodce instalací byl ukonèen døíve, než mohl být $(^NameDA) kompletnì nainstalovaný.$\r$\n$\r$\nPro pozdìjší instalace spuste, prosím, instalátor znovu.$\r$\n$\r$\n$\r$\n$\r$\nKliknìte na $(^CloseBtn) pro ukonèení prùvodce instalací."
-!endif 
+!endif
 
 !ifdef UMUI_UNABORTPAGE
   ${LangFileString} UMUI_UNTEXT_ABORT_INFO_TITLE "Dokonèování prùvodce odebráním $(^NameDA)"
@@ -78,7 +78,7 @@
   ${LangFileString} UMUI_TEXT_SETUPTYPE_STANDARD_TEXT "Budou se instalovat všechny dùležité souèásti. Doporuèuje se pro vìtšinu uživatelù."
   ${LangFileString} UMUI_TEXT_SETUPTYPE_COMPLETE_TEXT "Budou se instalovat všechny souèásti. (Potøebuje nejvíce místa na disku)"
   ${LangFileString} UMUI_TEXT_SETUPTYPE_CUSTOM_TEXT "Vyberte souèásti, které se budou instalovat a urèete, kam se nainstalují. Doporuèuje se pro zkušené uživatele."
-!endif 
+!endif
 
 !ifdef UMUI_UNSETUPTYPEPAGE
   ${LangFileString} UMUI_UNTEXT_SETUPTYPE_TITLE "Typ odinstalace"
@@ -88,37 +88,37 @@
   ${LangFileString} UMUI_UNTEXT_SETUPTYPE_STANDARD_TEXT "Budou ponechány nutné souèástí."
   ${LangFileString} UMUI_UNTEXT_SETUPTYPE_COMPLETE_TEXT "Celá aplikace bude odstranìna."
   ${LangFileString} UMUI_UNTEXT_SETUPTYPE_CUSTOM_TEXT "Vyberte souèásti programu, které se odeberou."
-!endif 
+!endif
 
 !ifdef UMUI_SETUPTYPEPAGE | UMUI_UNSETUPTYPEPAGE
   ${LangFileString} UMUI_TEXT_SETUPTYPE_MINIMAL_TITLE "Minimální"
   ${LangFileString} UMUI_TEXT_SETUPTYPE_STANDARD_TITLE "Standardní"
   ${LangFileString} UMUI_TEXT_SETUPTYPE_COMPLETE_TITLE "Úplná"
   ${LangFileString} UMUI_TEXT_SETUPTYPE_CUSTOM_TITLE "Vlastní"
-!endif 
+!endif
 
 
 !ifdef UMUI_INFORMATIONPAGE
   ${LangFileString} UMUI_TEXT_INFORMATION_SUBTITLE "Prosím, vezmìte v úvahu tyto informace týkající se instalace $(^NameDA)."
-!endif 
+!endif
 
 !ifdef UMUI_UNINFORMATIONPAGE
   ${LangFileString} UMUI_UNTEXT_INFORMATION_SUBTITLE "Prosím, vezmìte v úvahu tyto informace týkající se odebrání $(^NameDA)."
-!endif 
+!endif
 
 !ifdef UMUI_INFORMATIONPAGE | UMUI_UNINFORMATIONPAGE
   ${LangFileString} UMUI_TEXT_INFORMATION_TITLE "Informace"
   ${LangFileString} UMUI_TEXT_INFORMATION_INFO_TEXT "Informace týkající se $(^NameDA)."
-!endif 
+!endif
 
 
 !ifdef UMUI_ADDITIONALTASKSPAGE
   ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_INFO_TEXT "Vyberte dodateèné akce, které má prùvodce provést v prùbìhu instalace $(^NameDA). $_CLICK"
-!endif 
+!endif
 
 !ifdef UMUI_UNADDITIONALTASKSPAGE
   ${LangFileString} UMUI_UNTEXT_ADDITIONALTASKS_INFO_TEXT "Vyberte dodateèné akce, které má prùvodce provést v prùbìhu odebrání $(^NameDA). $_CLICK"
-!endif 
+!endif
 
 !ifdef UMUI_ADDITIONALTASKSPAGE | UMUI_UNADDITIONALTASKSPAGE
   ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_TITLE "Dodateèné akce"
@@ -131,9 +131,9 @@
   ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_FILE_ASSOCIATION "Asociace souborù:"
   ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_ASSOCIATE_WITH "Asociovat $(^NameDA) s "
   ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_ASSOCIATE_WITH_END " soubory"
-!endif 
-  
-  
+!endif
+
+
 !ifdef UMUI_CONFIRMPAGE | UMUI_UNCONFIRMPAGE | UMUI_ALTERNATIVESTARTMENUPAGE | UMUI_UNALTERNATIVESTARTMENUPAGE
   ${LangFileString} UMUI_TEXT_SHELL_VAR_CONTEXT "Vytvoøit zástupce pro:"
   ${LangFileString} UMUI_TEXT_SHELL_VAR_CONTEXT_FOR_ALL_USERS "Všechny uživatele"
@@ -144,11 +144,11 @@
 !ifdef UMUI_UPDATEPAGE
   ${LangFileString} UMUI_TEXT_UPDATE_TITLE "Aktualizovat"
   ${LangFileString} UMUI_TEXT_UPDATE_SUBTITLE "Aktualizace pøedchozí verze programu."
-  ${LangFileString} UMUI_TEXT_UPDATE_INFO_TEXT "Vítejte v prùvodci aktualizací $(^NameDA) .$\r$\nTento prùvodce umožòuje aktualizovat $OLDVERSION nalezenou na vašem poèítaèi."
+  ${LangFileString} UMUI_TEXT_UPDATE_INFO_TEXT "Vítejte v prùvodci aktualizací $(^NameDA).$\r$\nTento prùvodce umožòuje aktualizovat $OLDVERSION nalezenou na vašem poèítaèi."
   ${LangFileString} UMUI_TEXT_UPDATE_UPDATE_TITLE "Aktualizovat"
-  ${LangFileString} UMUI_TEXT_UPDATE_UPDATE_TEXT "Aktualizovat všechny souèásti $(^NameDA) nainstalované pøed verzí $NEWVERSION.."
+  ${LangFileString} UMUI_TEXT_UPDATE_UPDATE_TEXT "Aktualizovat všechny souèásti $(^NameDA) nainstalované pøed verzí $NEWVERSION."
   ${LangFileString} UMUI_TEXT_UPDATE_REMOVE_TITLE "Odebrat"
-  ${LangFileString} UMUI_TEXT_UPDATE_REMOVE_TEXT "Odebrat $(^NameDA) z vašeho poèítaèe."
+  ${LangFileString} UMUI_TEXT_UPDATE_REMOVE_TEXT "Odebrat verzi $OLDVERSION z vašeho poèítaèe."
   ${LangFileString} UMUI_TEXT_UPDATE_CONTINUE_TITLE "Pokraèovat v instalaci"
   ${LangFileString} UMUI_TEXT_UPDATE_CONTINUE_TEXT "Pokraèovat v instalaci obvyklým zpùsobem. Použijte tuto volbu, pokud chcete nainstalovat tuto novìjší verzi do jiné složky než pøedchozí verzi."
 !endif
@@ -157,7 +157,7 @@
 !ifdef UMUI_MAINTENANCEPAGE | UMUI_UNMAINTENANCEPAGE
   ${LangFileString} UMUI_TEXT_MAINTENANCE_TITLE "Údržba"
   ${LangFileString} UMUI_TEXT_MAINTENANCE_SUBTITLE "Zmìna, oprava nebo odstranìní programu."
-  ${LangFileString} UMUI_TEXT_MAINTENANCE_INFO_TEXT "Vítejte v prùvodci údržbou programu$(^NameDA).$\r$\nPomocí tohoto prùvodce mùžete modifikovat aktuální instalaci."
+  ${LangFileString} UMUI_TEXT_MAINTENANCE_INFO_TEXT "Vítejte v prùvodci údržbou programu $(^NameDA).$\r$\nPomocí tohoto prùvodce mùžete modifikovat aktuální instalaci."
   ${LangFileString} UMUI_TEXT_MAINTENANCE_MODIFY_TITLE "Zmìnit"
   ${LangFileString} UMUI_TEXT_MAINTENANCE_MODIFY_TEXT "Vyberte nové souèásti, které budou pøidány nebo vyberte nainstalované souèásti, které budou odebrány."
   ${LangFileString} UMUI_TEXT_MAINTENANCE_REPAIR_TITLE "Opravit"
