@@ -23,14 +23,14 @@ UltraModernUI include three NSIS plug-ins:
 * Updated the InstallOptionsEx plug-in to version 2.4.5 beta 3 with full unicode support;
 * Updated the SkinnedControls plug-in to version 1.4 with support of the new NSIS plug-in API, ignore case parameters name support, unicode support, rewritten documentation and button image size are no more limited to allow smoother gradients;
 * Several new and completed language files and other minor fixes:
-   * Completed: German language file by MMO;
-   * New: Greek language file by SysDesign;
-   * New: Italian language file by TM-RS;
-   * New: Lithuanian language file by SysDesign;
-   * New: Russian language file by SysDesign;
-   * New: Slovenian language file by SysDesign;
-   * New: Spanish language file by SysDesign;
-   * New: Turkish language file;
+   * Completed: German language file by Bodenseematze;
+   * New: Greek language file by Bodenseematze;
+   * New: Italian language file by Bodenseematze;
+   * New: Lithuanian language file by Bodenseematze;
+   * New: Russian language file by Bodenseematze;
+   * New: Slovenian language file by Bodenseematze;
+   * New: Spanish language file by Bodenseematze;
+   * New: Turkish language file by Bodenseematze;
 * The information page is now compatible with UTF16LE text files if compiled in Unicode;
 * The information page is now compatible with Unix style (LF only) line return text files; 
 * The UMUI_CUSTOM_SKIN define is now deprecated, it is no more necessary and you can simply use the UMUI_SKIN define with your custom skin; 

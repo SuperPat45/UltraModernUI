@@ -3,7 +3,7 @@
 
 ;Language: English (1033)
 ;By SuperPat
-;Changes by MMo
+;Changes by Matthias <bodenseematze@users.sourceforge.net>
 ;--------------------------------
 
 !ifdef UMUI_MULTILANGUAGEPAGE

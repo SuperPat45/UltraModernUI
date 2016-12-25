@@ -4,7 +4,6 @@
 ;Language: Japanese (1041)
 ;By Logue <http://logue.be/>
 ;modified 2009/06/23
-
 ;--------------------------------
 
 !ifdef UMUI_MULTILANGUAGEPAGE

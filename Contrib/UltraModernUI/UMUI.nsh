@@ -11,7 +11,7 @@ Based on:
 
 !ifndef MUI_INCLUDED
 !echo "NSIS Ultra-Modern User Interface version 2.0 beta 2 - Copyright 2005-2016 SuperPat"
-!echo "  (Bugfixes and some additions: 2015-2016 - Matthias Mohr)"
+!echo "  (Bugfixes and some additions: 2015-2016 - Bodenseematze)"
 !echo "Based on: NSIS Modern User Interface version 1.8 - Copyright 2002-2016 Joost Verburg"
 
 ;--------------------------------
@@ -105,8 +105,8 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
   !ifndef "${SYMBOL}"
     !define "${SYMBOL}" "${CONTENT}"
-    !insertmacro MUI_SET "${SYMBOL}_DEFAULTSET"
-    !insertmacro MUI_SET "MUI_${MUI_PAGE_UNINSTALLER_PREFIX}IOCONVERT_USED"
+    !define /IfNDef "${SYMBOL}_DEFAULTSET"
+    !define /IfNDef "MUI_${MUI_PAGE_UNINSTALLER_PREFIX}IOCONVERT_USED"
   !else
     !insertmacro MUI_UNSET "${SYMBOL}_DEFAULTSET"
   !endif
@@ -231,10 +231,10 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !endif
 
     !ifdef UMUI_UNIQUEBGIMAGE
-      !insertmacro MUI_SET UMUI_PAGEBGIMAGE
+      !define /IfNDef UMUI_PAGEBGIMAGE
     !endif
     !ifdef UMUI_UNUNIQUEBGIMAGE
-      !insertmacro MUI_SET UMUI_UNPAGEBGIMAGE
+      !define /IfNDef UMUI_UNPAGEBGIMAGE
     !endif
 
     !ifndef UMUI_ULTRAMODERN_SMALL
@@ -244,9 +244,9 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !else
       !define /IfNDef UMUI_UI_SMALL "${NSISDIR}\Contrib\UIs\UltraModernUI\UltraModern_small.exe"
       !define /IfNDef UMUI_UI_SB "${NSISDIR}\Contrib\UIs\UltraModernUI\UltraModern_small_sb.exe"
-      !insertmacro MUI_SET UMUI_USE_SMALLPAGE
+      !define /IfNDef UMUI_USE_SMALLPAGE
       !ifndef UMUI_UNIQUEBGIMAGE
-        !insertmacro MUI_SET UMUI_NO_WFA_BGTRANSPARENT
+        !define /IfNDef UMUI_NO_WFA_BGTRANSPARENT
       !endif
     !endif
 
@@ -306,7 +306,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
     !else
 
-      !insertmacro MUI_SET UMUI_USE_SMALL_PAGES
+      !define /IfNDef UMUI_USE_SMALL_PAGES
       ChangeUI all "${UMUI_UI_SMALL}"
 
     !endif
@@ -314,11 +314,11 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !ifdef UMUI_NOHEADERBGIMAGE
       !insertmacro MUI_UNSET UMUI_HEADERBGIMAGE
     !else
-      !insertmacro MUI_SET UMUI_HEADERBGIMAGE
+      !define /IfNDef UMUI_HEADERBGIMAGE
     !endif
 
     !ifdef UMUI_HEADERBGIMAGE
-      !insertmacro MUI_SET MUI_HEADER_TRANSPARENT_TEXT
+      !define /IfNDef MUI_HEADER_TRANSPARENT_TEXT
     !endif
 
     !ifdef UMUI_NOBOTTOMIMAGE
@@ -350,7 +350,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
     ; by default, UMUI_WELCOMEFINISHABORTPAGE_USE_IMAGE is set
     !ifndef UMUI_WELCOMEFINISHABORTPAGE_NOTUSE_IMAGE
-      !insertmacro MUI_SET UMUI_WELCOMEFINISHABORTPAGE_USE_IMAGE
+      !define /IfNDef UMUI_WELCOMEFINISHABORTPAGE_USE_IMAGE
     !else
       !insertmacro MUI_UNSET UMUI_WELCOMEFINISHABORTPAGE_USE_IMAGE
     !endif
@@ -401,11 +401,11 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
       !error "Invalid MUI_UNWELCOMEFINISHPAGE_BITMAP"
     !endif
 
-    !insertmacro MUI_SET UMUI_USE_SMALL_PAGES
+    !define /IfNDef UMUI_USE_SMALL_PAGES
 
     !ifdef UMUI_HEADERBGIMAGE
 
-      !insertmacro MUI_SET MUI_HEADER_TRANSPARENT_TEXT
+      !define /IfNDef MUI_HEADER_TRANSPARENT_TEXT
       !insertmacro MUI_UNSET MUI_HEADERIMAGE
       !insertmacro MUI_UNSET MUI_HEADERIMAGE_RIGHT
 
@@ -416,7 +416,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
       !ifndef MUI_HEADERIMAGE_UNBITMAP
         !define MUI_HEADERIMAGE_UNBITMAP "${MUI_HEADERIMAGE_BITMAP}"
         !ifdef MUI_HEADERIMAGE_BITMAP_NOSTRETCH
-          !insertmacro MUI_SET MUI_HEADERIMAGE_UNBITMAP_NOSTRETCH
+          !define /IfNDef MUI_HEADERIMAGE_UNBITMAP_NOSTRETCH
         !endif
       !endif
 
@@ -431,7 +431,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
         !ifndef MUI_HEADERIMAGE_UNBITMAP_RTL
           !define MUI_HEADERIMAGE_UNBITMAP_RTL "${MUI_HEADERIMAGE_BITMAP_RTL}"
           !ifdef MUI_HEADERIMAGE_BITMAP_RTL_NOSTRETCH
-            !insertmacro MUI_SET MUI_HEADERIMAGE_UNBITMAP_RTL_NOSTRETCH
+            !define /IfNDef MUI_HEADERIMAGE_UNBITMAP_RTL_NOSTRETCH
           !endif
         !endif
       !endif
@@ -611,6 +611,21 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
   FindWindow $MUI_TEMP1 "#32770" "" $HWNDPARENT
   GetDlgItem $MUI_TEMP1 $MUI_TEMP1 ${ID}
   SetCtlColors $MUI_TEMP1 ${UMUI_TEXT_LIGHTCOLOR} ${MUI_BGCOLOR}
+!endif
+;-----
+!macroend
+
+; Set transparent the background and the light text color of the control in a static Pages
+!macro UMUI_PAGECTLLIGHTTRANSPARENT_INIT ID
+!ifndef USE_MUIEx
+;-----------------
+  FindWindow $MUI_TEMP1 "#32770" "" $HWNDPARENT
+  GetDlgItem $MUI_TEMP1 $MUI_TEMP1 ${ID}
+  !ifdef UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}PAGEBGIMAGE
+    SetCtlColors $MUI_TEMP1 ${UMUI_TEXT_LIGHTCOLOR} "transparent"
+  !else
+    SetCtlColors $MUI_TEMP1 ${UMUI_TEXT_LIGHTCOLOR} ${MUI_BGCOLOR}
+  !endif
 !endif
 ;-----
 !macroend
@@ -830,8 +845,8 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !ifndef UMUI_ENABLE_DESCRIPTION_TEXT
       EnableWindow $MUI_TEMP1 0
     !else
-      EnableWindow $MUI_TEMP1 1
       !insertmacro UMUI_PAGECTLLIGHT_INIT 1043
+;      !insertmacro UMUI_PAGECTLLIGHTTRANSPARENT_INIT 1043
     !endif
 !else
 ;-----
@@ -855,13 +870,17 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
 !ifndef USE_MUIEx
 ;----------------
-      !ifdef UMUI_ENABLE_DESCRIPTION_TEXT
-        !insertmacro UMUI_PAGECTLTRANSPARENT_INIT 1043
-      !endif
+    !ifndef UMUI_ENABLE_DESCRIPTION_TEXT
+      EnableWindow $MUI_TEMP1 1
+    !else
+      !insertmacro UMUI_PAGECTL_INIT 1043
+;      !insertmacro UMUI_PAGECTLTRANSPARENT_INIT 1043
+    !endif
+!else
+;-----
+    EnableWindow $MUI_TEMP1 1
 !endif
 ;-----
-
-    EnableWindow $MUI_TEMP1 1
 
     SendMessage $MUI_TEMP1 ${WM_SETTEXT} 0 "STR:${TEXT}"
     Goto mui.description_done
@@ -877,6 +896,35 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
   !verbose ${MUI_VERBOSE}
 
   mui.description_done:
+
+!ifndef USE_MUIEx
+;----------------
+  !ifdef UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}PAGEBGIMAGE
+
+; Workaround attempt for stransparent component description
+; But all these methods flicker:
+
+; method 1
+;    System::Call "user32::LockWindowUpdate(i)i ($MUI_TEMP1)"
+;    System::Call "user32::InvalidateRect(i,i,i)i ($MUI_TEMP1, 0, 1)"
+;!define RDW_INVALIDATE 0x0001
+;!define RDW_ERASE 0x0004
+;!define RDW_UPDATENOW 0x0100
+;    System::Call "user32::RedrawWindow(i,i,i,i)i ($MUI_TEMP1, 0, 0, ${RDW_INVALIDATE}|${RDW_ERASE}|${RDW_UPDATENOW})"
+;    System::Call "user32::LockWindowUpdate(i)i (0)"
+
+; method 2
+;    LockWindow on
+;    LockWindow off
+
+; method 3
+;  FindWindow $MUI_TEMP2 "#32770" "" $HWNDPARENT
+;  ShowWindow $MUI_TEMP2 ${SW_HIDE}
+;  ShowWindow $MUI_TEMP2 ${SW_SHOW}
+
+  !endif
+!endif
+;-----
 
   !verbose pop
 
@@ -1030,7 +1078,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
       SetBrandingImage /IMGID=1034 /RESIZETOFIT "$PLUGINSDIR\Header.bmp"
     !else
       GetDlgItem $MUI_TEMP1 $HWNDPARENT 1034
-      SetCtlColors $MUI_TEMP1 ${UMUI_TEXT_COLOR}  "${MUI_BGCOLOR}"
+      SetCtlColors $MUI_TEMP1 ${UMUI_TEXT_COLOR} "${MUI_BGCOLOR}"
     !endif
 
     !ifdef UMUI_${UNPREFIX}BOTTOMIMAGE_BMP
@@ -1087,17 +1135,17 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
   !ifndef MUI_HEADER_TRANSPARENT_TEXT
 
-    SetCtlColors $MUI_TEMP1 ${UMUI_HEADERTEXT_COLOR}  "${MUI_BGCOLOR}"
+    SetCtlColors $MUI_TEMP1 ${UMUI_HEADERTEXT_COLOR} "${MUI_BGCOLOR}"
 
     GetDlgItem $MUI_TEMP1 $HWNDPARENT 1038
-    SetCtlColors $MUI_TEMP1 ${UMUI_HEADERTEXT_COLOR}  "${MUI_BGCOLOR}"
+    SetCtlColors $MUI_TEMP1 ${UMUI_HEADERTEXT_COLOR} "${MUI_BGCOLOR}"
 
   !else
 
-    SetCtlColors $MUI_TEMP1 ${UMUI_HEADERTEXT_COLOR}  "transparent"
+    SetCtlColors $MUI_TEMP1 ${UMUI_HEADERTEXT_COLOR} "transparent"
 
     GetDlgItem $MUI_TEMP1 $HWNDPARENT 1038
-    SetCtlColors $MUI_TEMP1 ${UMUI_HEADERTEXT_COLOR}  "transparent"
+    SetCtlColors $MUI_TEMP1 ${UMUI_HEADERTEXT_COLOR} "transparent"
 
   !endif
 
@@ -1111,13 +1159,13 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
   !else
 
     GetDlgItem $MUI_TEMP1 $HWNDPARENT 1034
-    SetCtlColors $MUI_TEMP1 ${UMUI_TEXT_COLOR}  "${MUI_BGCOLOR}"
+    SetCtlColors $MUI_TEMP1 ${UMUI_TEXT_COLOR} "${MUI_BGCOLOR}"
 
   !endif
 
 
   GetDlgItem $MUI_TEMP1 $HWNDPARENT 1039
-  SetCtlColors $MUI_TEMP1 ${UMUI_TEXT_COLOR}  "${MUI_BGCOLOR}"
+  SetCtlColors $MUI_TEMP1 ${UMUI_TEXT_COLOR} "${MUI_BGCOLOR}"
 
   GetDlgItem $MUI_TEMP1 $HWNDPARENT 1028
   SetCtlColors $MUI_TEMP1 /BRANDING
@@ -2307,6 +2355,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !define MUI_VAR_TEXT
   !endif
 
+;  !define /redef MUI_PAGE_UNINSTALLER_PREFIX ""
   Function .onMouseOverSection
     !insertmacro MUI_DESCRIPTION_BEGIN
 
@@ -2324,6 +2373,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
       Call "${MUI_CUSTOMFUNCTION_ONMOUSEOVERSECTION}"
     !endif
   FunctionEnd
+;  !undef MUI_PAGE_UNINSTALLER_PREFIX
 
   !verbose pop
 
@@ -2334,6 +2384,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
   !verbose push
   !verbose ${MUI_VERBOSE}
 
+;  !define /redef MUI_PAGE_UNINSTALLER_PREFIX "UN"
   Function un.onMouseOverSection
     !insertmacro MUI_DESCRIPTION_BEGIN
 
@@ -2351,6 +2402,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
       Call "${MUI_CUSTOMFUNCTION_UNONMOUSEOVERSECTION}"
     !endif
   FunctionEnd
+;  !undef MUI_PAGE_UNINSTALLER_PREFIX
 
   !verbose pop
 
@@ -2595,7 +2647,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
   !insertmacro MUI_PAGE_INIT
 
-  !insertmacro MUI_SET MUI_${MUI_PAGE_UNINSTALLER_PREFIX}WELCOMEPAGE
+  !define /IfNDef MUI_${MUI_PAGE_UNINSTALLER_PREFIX}WELCOMEPAGE
 
   !insertmacro MUI_DEFAULT_IOCONVERT MUI_WELCOMEPAGE_TITLE "$(MUI_${MUI_PAGE_UNINSTALLER_PREFIX}TEXT_WELCOME_INFO_TITLE)"
 
@@ -2638,7 +2690,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
   !insertmacro MUI_PAGE_INIT
 
-  !insertmacro MUI_SET MUI_${MUI_PAGE_UNINSTALLER_PREFIX}LICENSEPAGE
+  !define /IfNDef MUI_${MUI_PAGE_UNINSTALLER_PREFIX}LICENSEPAGE
 
   !define /IfNDef MUI_LICENSEPAGE_TEXT_TOP "$(MUI_INNERTEXT_LICENSE_TOP)"
   !define /IfNDef MUI_LICENSEPAGE_BUTTON ""
@@ -2696,7 +2748,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
   !insertmacro MUI_PAGE_INIT
 
-  !insertmacro MUI_SET MUI_${MUI_PAGE_UNINSTALLER_PREFIX}COMPONENTSPAGE
+  !define /IfNDef MUI_${MUI_PAGE_UNINSTALLER_PREFIX}COMPONENTSPAGE
 
   !define /IfNDef MUI_COMPONENTSPAGE_TEXT_TOP ""
   !define /IfNDef MUI_COMPONENTSPAGE_TEXT_COMPLIST ""
@@ -2794,7 +2846,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
   !insertmacro MUI_PAGE_INIT
 
-  !insertmacro MUI_SET MUI_${MUI_PAGE_UNINSTALLER_PREFIX}DIRECTORYPAGE
+  !define /IfNDef MUI_${MUI_PAGE_UNINSTALLER_PREFIX}DIRECTORYPAGE
 
   !define /IfNDef MUI_DIRECTORYPAGE_TEXT_TOP ""
   !define /IfNDef MUI_DIRECTORYPAGE_TEXT_DESTINATION ""
@@ -2836,7 +2888,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
   !insertmacro MUI_PAGE_INIT
 
-  !insertmacro MUI_SET MUI_${MUI_PAGE_UNINSTALLER_PREFIX}STARTMENUPAGE
+  !define /IfNDef MUI_${MUI_PAGE_UNINSTALLER_PREFIX}STARTMENUPAGE
 
   !define /IfNDef MUI_STARTMENUPAGE_DEFAULTFOLDER "$(^Name)"
   !define /IfNDef MUI_STARTMENUPAGE_TEXT_TOP "$(MUI_${MUI_PAGE_UNINSTALLER_PREFIX}INNERTEXT_STARTMENU_TOP)"
@@ -2908,7 +2960,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
   !insertmacro MUI_PAGE_INIT
 
-  !insertmacro MUI_SET MUI_${MUI_PAGE_UNINSTALLER_PREFIX}INSTFILESPAGE
+  !define /IfNDef MUI_${MUI_PAGE_UNINSTALLER_PREFIX}INSTFILESPAGE
 
   !ifdef UMUI_INSTALLDIR_REGISTRY_VALUENAME
     !ifndef UMUI_INSTALLDIR_REGISTRY_ROOT
@@ -2953,7 +3005,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
   !insertmacro MUI_PAGE_INIT
 
-  !insertmacro MUI_SET MUI_${MUI_PAGE_UNINSTALLER_PREFIX}FINISHPAGE
+  !define /IfNDef MUI_${MUI_PAGE_UNINSTALLER_PREFIX}FINISHPAGE
 
   !insertmacro MUI_DEFAULT_IOCONVERT MUI_FINISHPAGE_TITLE "$(MUI_${MUI_PAGE_UNINSTALLER_PREFIX}TEXT_FINISH_INFO_TITLE)"
   !insertmacro MUI_DEFAULT_IOCONVERT MUI_FINISHPAGE_TEXT "$(MUI_${MUI_PAGE_UNINSTALLER_PREFIX}TEXT_FINISH_INFO_TEXT)"
@@ -3049,7 +3101,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
   !insertmacro MUI_PAGE_INIT
 
-  !insertmacro MUI_SET MUI_UNCONFIRMPAGE
+  !define /IfNDef MUI_UNCONFIRMPAGE
 
   !define /IfNDef MUI_UNCONFIRMPAGE_TEXT_TOP ""
   !define /IfNDef MUI_UNCONFIRMPAGE_TEXT_LOCATION ""
@@ -3415,7 +3467,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
   !ifndef UMUI_HIDENEXTBACKBUTTON
     !insertmacro MUI_UNSET UMUI_HIDEFIRSTBACKBUTTON
   !else
-    !insertmacro MUI_SET UMUI_HIDEFIRSTBACKBUTTON
+    !define /IfNDef UMUI_HIDEFIRSTBACKBUTTON
     !insertmacro UMUI_SET_INSTALLFLAG ${UMUI_HIDEBACKBUTTON}
     !undef UMUI_HIDENEXTBACKBUTTON
   !endif
@@ -3741,6 +3793,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !insertmacro UMUI_PAGECTL_INIT 1023
     !insertmacro UMUI_PAGECTLTRANSPARENT_INIT 1006
     !insertmacro UMUI_PAGECTL_INIT 1043
+;    !insertmacro UMUI_PAGECTLTRANSPARENT_INIT 1043
     !insertmacro UMUI_PAGECTLLIGHT_INIT 1042
 
     !insertmacro MUI_INNERDIALOG_TEXT 1042 "${MUI_COMPONENTSPAGE_TEXT_DESCRIPTION_TITLE}"
@@ -3753,8 +3806,9 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !ifndef UMUI_ENABLE_DESCRIPTION_TEXT
       EnableWindow $MUI_TEMP1 0
     !else
-      EnableWindow $MUI_TEMP1 1
       !insertmacro UMUI_PAGECTLLIGHT_INIT 1043
+;      !insertmacro UMUI_PAGECTLLIGHTTRANSPARENT_INIT 1043
+      EnableWindow $MUI_TEMP1 1
     !endif
 !else
 ;-----
@@ -4125,32 +4179,26 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
   FunctionEnd
 
-  ;This is a workaround for the background of the progress bar that wasn't drawn properly
 !ifndef USE_MUIEx
 ;-----------------
 
-  !ifndef UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}SECTION_WORKAROUND_INSERTED
-    !define UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}SECTION_WORKAROUND_INSERTED
+  ;This is a workaround for the background of the progress bar that wasn't drawn properly with background image
+  !ifdef UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}PAGEBGIMAGE
+    !ifndef UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}SECTION_WORKAROUND_INSERTED
+      !define UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}SECTION_WORKAROUND_INSERTED
 
-    Section "${MUI_PAGE_UNINSTALLER_FUNCPREFIX}"
-      SetDetailsPrint none
+      Section "${MUI_PAGE_UNINSTALLER_FUNCPREFIX}"
+        SetDetailsPrint none
 
-      Push $0
-      Push $8
-      Push $4
+        FindWindow $MUI_TEMP1 "#32770" "" $HWNDPARENT
+        GetDlgItem $MUI_TEMP1 $MUI_TEMP1 1004
 
-      FindWindow $0 "#32770" "" $HWNDPARENT
-      GetDlgItem $8 $0 1004
+        System::Call "user32::InvalidateRect(i,i,i)i ($MUI_TEMP1, 0, 1)"
 
-      System::Call "user32::InvalidateRect(i,i,i)i (r8, 0, 1).r4"
+        SetDetailsPrint both
+      SectionEnd
 
-      Pop $4
-      Pop $8
-      Pop $0
-
-      SetDetailsPrint both
-    SectionEnd
-
+    !endif
   !endif
 
 !endif
@@ -4825,7 +4873,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
   !insertmacro MUI_PAGE_INIT
 
-  !insertmacro MUI_SET UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}MULTILANGUAGEPAGE
+  !define /IfNDef UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}MULTILANGUAGEPAGE
 
   !insertmacro MUI_DEFAULT_IOCONVERT UMUI_MULTILANGUAGEPAGE_TITLE "$(UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}TEXT_MULTILANGUAGE_TITLE)"
   !insertmacro MUI_DEFAULT_IOCONVERT UMUI_MULTILANGUAGEPAGE_TEXT "$(UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}TEXT_MULTILANGUAGE_TEXT)"
@@ -4914,7 +4962,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !define UMUI_INTERNAL_MPOSDROPDOWNRIGHT -60
   !endif
 
-  !insertmacro MUI_SET UMUI_HIDENEXTBACKBUTTON
+  !define /IfNDef UMUI_HIDENEXTBACKBUTTON
 
   Function "${PRE}"
 
@@ -5164,7 +5212,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
   !insertmacro MUI_PAGE_INIT
 
-  !insertmacro MUI_SET UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}CONFIRMPAGE
+  !define /IfNDef UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}CONFIRMPAGE
 
   !insertmacro MUI_DEFAULT_IOCONVERT UMUI_CONFIRMPAGE_TEXT_TOP "$(UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}TEXT_INSTCONFIRM_TEXT_TOP)"
   !insertmacro MUI_DEFAULT_IOCONVERT UMUI_CONFIRMPAGE_TEXT_BOTTOM "$(UMUI_TEXT_INSTCONFIRM_TEXTBOX_TITLE)"
@@ -5219,7 +5267,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
     !insertmacro INSTALLOPTIONS_EXTRACT_AS "${UMUI_CONFIRMPAGE_INI}" "Confirm.ini"
 
-    ; MMo-2016-09-15: missing PRE-Function support added:
+    ; Bodenseematze-2016-09-15: missing PRE-Function support added:
     !insertmacro MUI_PAGE_FUNCTION_CUSTOM PRE
 
     !insertmacro MUI_HEADER_TEXT_PAGE "$(UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}TEXT_INSTCONFIRM_TITLE)" "$(UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}TEXT_INSTCONFIRM_SUBTITLE)"
@@ -5290,7 +5338,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
   !insertmacro MUI_PAGE_INIT
 
-  !insertmacro MUI_SET UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}ABORTPAGE
+  !define /IfNDef UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}ABORTPAGE
 
   !insertmacro MUI_DEFAULT_IOCONVERT UMUI_ABORTPAGE_TITLE "$(UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}TEXT_ABORT_INFO_TITLE)"
   !insertmacro MUI_DEFAULT_IOCONVERT UMUI_ABORTPAGE_TEXT "$(UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}TEXT_ABORT_INFO_TEXT)"
@@ -5544,7 +5592,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
   !insertmacro MUI_PAGE_INIT
 
-  !insertmacro MUI_SET UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}INFORMATIONPAGE
+  !define /IfNDef UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}INFORMATIONPAGE
 
   !insertmacro MUI_DEFAULT_IOCONVERT UMUI_INFORMATIONPAGE_TEXT "$(UMUI_TEXT_INFORMATION_INFO_TEXT)"
 
@@ -5637,13 +5685,15 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !ifdef UMUI_INFORMATIONPAGE_USE_RICHTEXTFORMAT
 
       !ifndef UMUI_USE_INSTALLOPTIONSEX
-        !warning "The Rich Text Control that you want to use work only with InstallOptionEx but it seen that you don't use it. Use the define UMUI_USE_INSTALLOPTIONSEX"
+        !error "The Rich Text Control that you want to use with the UMUI_USE_INSTALLOPTIONSEX define work only with InstallOptionEx but it seen that you don't use it. Use the define UMUI_USE_INSTALLOPTIONSEX"
       !endif
 
       !insertmacro INSTALLOPTIONS_WRITE "Information.ini" "Field 2" Type "RichText"
 
       StrCmp $MUI_TEMP1 "" fileNotFound
       !insertmacro INSTALLOPTIONS_WRITE "Information.ini" "Field 2" State '$PLUGINSDIR\$MUI_TEMP1'
+
+      !insertmacro INSTALLOPTIONS_WRITE "Information.ini" "Field 2" Notify ONCLICK
 
     !else
 
@@ -5739,6 +5789,14 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
     !insertmacro MUI_PAGE_FUNCTION_CUSTOM LEAVE
 
+    !ifdef UMUI_INFORMATIONPAGE_USE_RICHTEXTFORMAT
+
+      !insertmacro INSTALLOPTIONS_READ $MUI_TEMP1 "Information.ini" "Settings" Notify
+      StrCmp $MUI_TEMP1 "ONNEXT" +2 0
+        Abort
+
+    !endif
+
   FunctionEnd
 
 !macroend
@@ -5770,7 +5828,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
   !insertmacro MUI_PAGE_INIT
 
-  !insertmacro MUI_SET UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}ADDITIONALTASKSPAGE
+  !define /IfNDef UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}ADDITIONALTASKSPAGE
 
   !insertmacro MUI_DEFAULT_IOCONVERT UMUI_ADDITIONALTASKSPAGE_TEXT_TOP "$(UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}TEXT_ADDITIONALTASKS_INFO_TEXT)"
 
@@ -5836,7 +5894,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
   Function "${PRE}"
 
-    ; MMo-2016-09-15: missing PRE-Function support added:
+    ; Bodenseematze-2016-09-15: missing PRE-Function support added:
     !insertmacro MUI_PAGE_FUNCTION_CUSTOM PRE
 
     !insertmacro MUI_HEADER_TEXT_PAGE "$(UMUI_TEXT_ADDITIONALTASKS_TITLE)" "$(UMUI_TEXT_ADDITIONALTASKS_SUBTITLE)"
@@ -6336,7 +6394,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
   !insertmacro MUI_PAGE_INIT
 
-  !insertmacro MUI_SET UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}SERIALNUMBERPAGE
+  !define /IfNDef UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}SERIALNUMBERPAGE
 
   !insertmacro MUI_DEFAULT_IOCONVERT UMUI_SERIALNUMBERPAGE_TEXT_TOP "$(UMUI_TEXT_SERIALNUMBER_INFO_TEXT)"
   !insertmacro MUI_DEFAULT_IOCONVERT UMUI_SERIALNUMBERPAGE_INVALIDATE_TEXT "$(UMUI_TEXT_SERIALNUMBER_INVALIDATE_TEXT)"
@@ -6394,7 +6452,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     ; IF setup cancelled or setuptype choosen
     !insertmacro UMUI_ABORT_IF_INSTALLFLAG_IS ${UMUI_CANCELLED}|${UMUI_MODIFY}|${UMUI_REPAIR}|${UMUI_UPDATE}
 
-    ; MMo-2016-09-15: missing PRE-Function support added:
+    ; Bodenseematze-2016-09-15: missing PRE-Function support added:
     !insertmacro MUI_PAGE_FUNCTION_CUSTOM PRE
 
     !insertmacro MUI_HEADER_TEXT_PAGE "$(UMUI_TEXT_SERIALNUMBER_TITLE)" "$(UMUI_TEXT_SERIALNUMBER_SUBTITLE)"
@@ -7100,8 +7158,8 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
   !insertmacro MUI_PAGE_INIT
 
-  !insertmacro MUI_SET MUI_${MUI_PAGE_UNINSTALLER_PREFIX}STARTMENUPAGE
-  !insertmacro MUI_SET UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}ALTERNATIVESTARTMENUPAGE
+  !define /IfNDef MUI_${MUI_PAGE_UNINSTALLER_PREFIX}STARTMENUPAGE
+  !define /IfNDef UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}ALTERNATIVESTARTMENUPAGE
 
   !define /IfNDef MUI_STARTMENUPAGE_DEFAULTFOLDER "$(^Name)"
   !insertmacro MUI_DEFAULT_IOCONVERT MUI_STARTMENUPAGE_TEXT_TOP "$(MUI_${MUI_PAGE_UNINSTALLER_PREFIX}INNERTEXT_STARTMENU_TOP)"
@@ -7850,7 +7908,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
   !insertmacro MUI_PAGE_INIT
 
-  !insertmacro MUI_SET UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}SETUPTYPEPAGE
+  !define /IfNDef UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}SETUPTYPEPAGE
 
   !insertmacro MUI_DEFAULT_IOCONVERT UMUI_SETUPTYPEPAGE_TEXT "$(UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}TEXT_SETUPTYPE_INFO_TEXT)"
   !insertmacro MUI_DEFAULT_IOCONVERT UMUI_SETUPTYPEPAGE_MINIMAL_TITLE "$(UMUI_TEXT_SETUPTYPE_MINIMAL_TITLE)"
@@ -8039,7 +8097,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     ; IF setup cancelled
     !insertmacro UMUI_ABORT_IF_INSTALLFLAG_IS ${UMUI_CANCELLED}|${UMUI_REPAIR}|${UMUI_UPDATE}
 
-    ; MMo-2016-09-15: missing PRE-Function support added:
+    ; Bodenseematze-2016-09-15: missing PRE-Function support added:
     !insertmacro MUI_PAGE_FUNCTION_CUSTOM PRE
 
     !insertmacro MUI_HEADER_TEXT_PAGE "$(UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}TEXT_SETUPTYPE_TITLE)" "$(UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}TEXT_SETUPTYPE_SUBTITLE)"
@@ -8168,7 +8226,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
   !insertmacro MUI_PAGE_INIT
 
-  !insertmacro MUI_SET UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}MAINTENANCEPAGE
+  !define /IfNDef UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}MAINTENANCEPAGE
 
   !insertmacro MUI_DEFAULT_IOCONVERT UMUI_MAINTENANCEPAGE_TEXT "$(UMUI_TEXT_MAINTENANCE_INFO_TEXT)"
   !insertmacro MUI_DEFAULT_IOCONVERT UMUI_MAINTENANCEPAGE_MODIFY_TITLE "$(UMUI_TEXT_MAINTENANCE_MODIFY_TITLE)"
@@ -8419,7 +8477,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
       Abort
     !insertmacro UMUI_ENDIF_INSTALLFLAG
 
-    ; MMo-2016-09-15: missing PRE-Function support added:
+    ; Bodenseematze-2016-09-15: missing PRE-Function support added:
     !insertmacro MUI_PAGE_FUNCTION_CUSTOM PRE
 
     !insertmacro MUI_HEADER_TEXT_PAGE "$(UMUI_TEXT_MAINTENANCE_TITLE)" "$(UMUI_TEXT_MAINTENANCE_SUBTITLE)"
@@ -8607,7 +8665,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
   !insertmacro MUI_PAGE_INIT
 
-  !insertmacro MUI_SET UMUI_UPDATEPAGE
+  !define /IfNDef UMUI_UPDATEPAGE
 
   !insertmacro MUI_DEFAULT_IOCONVERT UMUI_UPDATEPAGE_TEXT "$(UMUI_TEXT_UPDATE_INFO_TEXT)"
   !insertmacro MUI_DEFAULT_IOCONVERT UMUI_UPDATEPAGE_UPDATE_TITLE "$(UMUI_TEXT_UPDATE_UPDATE_TITLE)"
@@ -8708,7 +8766,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
     !insertmacro UMUI_ABORT_IF_INSTALLFLAG_ISNOT ${UMUI_DIFFVERSION}
 
-    ; MMo-2016-09-15: missing PRE-Function support added:
+    ; Bodenseematze-2016-09-15: missing PRE-Function support added:
     !insertmacro MUI_PAGE_FUNCTION_CUSTOM PRE
 
     !insertmacro MUI_HEADER_TEXT_PAGE "$(UMUI_TEXT_UPDATE_TITLE)" "$(UMUI_TEXT_UPDATE_SUBTITLE)"
@@ -8850,7 +8908,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
   !insertmacro MUI_PAGE_INIT
 
-  !insertmacro MUI_SET UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}FILEDISKREQUESTPAGE
+  !define /IfNDef UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}FILEDISKREQUESTPAGE
 
   !ifdef UMUI_FILEDISKREQUESTPAGE_FILE_TO_FOUND
     !warning "The UMUI_FILEDISKREQUESTPAGE_FILE_TO_FOUND define was renamed UMUI_FILEDISKREQUESTPAGE_FILE_NAME"

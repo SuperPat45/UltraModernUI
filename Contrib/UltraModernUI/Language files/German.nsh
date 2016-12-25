@@ -3,7 +3,7 @@
 
 ;Language: German (1031)
 ;By Tobias <tm2006@users.sourceforge.net>
-;Changes by MMo
+;Changes by Matthias <bodenseematze@users.sourceforge.net>
 ;--------------------------------
 
 !ifdef UMUI_MULTILANGUAGEPAGE

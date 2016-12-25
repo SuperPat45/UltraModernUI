@@ -1,9 +1,9 @@
-; o----------------------------------------------o
-; | NSIS 3.0 + Ultra-Modern User Interface 2.0b2 |
-; (----------------------------------------------)
-; | Installer script.                            |
-; | Written by SyperPat                          |
-; o----------------------------------------------o
+; o-----------------------------------------------o
+; | NSIS 3.01 + Ultra-Modern User Interface 2.0b2 |
+; (-----------------------------------------------)
+; | Installer script.                             |
+; | Written by SyperPat                           |
+; o-----------------------------------------------o
 
 ;--------------------------------
 ;General
@@ -15,8 +15,8 @@
   !define UMUI_VERBUILD "2.0_${NOW}"
 
   !define VER_MAJOR 3
-  !define VER_MINOR 0
-  !define VER_REVISION 9
+  !define VER_MINOR 01
+  !define VER_REVISION ""
   !define VER_BUILD ""
   !define VER_REV_STR ""
 
@@ -273,6 +273,7 @@
   !insertmacro MUI_LANGUAGE "ScotsGaelic"
   !insertmacro MUI_LANGUAGE "Vietnamese"
   !insertmacro MUI_LANGUAGE "Welsh"
+  !insertmacro MUI_LANGUAGE "Corsican"
 
 ; Other unicode only untranslated languages but usable even so.
   !insertmacro MUI_LANGUAGE "Georgian"
@@ -665,7 +666,7 @@ SectionGroupEnd
 
 SectionGroup "Plug-ins" SecPluginsPlugins
 
-Section "Banner" SecPluginsBanner
+Section "Banner plugin" SecPluginsBanner
 
   SetDetailsPrint textonly
   DetailPrint "Installing Plug-ins | Banner..."
@@ -683,7 +684,7 @@ Section "Banner" SecPluginsBanner
   File ..\..\Examples\Banner\Example.nsi
 SectionEnd
 
-Section "Language DLL" SecPluginsLangDLL
+Section "Language DLL plugin" SecPluginsLangDLL
 
   SetDetailsPrint textonly
   DetailPrint "Installing Plug-ins | Language DLL..."
@@ -696,7 +697,7 @@ Section "Language DLL" SecPluginsLangDLL
   File ..\..\Plugins\x86-unicode\LangDLL.dll
 SectionEnd
 
-Section "nsExec" SecPluginsnsExec
+Section "nsExec plugin" SecPluginsnsExec
 
   SetDetailsPrint textonly
   DetailPrint "Installing Plug-ins | nsExec..."
@@ -714,7 +715,7 @@ Section "nsExec" SecPluginsnsExec
   File ..\..\Examples\nsExec\test.nsi
 SectionEnd
 
-Section "Splash" SecPluginsSplash
+Section "Splash plugin" SecPluginsSplash
 
   SetDetailsPrint textonly
   DetailPrint "Installing Plug-ins | Splash..."
@@ -732,7 +733,7 @@ Section "Splash" SecPluginsSplash
   File ..\..\Examples\Splash\Example.nsi
 SectionEnd
 
-Section "AdvSplash" SecPluginsSplashT
+Section "AdvSplash plugin" SecPluginsSplashT
 
   SetDetailsPrint textonly
   DetailPrint "Installing Plug-ins | AdvSplash..."
@@ -750,7 +751,7 @@ Section "AdvSplash" SecPluginsSplashT
   File ..\..\Examples\AdvSplash\Example.nsi
 SectionEnd
 
-Section "BgImage" SecPluginsBgImage
+Section "BgImage plugin" SecPluginsBgImage
 
   SetDetailsPrint textonly
   DetailPrint "Installing Plug-ins | BgImage..."
@@ -768,7 +769,7 @@ Section "BgImage" SecPluginsBgImage
   File ..\..\Examples\BgImage\Example.nsi
 SectionEnd
 
-Section "InstallOptions" SecPluginsIO
+Section "InstallOptions plugin" SecPluginsIO
 
   SetDetailsPrint textonly
   DetailPrint "Installing Plug-ins | InstallOptions..."
@@ -799,7 +800,7 @@ Section "InstallOptions" SecPluginsIO
   !insertmacro MUI_STARTMENU_WRITE_END
 SectionEnd
 
-Section "Math" SecPluginsMath
+Section "Math plugin" SecPluginsMath
 
   SetDetailsPrint textonly
   DetailPrint "Installing Plug-ins | Math..."
@@ -821,7 +822,7 @@ Section "Math" SecPluginsMath
 
 SectionEnd
 
-Section "NSISdl" SecPluginsNSISDL
+Section "NSISdl plugin" SecPluginsNSISDL
 
   SetDetailsPrint textonly
   DetailPrint "Installing Plug-ins | NSISdl..."
@@ -838,7 +839,7 @@ Section "NSISdl" SecPluginsNSISDL
   File ..\..\Docs\NSISdl\License.txt
 SectionEnd
 
-Section "System" SecPluginsSystem
+Section "System plugin" SecPluginsSystem
 
   SetDetailsPrint textonly
   DetailPrint "Installing Plug-ins | System..."
@@ -860,7 +861,7 @@ Section "System" SecPluginsSystem
   File ..\..\Examples\System\System.nsi
 SectionEnd
 
-Section "nsDialogs" SecPluginsDialogs
+Section "nsDialogs plugin" SecPluginsDialogs
 
   SetDetailsPrint textonly
   DetailPrint "Installing Plug-ins | nsDialogs..."
@@ -884,7 +885,7 @@ Section "nsDialogs" SecPluginsDialogs
 
 SectionEnd
 
-Section "StartMenu" SecPluginsStartMenu
+Section "StartMenu plugin" SecPluginsStartMenu
 
   SetDetailsPrint textonly
   DetailPrint "Installing Plug-ins | StartMenu..."
@@ -902,7 +903,7 @@ Section "StartMenu" SecPluginsStartMenu
   File ..\..\Examples\StartMenu\Example.nsi
 SectionEnd
 
-Section "UserInfo" SecPluginsUserInfo
+Section "UserInfo plugin" SecPluginsUserInfo
 
   SetDetailsPrint textonly
   DetailPrint "Installing Plug-ins | UserInfo..."
@@ -918,7 +919,7 @@ Section "UserInfo" SecPluginsUserInfo
   File ..\..\Examples\UserInfo\UserInfo.nsi
 SectionEnd
 
-Section "Dialer" SecPluginsDialer
+Section "Dialer plugin" SecPluginsDialer
 
   SetDetailsPrint textonly
   DetailPrint "Installing Plug-ins | Dialer..."
@@ -934,7 +935,7 @@ Section "Dialer" SecPluginsDialer
   File ..\..\Docs\Dialer\Dialer.txt
 SectionEnd
 
-Section "VPatch" SecPluginsVPatch
+Section "VPatch plugin" SecPluginsVPatch
 
   SetDetailsPrint textonly
   DetailPrint "Installing Plug-ins | VPatch..."
@@ -1880,7 +1881,6 @@ Function confirm_function
   !insertmacro confirm_addline ToolsZ2E
   !insertmacro confirm_addline Graphics
   !insertmacro confirm_addline LangFiles
-  !insertmacro confirm_addline PluginsPlugins
   !insertmacro confirm_addline PluginsBanner
   !insertmacro confirm_addline PluginsLangDLL
   !insertmacro confirm_addline PluginsnsExec

@@ -3,7 +3,6 @@
 
 ;Language: Polish (1045)
 ;By forge
-
 ;--------------------------------
 
 !ifdef UMUI_MULTILANGUAGEPAGE

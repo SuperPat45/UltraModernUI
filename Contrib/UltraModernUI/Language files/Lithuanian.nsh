@@ -2,8 +2,7 @@
 ;Compatible with UltraModernUI 2.0 beta 1
 
 ;Language: Lithuanian (1063)
-;By SysDesign, (C)opyright 2016
-
+;By Matthias <bodenseematze@users.sourceforge.net> (copied from English and translated)
 ;--------------------------------
 
 !ifdef UMUI_MULTILANGUAGEPAGE

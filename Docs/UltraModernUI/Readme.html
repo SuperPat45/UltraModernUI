@@ -626,6 +626,9 @@
           <p><strong>MUI_COMPONENTSPAGE_NODESC</strong><br />
           No description area.</p>
 
+          <p><span class="blue"><strong>UMUI_ENABLE_DESCRIPTION_TEXT</strong></span> <span class="parameter">ini_file</span><br />
+          Enable the description text when the mouse is not positionned over a component.<br />
+
         </div>
 
 
@@ -2521,7 +2524,7 @@ FunctionEnd</pre>
 <div>
 
   <p>If you want add your own code to functions inserted by the UltraModernUI, such as the .onGUIInit function and the Page functions, create your own function and let the UltraModernUI functions call them. Use the defines to define the name of your functions.</p>
-  <p>Contrary to Modern UI, UltraModernUI may define itself, if necessary, the .onGUIEnd and the un.onGUIEnd functions. Consequently, you may not declare them in your script, and, in this case, you must used this customization.</p>
+  <p>Contrary to Modern UI, UltraModernUI may also define itself, if background skin is used, the .onGUIEnd and the un.onGUIEnd functions. Consequently, you may not be able to declare them in your script, and, in this case, you must used this customization.</p>
 
   <p>Example:</p>
 
@@ -2630,23 +2633,24 @@ FunctionEnd</span></pre>
 <h1>Version History</h1>
 <ul>
 
-  <li><strong>Version 2.0 beta 2</strong> - ???? ??, 2016
+  <li><strong>Version 2.0 beta 2</strong> - December 25, 2016
   <ul>
     <li>Updated the SkinnedControls plug-in to version 1.4 with support of the new NSIS plug-in API, optional unskinit method calls and ignore case parameters name support.</li>
-    <li>Fixed: Missing MUI_PAGE_CUSTOMFUNCTION_PRE support missing for some Ultra-Modern pages (by mmo);</li>
-    <li>Fixed: Most of the time, command line parameters were not transfered to Exec calls (thanks mmo);</li>
-    <li>Several new and completed language files and other minor fixes send by Bodenseematze:</li>
-      <ul>
-        <li>Completed: German language file by MMO;</li>
-        <li>New: Greek language file by SysDesign;</li>
-        <li>New: Italian language file by TM-RS;</li>
-        <li>New: Lithuanian language file by SysDesign;</li>
-        <li>New: Russian language file by SysDesign;</li>
-        <li>New: Slovenian language file by SysDesign;</li>
-        <li>New: Spanish language file by SysDesign;</li>
-        <li>New: Turkish language file;</li>
-      </ul>
-    <li>Some bug fixes and optimizations;</li>
+    <li>Fixed: Links on RichText information pages are now clickable;</li>
+    <li>Fixed: Missing MUI_PAGE_CUSTOMFUNCTION_PRE support missing for some Ultra-Modern pages (by Bodenseematze);</li>
+    <li>Fixed: Most of the time, command line parameters were not transfered to Exec calls (thanks Bodenseematze);</li>
+    <li>Several new and completed language files and other minor fixes by Bodenseematze:</li>
+    <ul>
+      <li>Completed: German language file;</li>
+      <li>New: Greek language file;</li>
+      <li>New: Italian language file;</li>
+      <li>New: Lithuanian language file;</li>
+      <li>New: Russian language file;</li>
+      <li>New: Slovenian language file;</li>
+      <li>New: Spanish language file;</li>
+      <li>New: Turkish language file;</li>
+    </ul>
+    <li>Minor optimizations.</li>
   </ul>
   </li>
 

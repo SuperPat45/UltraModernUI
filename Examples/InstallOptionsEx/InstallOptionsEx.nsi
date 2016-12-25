@@ -192,6 +192,7 @@
   !insertmacro MUI_LANGUAGE "ScotsGaelic"
   !insertmacro MUI_LANGUAGE "Vietnamese"
   !insertmacro MUI_LANGUAGE "Welsh"
+  !insertmacro MUI_LANGUAGE "Corsican"
 
 ; Other unicode only untranslated languages but usable even so.
   !insertmacro MUI_LANGUAGE "Georgian"

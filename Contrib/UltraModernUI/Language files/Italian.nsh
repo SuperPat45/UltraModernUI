@@ -2,8 +2,7 @@
 ;Compatible with UltraModernUI 2.0 beta 1
 
 ;Language: Italiano (1040)
-;
-;By TM-RS
+;By Matthias <bodenseematze@users.sourceforge.net> (copied from English and translated)
 ;--------------------------------
 
 !ifdef UMUI_MULTILANGUAGEPAGE

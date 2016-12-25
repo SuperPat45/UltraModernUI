@@ -12,13 +12,13 @@
   !define NAME "UltraModernUI"
 
   ; For language file selection
-;  !define VER_MAJOR 3
-;  !define VER_MINOR 0
-;  !define VER_REV_STR ""
+  !define VER_MAJOR 3
+  !define VER_MINOR 01
+  !define VER_REV_STR ""
 
-;  !if "${NSIS_VERSION}" != "v${VER_MAJOR}.${VER_MINOR}${VER_REV_STR}"
-;    !error "VER_MAJOR, VER_MINOR and VER_REV_STR defines does not match the current NSIS version: ${NSIS_VERSION}"
-;  !endif
+  !if "${NSIS_VERSION}" != "v${VER_MAJOR}.${VER_MINOR}${VER_REV_STR}"
+    !error "VER_MAJOR, VER_MINOR and VER_REV_STR defines does not match the current NSIS version: ${NSIS_VERSION}"
+  !endif
 
   !define UMUI_VERSION "v2.0b2"
   !define UMUI_VERBUILD "2.0_${NOW}"
@@ -267,6 +267,7 @@
   !insertmacro MUI_LANGUAGE "ScotsGaelic"
   !insertmacro MUI_LANGUAGE "Vietnamese"
   !insertmacro MUI_LANGUAGE "Welsh"
+  !insertmacro MUI_LANGUAGE "Corsican"
 
 ; Other unicode only untranslated languages but usable even so.
   !insertmacro MUI_LANGUAGE "Georgian"
@@ -607,15 +608,15 @@ SectionGroup /e "Plugins" SecGroupPlugins
 
     SectionIn 3
 
-  SetOutPath $INSTDIR\Contrib\InstallOptionsEx
-  File "..\..\Contrib\InstallOptionsEx\*.cpp"
-  File "..\..\Contrib\InstallOptionsEx\*.c"
-  File "..\..\Contrib\InstallOptionsEx\*.h"
-  File "..\..\Contrib\InstallOptionsEx\ioptdll.rc"
-  File "..\..\Contrib\InstallOptionsEx\io.sln"
-  File "..\..\Contrib\InstallOptionsEx\io.vcproj"
-  SetOutPath $INSTDIR\Contrib\InstallOptionsEx\Controls
-  File "..\..\Contrib\InstallOptionsEx\Controls\*.h"
+    SetOutPath $INSTDIR\Contrib\InstallOptionsEx
+    File "..\..\Contrib\InstallOptionsEx\*.cpp"
+    File "..\..\Contrib\InstallOptionsEx\*.c"
+    File "..\..\Contrib\InstallOptionsEx\*.h"
+    File "..\..\Contrib\InstallOptionsEx\ioptdll.rc"
+    File "..\..\Contrib\InstallOptionsEx\io.sln"
+    File "..\..\Contrib\InstallOptionsEx\io.vcproj"
+    SetOutPath $INSTDIR\Contrib\InstallOptionsEx\Controls
+    File "..\..\Contrib\InstallOptionsEx\Controls\*.h"
 
   SectionEnd
 
@@ -665,7 +666,7 @@ SectionGroup /e "Plugins" SecGroupPlugins
 
 SectionGroupEnd
 
-/*
+
 Section "Updated Languages Files from NSIS ${NSIS_VERSION}" SecNSISLanguagesFiles
 
   SetDetailsPrint textonly
@@ -681,7 +682,6 @@ Section "Updated Languages Files from NSIS ${NSIS_VERSION}" SecNSISLanguagesFile
   File "..\..\Contrib\Language files\*.nlf"
 
 SectionEnd
-*/
 
 ;--------------------------------
 ;Uninstall Section(s)
@@ -931,6 +931,7 @@ SectionEnd
   !insertmacro UMUI_COMPONENT SecInstallOptionsExSources
   !insertmacro UMUI_COMPONENT SecnsArray
   !insertmacro UMUI_COMPONENT SecnsArraySources
+  !insertmacro UMUI_COMPONENT SecNSISLanguagesFiles
 !insertmacro UMUI_DECLARECOMPONENTS_END
 
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
@@ -944,7 +945,7 @@ SectionEnd
   !insertmacro MUI_DESCRIPTION_TEXT ${SecInstallOptionsExSources} "The Sources code of the InstallOptionsEx plugin."
   !insertmacro MUI_DESCRIPTION_TEXT ${SecnsArray} "This NSIS plugin, writing by Afrow UK, add the support of the array in NSIS. It comes with plenty of functions for managing your arrays.$\nThis plugin is used with the AlternativeStartMenu and MultiLanguages pages of UltraModernUI."
   !insertmacro MUI_DESCRIPTION_TEXT ${SecnsArraySources} "The Sources code of the nsArray plugin."
-;  !insertmacro MUI_DESCRIPTION_TEXT ${SecNSISLanguagesFiles} "Update the NSIS language files of your installation by those of the version ${NSIS_VERSION} of NSIS.$\nThese language files contain a lot of translation fix and add the lastest translated languages."
+  !insertmacro MUI_DESCRIPTION_TEXT ${SecNSISLanguagesFiles} "Update the NSIS language files of your installation by those of the version ${NSIS_VERSION} of NSIS.$\nThese language files contain a lot of translation fix and add the lastest translated languages."
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 
@@ -1009,7 +1010,7 @@ Function confirm_function
   !insertmacro confirm_addline InstallOptionsExSources
   !insertmacro confirm_addline nsArray
   !insertmacro confirm_addline nsArraySources
-;  !insertmacro confirm_addline NSISLanguagesFiles
+  !insertmacro confirm_addline NSISLanguagesFiles
 
 FunctionEnd
 
@@ -1061,18 +1062,17 @@ Function .onInit
   ; Check NSIS Version
   ReadRegDword $0 HKLM Software\NSIS "VersionMajor"
   IfErrors errorNSIS 0
-;  ReadRegDword $1 HKLM Software\NSIS "VersionMinor"
-;  IfErrors errorNSIS 0
-    StrCmp $0 3 okNSIS 0
+    ReadRegDword $1 HKLM Software\NSIS "VersionMinor"
+    IfErrors errorNSIS 0
+      StrCmp $0 3 okNSIS 0
 
-      errorNSIS:
-        MessageBox MB_OK|MB_ICONSTOP "NSIS 3 is not installed on your computer.$\r$\nPlease, install NSIS (http://nsis.sourceforge.net) and then re-execute this install.$\n$\rThis install will stop."
-        Quit
+        errorNSIS:
+          MessageBox MB_OK|MB_ICONSTOP "NSIS 3 is not installed on your computer.$\r$\nPlease, install NSIS (http://nsis.sourceforge.net) and then re-execute this install.$\n$\rThis install will stop."
+          Quit
 
   okNSIS:
   ClearErrors
 
-/*
   IntCmp $1 0 okNSISMin 0 okNSISMin
     MessageBox MB_OK|MB_ICONSTOP "Your version of NSIS is not compatible with UltraModernUI.$\r$\nPlease, update NSIS (http://nsis.sourceforge.net) and then re-execute this install.$\n$\rThis install will stop."
     Quit
@@ -1081,7 +1081,7 @@ Function .onInit
 
   ; ReadOnly Unselect if NSIS != VER_MAJOR && NSIS >= VER_MINOR
   IntCmp $0 ${VER_MAJOR} 0 unselectROlangFiles unselectROlangFiles
-  IntCmp $1 ${VER_MINOR} 0 end1 0
+  IntCmp $1 ${VER_MINOR} unselectROlangFiles end1 unselectROlangFiles
   unselectROlangFiles:
     !insertmacro UnSelectSection ${SecNSISLanguagesFiles}
     SectionGetFlags ${SecNSISLanguagesFiles} $2
@@ -1090,7 +1090,7 @@ Function .onInit
     !insertmacro ClearSectionInInstType ${SecNSISLanguagesFiles} 4 ;4 complete
   end1:
   ClearErrors
-*/
+
 FunctionEnd
 
 Function un.onInit

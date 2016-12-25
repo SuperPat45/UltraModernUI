@@ -3,7 +3,6 @@
 
 ;Language: Hungarian (1038) - Based on NSIS Official Hungarian Language
 ;By Tom Evin (evin@mailbox.hu)
-
 ;--------------------------------
 
 !ifdef UMUI_MULTILANGUAGEPAGE

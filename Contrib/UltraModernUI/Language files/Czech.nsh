@@ -3,7 +3,6 @@
 
 ;Language: Czech (1029)
 ;By Pospec (pospec4444atgmaildotcom)
-
 ;--------------------------------
 
 !ifdef UMUI_MULTILANGUAGEPAGE

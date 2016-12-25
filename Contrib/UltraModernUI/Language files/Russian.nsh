@@ -2,7 +2,7 @@
 ;Compatible with UltraModernUI 2.0 beta 1
 
 ;Language: Russian (1049)
-;By SysDesign (copied from English and translated)
+;By Matthias <bodenseematze@users.sourceforge.net> (copied from English and translated)
 ;--------------------------------
 
 !ifdef UMUI_MULTILANGUAGEPAGE

@@ -3,7 +3,6 @@
 
 ;Language: French (1036)
 ;By SuperPat
-
 ;--------------------------------
 
 !ifdef UMUI_MULTILANGUAGEPAGE

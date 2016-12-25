@@ -3,7 +3,6 @@
 
 ;Language: Brazilian Portuguese (1046)
 ;By Jenner Modesto <jennermodesto@gmail.com>
-
 ;--------------------------------
 
 !ifdef UMUI_CONFIRMPAGE
