@@ -30,7 +30,7 @@
 
     <div style="text-align: justify;">
       <p>The Ultra-Modern User Interface is a new interface with a style like the most recent installers for NSIS 3 (Nullsoft Scriptable Install System), the tool that allows programmers to create such installers for Windows. UltraModernUI and NSIS are released under an open source license.</p>
-      <p>The Ultra-Modern User Interface also features new pages (Confirm, Abort, AlternativeStartMenu, AdditionnalTasks, Information, Maintenance, Update, StupType...). The interface and the graphics can be customized using the provided settings and the new skins system. </p>
+      <p>The Ultra-Modern User Interface also features new pages (Confirm, Abort, AlternativeStartMenu, AdditionalTasks, Information, Maintenance, Update, StupType...). The interface and the graphics can be customized using the provided settings and the new skins system. </p>
       <p>UltraModernUI include also an other User Interface named ModernUIEx. ModernUIEx is the same User Interface as the original Modern UI style but with the support of the new ultra-modern pages and thith a little more options.</p>
       <p>Using the UltraModernUI macros and language files, writing scripts with a ultra-modern interface is easy. A lot of examples are available to show the different features and this document contains all information about writing UltraModernUI scripts and a reference of all settings.</p>
       <p>The issue of UltraModernUI is to be the most compatible with the existing Modern UI scripts. Because of it is based on the Modern UI of Joost Verburg, it use the same macro a define and provide new one. The new macro and define use the prefix UMUI_ instead of MUI_.</p>
@@ -56,7 +56,7 @@
                 <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/UMUI07.png" alt="Setup type page" />
                 <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/UMUI08.png" alt="Directory page with unique background image option" />
                 <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/UMUI09.png" alt="Alternative start menu page with TreeView" />
-                <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/UMUI10.png" alt="Additionnal tasks page with green skin" />
+                <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/UMUI10.png" alt="Additional tasks page with green skin" />
                 <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/UMUI11b.png" alt="Installer confirm page with red skin" />
                 <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/UMUI12.png" alt="Abort page" />
                 <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/UMUINoLeftImage01.png" alt="License page with the no left image option" />
@@ -65,7 +65,7 @@
                 <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/UMUISmall02.png" alt="Directory page with the small page option" />
                 <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/MUIEx01.png" alt="Multi language page with the ModernUIEx interface" />
                 <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/MUIEx02.png" alt="Setup type page with the ModernUIEx interface" />
-                <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/MUIEx03.png" alt="Additionnal tasks page with the ModernUIEx interface" />
+                <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/MUIEx03.png" alt="Additional tasks page with the ModernUIEx interface" />
                 <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/MUIEx04.png" alt="Serial number page with the ModernUIEx interface" />
             </div>
         </div>
@@ -1254,6 +1254,9 @@ Var PLUGINS_FOLDER
       <span class="blue"><strong>UMUI_INSTALLDIR_REGISTRY_VALUENAME</strong></span> <span class="parameter">value_name</span><br />
       The registry key to store the $INSTDIR variable. This replace the InstallDirRegKey instruction. This value will be automatically saved to the registry on install success. Don't forget to remove this key during uninstallation.<br />
       UMUI_INSTALLDIR_REGISTRY_ROOT and UMUI_INSTALLDIR_REGISTRY_KEY defines are optional when <strong>UMUI_PARAMS_REGISTRY_ROOT</strong> and <strong>UMUI_PARAMS_REGISTRY_KEY</strong> are defined.</p>
+
+      <p><span class="blue"><strong>UMUI_DEFAULT_SHELLVARCONTEXT</strong></span> <span class="parameter">(all/current)</span><br />
+      Set the default context of $SMPROGRAMS and other shell folders. If set to 'current' (the default), the current user's shell folders are used. If set to 'all', the 'all users' shell folder is used. The all users folder may not be supported on all OSes. If the all users folder is not found, the current user folder will be used. Please take into consideration that a "normal user" has no rights to write in the all users area. Only admins have full access rights to the all users area. You can check this by using the UserInfo plug-in. See Contrib\UserInfo\UserInfo.nsi for an example.</p>
 
       <p><span class="blue"><strong>UMUI_SHELLVARCONTEXT_REGISTRY_ROOT</strong></span> <span class="parameter">root</span><br />
       <span class="blue"><strong>UMUI_SHELLVARCONTEXT_REGISTRY_KEY</strong></span> <span class="parameter">key</span><br />
@@ -2754,7 +2757,7 @@ FunctionEnd</span></pre>
   <h2><img class="trigger" title="Open/Close section" alt="[+]" id="trigger_lic" src="images/closed.gif" onclick="toggle('trigger_lic', 'toggle_lic');" /> License Terms</h2>
   <div class="toggle" id="toggle_lic">
 
-  <pre>Copyright &copy; 2005-2016 SuperPat</pre>
+  <pre>Copyright &copy; 2005-2017 SuperPat</pre>
 
   <pre>This software is provided 'as-is', without any express or implied
 warranty. In no event will the authors be held liable for any damages
@@ -2778,7 +2781,7 @@ it freely, subject to the following restrictions:</pre>
 
 </div>
 
-  <div class="footer">&copy; 2005-2016 SuperPat</div>
+  <div class="footer">&copy; 2005-2017 SuperPat</div>
 
   </div>
 

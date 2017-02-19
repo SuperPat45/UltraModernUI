@@ -16,7 +16,7 @@
   VIProductVersion "${VERIPV}.0.0"
   VIAddVersionKey "ProductName" "SkinnedControls plugin for NSIS (Nullsoft Scriptable Install System)."
   VIAddVersionKey "LegalTrademarks" "SkinnedControls is released under the zlib/libpng license"
-  VIAddVersionKey "LegalCopyright" "Copyright © 2005-2016 SuperPat, Based on wansis @ Saivert"
+  VIAddVersionKey "LegalCopyright" "Copyright © 2005-2017 SuperPat, Based on wansis @ Saivert"
   VIAddVersionKey "FileDescription" "SkinnedControls allow you to can skin all buttons and scroll bars of your installer."
   VIAddVersionKey "FileVersion" "${VERIPV}"
   

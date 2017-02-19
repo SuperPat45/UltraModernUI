@@ -30,7 +30,7 @@
   VIAddVersionKey ProductVersion "${UMUI_VERSION}"
   VIAddVersionKey Comments "This package also include some plugins used by UMUI to extend the possibilities of NSIS."
   VIAddVersionKey LegalTrademarks "NSIS and UltraModernUI are released under the zlib/libpng license: http://nsis.sf.net/License"
-  VIAddVersionKey LegalCopyright "Copyright � 2005-2016 SuperPat"
+  VIAddVersionKey LegalCopyright "Copyright © 2005-2017 SuperPat"
   VIAddVersionKey FileDescription "NSIS (Nullsoft Scriptable Install System) with the Ultra-Modern User Interface."
   VIAddVersionKey FileVersion "${UMUI_VERBUILD}"
 

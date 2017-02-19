@@ -29,7 +29,7 @@
   VIAddVersionKey ProductVersion "${UMUI_VERSION}"
   VIAddVersionKey Comments "A new User Interface for NSIS with a style like the most recent installers. This package also include some plugins used by UMUI to extend the possibilities of NSIS."
   VIAddVersionKey LegalTrademarks "UltraModernUI is released under the zlib/libpng license: http://nsis.sf.net/License"
-  VIAddVersionKey LegalCopyright "Copyright © 2005-2016 SuperPat"
+  VIAddVersionKey LegalCopyright "Copyright © 2005-2017 SuperPat"
   VIAddVersionKey FileDescription "Ultra-Modern User Interface for NSIS (Nullsoft Scriptable Install System) version 2.42+ x86 ansi edition and NSIS version 3 x86 edition."
   VIAddVersionKey FileVersion "${UMUI_VERBUILD}"
 

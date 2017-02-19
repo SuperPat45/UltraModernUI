@@ -1,7 +1,7 @@
 /*
 
 NSIS UltraModern User Interface version 2.0 beta 2
-Copyright 2005-2016 SuperPat
+Copyright 2005-2017 SuperPat
 
 Based on:
     NSIS Modern User Interface version 1.8 (Git version: d20b99c082a99304a542c2fa6cf4abd381ca263a)
@@ -10,7 +10,7 @@ Based on:
 */
 
 !ifndef MUI_INCLUDED
-!echo "NSIS Ultra-Modern User Interface version 2.0 beta 2 - Copyright 2005-2016 SuperPat"
+!echo "NSIS Ultra-Modern User Interface version 2.0 beta 2 - Copyright 2005-2017 SuperPat"
 !echo "  (Bugfixes and some additions: 2015-2016 - Bodenseematze)"
 !echo "Based on: NSIS Modern User Interface version 1.8 - Copyright 2002-2016 Joost Verburg"
 
@@ -1647,10 +1647,11 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
   Push $MUI_TEMP1
   Push $MUI_TEMP2
 
-  StrCpy $MUI_TEMP1 current ;default value for all installer
-
   !ifdef UMUI_DEFAULT_SHELLVARCONTEXT
     StrCpy $MUI_TEMP1 "${UMUI_DEFAULT_SHELLVARCONTEXT}"
+  !else
+    !insertmacro UMUI_GETSHELLVARCONTEXT
+    Pop $MUI_TEMP1 ;current value
   !endif
 
   !ifdef UMUI_SHELLVARCONTEXT_REGISTRY_VALUENAME
