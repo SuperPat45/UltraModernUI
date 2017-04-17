@@ -8254,7 +8254,11 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 !endif
 ;------
 
-  !define /IfNDef UMUI_MAINTENANCEPAGE_DEFAULTCHOICE ${UMUI_MODIFY}
+  !ifdef UMUI_MAINTENANCEPAGE_MODIFY
+    !define /IfNDef UMUI_MAINTENANCEPAGE_DEFAULTCHOICE ${UMUI_MODIFY}
+  !else ifdef UMUI_MAINTENANCEPAGE_REPAIR
+    !define /IfNDef UMUI_MAINTENANCEPAGE_DEFAULTCHOICE ${UMUI_REPAIR}
+  !endif
 
   !ifndef UMUI_MAINTENANCEPAGE_MODIFY & UMUI_MAINTENANCEPAGE_REPAIR
     !error "Maintenance page: You need to define at least one of these options: UMUI_MAINTENANCEPAGE_MODIFY or UMUI_MAINTENANCEPAGE_REPAIR."
@@ -8277,11 +8281,6 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
   !ifndef UMUI_VAR_UMUI_TEMP3
     Var UMUI_TEMP3
     !define UMUI_VAR_UMUI_TEMP3
-  !endif
-
-  !ifndef UMUI_VAR_UMUI_INSTALLER_PATH
-    Var UMUI_INSTALLER_PATH
-    !define UMUI_VAR_UMUI_INSTALLER_PATH
   !endif
 
   PageEx ${MUI_PAGE_UNINSTALLER_FUNCPREFIX}custom
@@ -8332,13 +8331,18 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
       !warning "The MAINTENANCE unpage need the UMUI_INSTALLERFULLPATH_REGISTRY_VALUENAME define"
     !endif
 
+    !ifndef UMUI_VAR_UMUI_TEMP4
+      Var UMUI_TEMP4
+      !define UMUI_VAR_UMUI_TEMP4
+    !endif
+
     !insertmacro UMUI_PAGE_MAINTENANCE
 
     ; IF installer can't be found
     !define /redef UMUI_ABORT_IF_INSTALLFLAG_IS ${UMUI_CANCELLED}|${UMUI_REMOVE}
     !define MUI_PAGE_CUSTOMFUNCTION_LEAVE un.umui.fileRequestLeave
 
-    !define UMUI_FILEDISKREQUESTPAGE_VARIABLE UMUI_INSTALLER_PATH
+    !define UMUI_FILEDISKREQUESTPAGE_VARIABLE UMUI_TEMP4
     !define UMUI_FILEDISKREQUESTPAGE_FILE_NAME $MUI_TEMP2
     !define MUI_PAGE_HEADER_TEXT "$(UMUI_TEXT_MAINTENANCE_TITLE)"
 
@@ -8466,9 +8470,9 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
         ; continue to the next page for the File Request, Set the variable
         !insertmacro UMUI_GETPARENTFOLDER $MUI_TEMP1
-        Pop $UMUI_INSTALLER_PATH
+        Pop $UMUI_TEMP4
 
-        StrLen $UMUI_TEMP3 $UMUI_INSTALLER_PATH
+        StrLen $UMUI_TEMP3 $UMUI_TEMP4
         StrCpy $MUI_TEMP2 $MUI_TEMP1 "" $UMUI_TEMP3
 
       !endif
@@ -8590,9 +8594,9 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
         ClearErrors
 
         !insertmacro UMUI_GETPARENTFOLDER $MUI_TEMP1
-        Pop $UMUI_INSTALLER_PATH
+        Pop $UMUI_TEMP4
 
-        StrLen $UMUI_TEMP3 $UMUI_INSTALLER_PATH
+        StrLen $UMUI_TEMP3 $UMUI_TEMP4
         StrCpy $MUI_TEMP2 $MUI_TEMP1 "" $UMUI_TEMP3
 
       !insertmacro UMUI_ENDIF_INSTALLFLAG

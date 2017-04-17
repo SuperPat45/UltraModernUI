@@ -1,5 +1,5 @@
 ; o----------------------------------------o
-; | NSIS Ultra-Modern User Interface 2.0b2 |
+; | NSIS Ultra-Modern User Interface 2.0b3 |
 ; (----------------------------------------)
 ; | Installer script.                      |
 ; | Written by SyperPat                    |
@@ -20,7 +20,7 @@
     !error "VER_MAJOR, VER_MINOR and VER_REV_STR defines does not match the current NSIS version: ${NSIS_VERSION}"
   !endif
 
-  !define UMUI_VERSION "v2.0b2"
+  !define UMUI_VERSION "v2.0b3"
   !define UMUI_VERBUILD "2.0_${NOW}"
 
   !define /date VERIPV "200.%Y.%m.%d"
@@ -29,7 +29,7 @@
   VIAddVersionKey ProductVersion "${UMUI_VERSION}"
   VIAddVersionKey Comments "A new User Interface for NSIS with a style like the most recent installers. This package also include some plugins used by UMUI to extend the possibilities of NSIS."
   VIAddVersionKey LegalTrademarks "UltraModernUI is released under the zlib/libpng license: http://nsis.sf.net/License"
-  VIAddVersionKey LegalCopyright "Copyright © 2005-2017 SuperPat"
+  VIAddVersionKey LegalCopyright "Copyright ï¿½ 2005-2017 SuperPat"
   VIAddVersionKey FileDescription "Ultra-Modern User Interface for NSIS (Nullsoft Scriptable Install System) version 2.42+ x86 ansi edition and NSIS version 3 x86 edition."
   VIAddVersionKey FileVersion "${UMUI_VERBUILD}"
 
@@ -202,6 +202,7 @@
   !insertmacro MUI_LANGUAGE "English"
 
 ; Other UMUI translated languages
+  !insertmacro MUI_LANGUAGE "Bulgarian"
   !insertmacro MUI_LANGUAGE "Czech"
   !insertmacro MUI_LANGUAGE "French"
   !insertmacro MUI_LANGUAGE "German"
@@ -234,7 +235,6 @@
   !insertmacro MUI_LANGUAGE "Ukrainian"
   !insertmacro MUI_LANGUAGE "Slovak"
   !insertmacro MUI_LANGUAGE "Croatian"
-  !insertmacro MUI_LANGUAGE "Bulgarian"
   !insertmacro MUI_LANGUAGE "Thai"
   !insertmacro MUI_LANGUAGE "Romanian"
   !insertmacro MUI_LANGUAGE "Latvian"
@@ -339,7 +339,8 @@ Section "$(^NameDA)" SecUMUI
   WriteUninstaller "$INSTDIR\UninstallUMUI.exe"
 
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "DisplayName" "$(^Name)"
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "UninstallString" '"$INSTDIR\UninstallUMUI.exe"'
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "DisplayIcon" "$INSTDIR\UninstallUMUI.exe,0"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "UninstallString" "$INSTDIR\UninstallUMUI.exe"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "Publisher" "SuperPat"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "HelpLink" "http://ultramodernui.sourceforge.net/"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "URLInfoAbout" "http://ultramodernui.sourceforge.net/"

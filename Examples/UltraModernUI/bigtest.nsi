@@ -160,6 +160,10 @@ Section "Dummy Section" SecDummy
   ;ADD YOUR OWN FILES HERE...
   sleep 10000
   
+  ; Write the uninstall keys for Windows
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\BigNSISTest" "DisplayName" "$(^NameDA)"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\BigNSISTest" "DisplayIcon" "$INSTDIR\Uninstall.exe,0"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\BigNSISTest" "UninstallString" "$INSTDIR\Uninstall.exe"
   ;Create uninstaller
   WriteUninstaller "$INSTDIR\Uninstall.exe"
 
@@ -169,6 +173,8 @@ Section Uninstall
 
   DeleteRegKey ${UMUI_PARAMS_REGISTRY_ROOT} "${UMUI_PARAMS_REGISTRY_KEY}"
     
+  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\BigNSISTest"
+
   Delete "$INSTDIR\Uninstall.exe"
   RMDir "$INSTDIR"
   Sleep 1000

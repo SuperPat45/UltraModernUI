@@ -28,6 +28,7 @@ What's new in UltraModernUI version 2.0?
       * New: Slovenian language file by Bodenseematze;
       * New: Spanish language file by Bodenseematze;
       * New: Turkish language file by Bodenseematze;
+      * New: Bulgarian language file by Angel;
   o  The information page is now compatible with UTF16LE text files if compiled in Unicode;
   o  The information page is now compatible with Unix style (LF only) line return text files;
   o  The UMUI_CUSTOM_SKIN define is now deprecated, it is no more necessary and you can simply use the UMUI_SKIN define with your custom skin;
