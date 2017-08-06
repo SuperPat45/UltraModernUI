@@ -13,14 +13,14 @@
 
   ; For language file selection
   !define VER_MAJOR 3
-  !define VER_MINOR 01
-  !define VER_REV_STR ""
+  !define VER_MINOR 02
+  !define VER_REV_STR ".1"
 
   !if "${NSIS_VERSION}" != "v${VER_MAJOR}.${VER_MINOR}${VER_REV_STR}"
     !error "VER_MAJOR, VER_MINOR and VER_REV_STR defines does not match the current NSIS version: ${NSIS_VERSION}"
   !endif
 
-  !define UMUI_VERSION "v2.0b3"
+  !define UMUI_VERSION "2.0b3"
   !define UMUI_VERBUILD "2.0_${NOW}"
 
   !define /date VERIPV "200.%Y.%m.%d"
@@ -41,7 +41,7 @@
   Name "NSIS Ultra-Modern User Interface ${UMUI_VERSION}"
 
   ; The file to write
-  OutFile "UltraModernUI_${UMUI_VERBUILD}.exe"
+  OutFile "UltraModernUI_${UMUI_VERSION}.exe"
 
   ;Generate unicode installer
   Unicode True
@@ -346,7 +346,7 @@ Section "$(^NameDA)" SecUMUI
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "URLInfoAbout" "http://ultramodernui.sourceforge.net/"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "URLUpdateInfo" "http://ultramodernui.sourceforge.net/"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "ModifyPath" '"$INSTDIR\UninstallUMUI.exe" /modify'
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "DisplayVersion" "${UMUI_VERBUILD}"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "DisplayVersion" "${UMUI_VERSION}"
 
 SectionEnd
 

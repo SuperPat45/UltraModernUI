@@ -1,5 +1,5 @@
 ; o-----------------------------------------------o
-; | NSIS 3.01 + Ultra-Modern User Interface 2.0b3 |
+; | NSIS 3.02 + Ultra-Modern User Interface 2.0b3 |
 ; (-----------------------------------------------)
 ; | Installer script.                             |
 ; | Written by SyperPat                           |
@@ -7,20 +7,21 @@
 
 ;--------------------------------
 ;General
-  
+
   !define /date NOW "%Y-%m-%d"
   !define NAME "UltraModernUI"
 
-  !define UMUI_VERSION "v2.0b3"
+  !define UMUI_VERSION "2.0b3"
   !define UMUI_VERBUILD "2.0_${NOW}"
 
   !define VER_MAJOR 3
-  !define VER_MINOR 01
-  !define VER_REVISION ""
-  !define VER_BUILD ""
-  !define VER_REV_STR ""
+  !define VER_MINOR 02
+  !define VER_REVISION 1
+  !define VER_BUILD 0
+  !define VER_REV_STR ".1"
 
-  !if "${NSIS_VERSION}" != "v${VER_MAJOR}.${VER_MINOR}${VER_REV_STR}"
+  !define VERSION "${VER_MAJOR}.${VER_MINOR}${VER_REV_STR}"
+  !if "${NSIS_VERSION}" != "v${VERSION}"
     !error "VER_MAJOR, VER_MINOR and VER_REV_STR defines does not match the current NSIS version: ${NSIS_VERSION}"
   !endif
 
@@ -39,10 +40,10 @@
 ;Configuration
 
   ; The name of the installer
-  Name "NSIS ${NSIS_VERSION} and ${NAME} ${UMUI_VERSION}"
+  Name "NSIS ${VERSION} and ${NAME} ${UMUI_VERSION}"
 
   ; The file to write
-  OutFile "NSIS_${VER_MAJOR}.${VER_MINOR}${VER_REV_STR}_UltraModernUI_${UMUI_VERBUILD}.exe"
+  OutFile "NSIS_${VERSION}_UltraModernUI_${UMUI_VERSION}.exe"
 
   SetCompressor /FINAL /SOLID lzma
 
@@ -291,7 +292,7 @@ InstType "$(UMUI_TEXT_SETUPTYPE_COMPLETE_TITLE)"
 ;--------------------------------
 ;Installer Sections
 
-SectionGroup /e "NSIS ${NSIS_VERSION}" SecNSIS
+SectionGroup /e "NSIS ${VERSION}" SecNSIS
 
 !macro InstallStub stub
     File ..\..\Stubs\${stub}-x86-ansi
@@ -318,7 +319,7 @@ Section "NSIS Core Files (required)" SecCore
   File ..\..\makensisw.exe
   File ..\..\COPYING
   File ..\..\NSIS.chm
-  !searchparse /file "..\..\NSIS.chm" "ITSF" VALIDATE_CHM
+  !pragma verifychm "..\..\NSIS.chm"
   File ..\..\NSIS.exe
   !if /FileExists "..\..\NSIS.exe.manifest"
     File "..\..\NSIS.exe.manifest"
@@ -393,7 +394,11 @@ Section "NSIS Core Files (required)" SecCore
 
   SetOutPath $INSTDIR\Bin
   File ..\..\Bin\LibraryLocal.exe
-  File ..\..\Bin\RegTool.bin
+  !if ${VER_MINOR} > 1
+    File ..\..\Bin\RegTool-x86.bin
+  !else
+    File ..\..\Bin\RegTool.bin
+  !endif
 
   CreateDirectory $INSTDIR\Plugins\x86-ansi
   CreateDirectory $INSTDIR\Plugins\x86-unicode
@@ -1024,8 +1029,8 @@ Section -post
   WriteRegExpandStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\NSIS" "InstallLocation" "$INSTDIR"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\NSIS" "DisplayName" "Nullsoft Install System"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\NSIS" "DisplayIcon" "$INSTDIR\NSIS.exe,0"
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\NSIS" "DisplayVersion" "${NSIS_VERSION}"
-!ifdef VER_MAJOR & VER_MINOR & VER_REVISION & VER_BUILD
+!ifdef VER_MAJOR & VER_MINOR & VER_REVISION
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\NSIS" "DisplayVersion" "${VERSION}"
   WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\NSIS" "VersionMajor" "${VER_MAJOR}"
   WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\NSIS" "VersionMinor" "${VER_MINOR}.${VER_REVISION}"
 !endif
@@ -1111,7 +1116,7 @@ Section "NSIS Ultra-Modern User Interface Core Files (required)" SecUMUI
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "URLInfoAbout" "http://ultramodernui.sourceforge.net/"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "URLUpdateInfo" "http://ultramodernui.sourceforge.net/"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "ModifyPath" '"$INSTDIR\UninstallUMUI.exe" /modify'
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "DisplayVersion" "${UMUI_VERBUILD}"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "DisplayVersion" "${UMUI_VERSION}"
 
 
 SectionEnd

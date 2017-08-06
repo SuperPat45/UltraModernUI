@@ -2130,6 +2130,9 @@ FunctionEnd</pre>
       <p><strong>MUI_UNCONFIRMPAGE_TEXT_LOCATION</strong> <span class="parameter">text</span><br />
       Text to display next to the uninstall location text box.</p>
 
+      <strong>MUI_UNCONFIRMPAGE_VARIABLE</strong> <span class="parameter">variable</span><br />
+      Variable in which to store the uninstall source folder.<br />
+      <em>Default: $INSTDIR</em></p>
     </div>
 
 
@@ -2578,12 +2581,14 @@ FunctionEnd</span></pre>
 
     <p><strong>MUI_PAGE_CUSTOMFUNCTION_PRE</strong> <span class="parameter">function</span><br />
     <strong>MUI_PAGE_CUSTOMFUNCTION_SHOW</strong> <span class="parameter">function</span><br />
-    <strong>MUI_PAGE_CUSTOMFUNCTION_LEAVE</strong> <span class="parameter">function</span></p>
+    <strong>MUI_PAGE_CUSTOMFUNCTION_LEAVE</strong> <span class="parameter">function</span><br />
+    <strong>MUI_PAGE_CUSTOMFUNCTION_DESTROYED</strong> <span class="parameter">function</span></p>
 
     <p><strong>Notes:</strong></p>
     <ul>
       <li>In the Pre function of the Welcome, the Finish and the Abort pages, you can write to the InstallOptions INI file of the page (ioSpecial.ini)</li>
       <li>In the Show function of Welcome, Finish and StartMenu pages, $MUI_HWND contains the HWND of the inner dialog</li>
+      <li>The destroyed function is called after a external/plug-in page has been destroyed. (Currently only for the original StartMenu Page)</li>
     </ul>
 
   </div>
@@ -2637,9 +2642,13 @@ FunctionEnd</span></pre>
 <h1>Version History</h1>
 <ul>
 
-  <li><strong>Version 2.0 beta 3</strong> - ??? ??, 2017
+  <li><strong>Version 2.0 beta 3</strong> - August 06, 2017
   <ul>
     <li>New Bulgarian language files by Angel.</li>
+    <li>Added support HKCR32, HKCR64, HKCU32, HKCU64, HKLM32 and HKLM64 root keys for all the UMUI_*_REGISTRY_ROOT defines and for the UMUI_ADDPARAMTOSAVETOREGISTRYKEY macro with NSIS versions >= 2.03.</li>
+    <li>Added support for MUI_UNCONFIRMPAGE_VARIABLE from Modern UI 1.8.</li>
+    <li>Added support for MUI_PAGE_CUSTOMFUNCTION_DESTROYED for original StartMenu page from Modern UI 1.8.</li>
+    <li>Minor Fixes.</li>
   </ul>
   </li>
 
@@ -2736,7 +2745,7 @@ FunctionEnd</span></pre>
 <div>
 
   <p>Made by SuperPat<br />
-  - Based on Modern UI Copyright 2002-2016 Joost Verburg.<br />
+  - Based on Modern UI 1.8 Copyright 2002-2017 Joost Verburg.<br />
   - And inspired of the ExperienceUI of dandaman32.</p>
 
   <p>Skins by SuperPat<br />

@@ -10,6 +10,7 @@ The Ultra-Modern User Interface also features new pages (Confirm, Abort, Alterna
 UltraModernUI include also an other User Interface named ModernUIEx. ModernUIEx is the same User Interface as the original Modern UI style but with the support of the new ultra-modern pages and thith a little more options.
 
 UltraModernUI include three NSIS plug-ins:
+
 * [SkinnedControls](http://nsis.sourceforge.net/SkinnedControls_plug-in): a plug-in, natively integrated to UmtraModernUI, to skin all buttons and scroll bars of your installer;
 * [InstallOptionsEx](http://nsis.sourceforge.net/InstallOptionsEx_plug-in): an extension, natively integrated to UmtraModernUI, of the original [InstallOptions](http://nsis.sourceforge.net/Docs/InstallOptions/Readme.html) plug-in with more feature to create custom pages;
 * [nsArray](http://nsis.sourceforge.net/Arrays_in_NSIS): needed by some UltraModernUI features, provide less out-of-the-box arrays and map features.
@@ -23,14 +24,15 @@ UltraModernUI include three NSIS plug-ins:
 * Updated the InstallOptionsEx plug-in to version 2.4.5 beta 3 with full unicode support;
 * Updated the SkinnedControls plug-in to version 1.4 with support of the new NSIS plug-in API, ignore case parameters name support, unicode support, rewritten documentation and button image size are no more limited to allow smoother gradients;
 * Several new and completed language files and other minor fixes:
-   * Completed: German language file by Bodenseematze;
-   * New: Greek language file by Bodenseematze;
-   * New: Italian language file by Bodenseematze;
-   * New: Lithuanian language file by Bodenseematze;
-   * New: Russian language file by Bodenseematze;
-   * New: Slovenian language file by Bodenseematze;
-   * New: Spanish language file by Bodenseematze;
-   * New: Turkish language file by Bodenseematze;
+  * Completed: German language file by Bodenseematze;
+  * New: Greek language file by Bodenseematze;
+  * New: Italian language file by Bodenseematze;
+  * New: Lithuanian language file by Bodenseematze;
+  * New: Russian language file by Bodenseematze;
+  * New: Slovenian language file by Bodenseematze;
+  * New: Spanish language file by Bodenseematze;
+  * New: Turkish language file by Bodenseematze;
+  * New: Bulgarian language file by Angel;
 * The information page is now compatible with UTF16LE text files if compiled in Unicode;
 * The information page is now compatible with Unix style (LF only) line return text files; 
 * The UMUI_CUSTOM_SKIN define is now deprecated, it is no more necessary and you can simply use the UMUI_SKIN define with your custom skin; 
@@ -43,4 +45,5 @@ UltraModernUI include three NSIS plug-ins:
 * Source code now on GitHub: https://github.com/SuperPat45/UltraModernUI.
 
 # License
+
 [zlib/libpng](LICENSE.md)

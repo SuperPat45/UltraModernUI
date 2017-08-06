@@ -1,18 +1,18 @@
 /*
 
-NSIS UltraModern User Interface version 2.0 beta 2
+NSIS UltraModern User Interface version 2.0 beta 3
 Copyright 2005-2017 SuperPat
 
 Based on:
     NSIS Modern User Interface version 1.8 (Git version: d20b99c082a99304a542c2fa6cf4abd381ca263a)
-    Copyright 2002-2016 Joost Verburg
+    Copyright 2002-2017 Joost Verburg
 
 */
 
 !ifndef MUI_INCLUDED
-!echo "NSIS Ultra-Modern User Interface version 2.0 beta 2 - Copyright 2005-2017 SuperPat"
+!echo "NSIS Ultra-Modern User Interface version 2.0 beta 3 - Copyright 2005-2017 SuperPat"
 !echo "  (Bugfixes and some additions: 2015-2016 - Bodenseematze)"
-!echo "Based on: NSIS Modern User Interface version 1.8 - Copyright 2002-2016 Joost Verburg"
+!echo "Based on: NSIS Modern User Interface version 1.8 - Copyright 2002-2017 Joost Verburg"
 
 ;--------------------------------
 !verbose push 3
@@ -21,7 +21,7 @@ Based on:
 
 !define MUI_INCLUDED
 
-!define UMUI_SYSVERSION "2.0 beta 2"
+!define UMUI_SYSVERSION "2.0 beta 3"
 !define MUI_SYSVERSION "1.8"
 
 ;--------------------------------
@@ -3115,6 +3115,10 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
     UninstallText "${MUI_UNCONFIRMPAGE_TEXT_TOP}" "${MUI_UNCONFIRMPAGE_TEXT_LOCATION}"
 
+    !ifdef MUI_UNCONFIRMPAGE_VARIABLE
+      DirVar "${MUI_UNCONFIRMPAGE_VARIABLE}"
+    !endif
+
   PageExEnd
 
   !insertmacro MUI_UNFUNCTION_CONFIRMPAGE un.mui.ConfirmPre_${MUI_UNIQUEID} un.mui.ConfirmShow_${MUI_UNIQUEID} un.mui.ConfirmLeave_${MUI_UNIQUEID}
@@ -4074,6 +4078,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !endif
 
     StartMenu::Show
+    !insertmacro MUI_PAGE_FUNCTION_CUSTOM DESTROYED
 
     Pop $MUI_TEMP1
     StrCmp $MUI_TEMP1 "success" 0 +2
