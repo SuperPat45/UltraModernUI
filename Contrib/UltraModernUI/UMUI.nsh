@@ -467,7 +467,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
       ChangeUI IDD_SELCOM "${UMUI_UI_COMPONENTSPAGE_BIGDESC}"
     !endif
 
-    ; Workaround for unsigned detail button
+    ; Workaround for unstyled detail button
     !ifdef UMUI_BUTTONIMAGE_BMP | UMUI_UNBUTTONIMAGE_BMP
       !if ! "${UMUI_XPSTYLE}" == "On"
         ChangeUI IDD_INSTFILES "${UMUI_UI_SB}"
@@ -1625,7 +1625,26 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
             StrCmp $MUI_TEMP1 HKPD 0 +2
               WriteRegStr HKPD "$MUI_TEMP2" "$R2" "$R3"
               Goto loop
-
+            !if ${NSIS_PACKEDVERSION} >= 0x03002000
+              StrCmp $MUI_TEMP1 HKCR32 0 +2
+                WriteRegStr HKCR32 "$MUI_TEMP2" "$R2" "$R3"
+                Goto loop
+              StrCmp $MUI_TEMP1 HKCR64 0 +2
+                WriteRegStr HKCR64 "$MUI_TEMP2" "$R2" "$R3"
+                Goto loop
+              StrCmp $MUI_TEMP1 HKCU32 0 +2
+                WriteRegStr HKCU32 "$MUI_TEMP2" "$R2" "$R3"
+                Goto loop
+              StrCmp $MUI_TEMP1 HKCU64 0 +2
+                WriteRegStr HKCU64 "$MUI_TEMP2" "$R2" "$R3"
+                Goto loop
+              StrCmp $MUI_TEMP1 HKLM32 0 +2
+                WriteRegStr HKLM32 "$MUI_TEMP2" "$R2" "$R3"
+                Goto loop
+              StrCmp $MUI_TEMP1 HKLM64 0 +2
+                WriteRegStr HKLM64 "$MUI_TEMP2" "$R2" "$R3"
+                Goto loop
+            !endif
       end:
       ClearErrors
 
@@ -5865,15 +5884,15 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !endif
   !endif
 
-  PageEx custom
+  PageEx ${MUI_PAGE_UNINSTALLER_FUNCPREFIX}custom
 
-    PageCallbacks mui.AdditionalTasksPre_${MUI_UNIQUEID} mui.AdditionalTasksLeave_${MUI_UNIQUEID}
+    PageCallbacks ${MUI_PAGE_UNINSTALLER_FUNCPREFIX}mui.AdditionalTasksPre_${MUI_UNIQUEID} ${MUI_PAGE_UNINSTALLER_FUNCPREFIX}mui.AdditionalTasksLeave_${MUI_UNIQUEID}
 
     Caption " "
 
   PageExEnd
 
-  !insertmacro UMUI_FUNCTION_ADDITIONALTASKSPAGE mui.AdditionalTasksPre_${MUI_UNIQUEID} mui.AdditionalTasksLeave_${MUI_UNIQUEID}
+  !insertmacro UMUI_FUNCTION_ADDITIONALTASKSPAGE ${MUI_PAGE_UNINSTALLER_FUNCPREFIX}mui.AdditionalTasksPre_${MUI_UNIQUEID} ${MUI_PAGE_UNINSTALLER_FUNCPREFIX}mui.AdditionalTasksLeave_${MUI_UNIQUEID}
 
   !undef UMUI_ADDITIONALTASKSPAGE_TEXT_TOP
 
@@ -6420,15 +6439,15 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !define UMUI_VAR_UMUI_SNTEXT
   !endif
 
-  PageEx custom
+  PageEx ${MUI_PAGE_UNINSTALLER_FUNCPREFIX}custom
 
-    PageCallbacks mui.serialnumberPre_${MUI_UNIQUEID} mui.serialnumberLeave_${MUI_UNIQUEID}
+    PageCallbacks ${MUI_PAGE_UNINSTALLER_FUNCPREFIX}mui.serialnumberPre_${MUI_UNIQUEID} ${MUI_PAGE_UNINSTALLER_FUNCPREFIX}mui.serialnumberLeave_${MUI_UNIQUEID}
 
     Caption " "
 
   PageExEnd
 
-  !insertmacro UMUI_FUNCTION_SERIALNUMBERPAGE mui.serialnumberPre_${MUI_UNIQUEID} mui.serialnumberLeave_${MUI_UNIQUEID}
+  !insertmacro UMUI_FUNCTION_SERIALNUMBERPAGE ${MUI_PAGE_UNINSTALLER_FUNCPREFIX}mui.serialnumberPre_${MUI_UNIQUEID} ${MUI_PAGE_UNINSTALLER_FUNCPREFIX}mui.serialnumberLeave_${MUI_UNIQUEID}
 
   !undef UMUI_SERIALNUMBERPAGE_TEXT_TOP
 
@@ -8715,15 +8734,15 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !define UMUI_VAR_NEWVERSION
   !endif
 
-  PageEx custom
+  PageEx ${MUI_PAGE_UNINSTALLER_FUNCPREFIX}custom
 
-    PageCallbacks mui.updatePre_${MUI_UNIQUEID} mui.updateLeave_${MUI_UNIQUEID}
+    PageCallbacks ${MUI_PAGE_UNINSTALLER_FUNCPREFIX}mui.updatePre_${MUI_UNIQUEID} ${MUI_PAGE_UNINSTALLER_FUNCPREFIX}mui.updateLeave_${MUI_UNIQUEID}
 
     Caption " "
 
   PageExEnd
 
-  !insertmacro UMUI_FUNCTION_UPDATEPAGE mui.updatePre_${MUI_UNIQUEID} mui.updateLeave_${MUI_UNIQUEID}
+  !insertmacro UMUI_FUNCTION_UPDATEPAGE ${MUI_PAGE_UNINSTALLER_FUNCPREFIX}mui.updatePre_${MUI_UNIQUEID} ${MUI_PAGE_UNINSTALLER_FUNCPREFIX}mui.updateLeave_${MUI_UNIQUEID}
 
   !insertmacro MUI_UNSET UMUI_UPDATEPAGE_TEXT
   !insertmacro MUI_UNSET UMUI_UPDATEPAGE_UPDATE_TITLE
