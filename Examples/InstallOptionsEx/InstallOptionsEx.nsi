@@ -18,7 +18,7 @@
   VIAddVersionKey ProductVersion "${VERSION}"
   VIAddVersionKey Comments "InstallOptionsEx plugin for NSIS (Nullsoft Scriptable Install System)."
   VIAddVersionKey LegalTrademarks "InstallOptionsEx is released under the zlib/libpng license: http://nsis.sf.net/License"
-  VIAddVersionKey LegalCopyright "Copyright © 2005-2017 SuperPat, Copyright © 2004-2005 Diego Pedroso"
+  VIAddVersionKey LegalCopyright "Copyright ï¿½ 2005-2018 SuperPat, Copyright ï¿½ 2004-2005 Diego Pedroso"
   VIAddVersionKey FileDescription "InstallOptionsEx allow you to create custom pages for NSIS installers, to prompt the user for extra information."
   VIAddVersionKey FileVersion "${VERIPV}"
   

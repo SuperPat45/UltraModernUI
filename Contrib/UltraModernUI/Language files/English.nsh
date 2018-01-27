@@ -123,7 +123,7 @@
 !ifdef UMUI_ADDITIONALTASKSPAGE | UMUI_UNADDITIONALTASKSPAGE
   ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_TITLE "Additional Tasks"
   ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_SUBTITLE "Which are the additional tasks which must be carried out?"
-  ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_ADDITIONAL_ICONS "Additionnal Icons:"
+  ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_ADDITIONAL_ICONS "Additional Icons:"
   ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_CREATE_DESKTOP_ICON "Create a desktop icon"
   ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_CREATE_QUICK_LAUNCH_ICON "Create a Quick Launch icon"
   ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_ADVANCED_PARAMETERS "Advanced parameters:"

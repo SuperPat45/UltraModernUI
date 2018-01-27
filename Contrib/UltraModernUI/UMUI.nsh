@@ -1,18 +1,18 @@
 /*
 
-NSIS UltraModern User Interface version 2.0 beta 3
-Copyright 2005-2017 SuperPat
+NSIS UltraModern User Interface version 2.0 beta 4
+Copyright 2005-2018 SuperPat
 
 Based on:
     NSIS Modern User Interface version 1.8 (Git version: d20b99c082a99304a542c2fa6cf4abd381ca263a)
-    Copyright 2002-2017 Joost Verburg
+    Copyright 2002-2018 Joost Verburg
 
 */
 
 !ifndef MUI_INCLUDED
-!echo "NSIS Ultra-Modern User Interface version 2.0 beta 3 - Copyright 2005-2017 SuperPat"
+!echo "NSIS Ultra-Modern User Interface version 2.0 beta 4 - Copyright 2005-2018 SuperPat"
 !echo "  (Bugfixes and some additions: 2015-2016 - Bodenseematze)"
-!echo "Based on: NSIS Modern User Interface version 1.8 - Copyright 2002-2017 Joost Verburg"
+!echo "Based on: NSIS Modern User Interface version 1.8 - Copyright 2002-2018 Joost Verburg"
 
 ;--------------------------------
 !verbose push 3
@@ -21,7 +21,7 @@ Based on:
 
 !define MUI_INCLUDED
 
-!define UMUI_SYSVERSION "2.0 beta 3"
+!define UMUI_SYSVERSION "2.0 beta 4"
 !define MUI_SYSVERSION "1.8"
 
 ;--------------------------------
@@ -4255,9 +4255,9 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 !macro MUI_FUNCTION_FINISHPAGE PRE LEAVE
 
   !ifndef UMUI_WELCOMEFINISHABORTPAGE_USE_IMAGE
-    !define UMUI_INTERNAL_FNUMFIELDS_3ADDITIONNALCONTROLS 5
-    !define UMUI_INTERNAL_FNUMFIELDS_2ADDITIONNALCONTROLS 4
-    !define UMUI_INTERNAL_FNUMFIELDS_1ADDITIONNALCONTROLS 3
+    !define UMUI_INTERNAL_FNUMFIELDS_3ADDITIONALCONTROLS 5
+    !define UMUI_INTERNAL_FNUMFIELDS_2ADDITIONALCONTROLS 4
+    !define UMUI_INTERNAL_FNUMFIELDS_1ADDITIONALCONTROLS 3
     !define UMUI_INTERNAL_FIELDTITLE 1
     !define UMUI_INTERNAL_FIELDTEXT 2
     !define UMUI_INTERNAL_FIELDTHIRD 3
@@ -4271,9 +4271,9 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !define UMUI_INTERNAL_FPOSLINKLEFT 22
     !define UMUI_INTERNAL_FOPTIONCHECKLEFT 26
   !else
-    !define UMUI_INTERNAL_FNUMFIELDS_3ADDITIONNALCONTROLS 6
-    !define UMUI_INTERNAL_FNUMFIELDS_2ADDITIONNALCONTROLS 5
-    !define UMUI_INTERNAL_FNUMFIELDS_1ADDITIONNALCONTROLS 4
+    !define UMUI_INTERNAL_FNUMFIELDS_3ADDITIONALCONTROLS 6
+    !define UMUI_INTERNAL_FNUMFIELDS_2ADDITIONALCONTROLS 5
+    !define UMUI_INTERNAL_FNUMFIELDS_1ADDITIONALCONTROLS 4
     !define UMUI_INTERNAL_FIELDTITLE 2
     !define UMUI_INTERNAL_FIELDTEXT 3
     !define UMUI_INTERNAL_FIELDTHIRD 4
@@ -4375,7 +4375,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
       !insertmacro MUI_INSTALLOPTIONS_WRITE_DEFAULTCONVERT "ioSpecial.ini" "Field ${UMUI_INTERNAL_FIELDTEXT}" "Text" "MUI_FINISHPAGE_TEXT_REBOOT"
 
-      !insertmacro INSTALLOPTIONS_WRITE "ioSpecial.ini" "Settings" "Numfields" "${UMUI_INTERNAL_FNUMFIELDS_2ADDITIONNALCONTROLS}"
+      !insertmacro INSTALLOPTIONS_WRITE "ioSpecial.ini" "Settings" "Numfields" "${UMUI_INTERNAL_FNUMFIELDS_2ADDITIONALCONTROLS}"
 
       !insertmacro INSTALLOPTIONS_WRITE "ioSpecial.ini" "Field ${UMUI_INTERNAL_FIELDTHIRD}" "Type" "RadioButton"
       !insertmacro MUI_INSTALLOPTIONS_WRITE_DEFAULTCONVERT "ioSpecial.ini" "Field ${UMUI_INTERNAL_FIELDTHIRD}" "Text" "MUI_FINISHPAGE_TEXT_REBOOTNOW"
@@ -4594,15 +4594,15 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
 
     !ifdef MUI_FINISHPAGE_RUN & MUI_FINISHPAGE_SHOWREADME & MUI_FINISHPAGE_LINK
-      !insertmacro INSTALLOPTIONS_WRITE "ioSpecial.ini" "Settings" "Numfields" "${UMUI_INTERNAL_FNUMFIELDS_3ADDITIONNALCONTROLS}"
+      !insertmacro INSTALLOPTIONS_WRITE "ioSpecial.ini" "Settings" "Numfields" "${UMUI_INTERNAL_FNUMFIELDS_3ADDITIONALCONTROLS}"
     !else ifdef MUI_FINISHPAGE_RUN & MUI_FINISHPAGE_SHOWREADME
-      !insertmacro INSTALLOPTIONS_WRITE "ioSpecial.ini" "Settings" "Numfields" "${UMUI_INTERNAL_FNUMFIELDS_2ADDITIONNALCONTROLS}"
+      !insertmacro INSTALLOPTIONS_WRITE "ioSpecial.ini" "Settings" "Numfields" "${UMUI_INTERNAL_FNUMFIELDS_2ADDITIONALCONTROLS}"
     !else ifdef MUI_FINISHPAGE_RUN & MUI_FINISHPAGE_LINK
-      !insertmacro INSTALLOPTIONS_WRITE "ioSpecial.ini" "Settings" "Numfields" "${UMUI_INTERNAL_FNUMFIELDS_2ADDITIONNALCONTROLS}"
+      !insertmacro INSTALLOPTIONS_WRITE "ioSpecial.ini" "Settings" "Numfields" "${UMUI_INTERNAL_FNUMFIELDS_2ADDITIONALCONTROLS}"
     !else ifdef MUI_FINISHPAGE_SHOWREADME & MUI_FINISHPAGE_LINK
-      !insertmacro INSTALLOPTIONS_WRITE "ioSpecial.ini" "Settings" "Numfields" "${UMUI_INTERNAL_FNUMFIELDS_2ADDITIONNALCONTROLS}"
+      !insertmacro INSTALLOPTIONS_WRITE "ioSpecial.ini" "Settings" "Numfields" "${UMUI_INTERNAL_FNUMFIELDS_2ADDITIONALCONTROLS}"
     !else ifdef MUI_FINISHPAGE_RUN | MUI_FINISHPAGE_SHOWREADME | MUI_FINISHPAGE_LINK
-      !insertmacro INSTALLOPTIONS_WRITE "ioSpecial.ini" "Settings" "Numfields" "${UMUI_INTERNAL_FNUMFIELDS_1ADDITIONNALCONTROLS}"
+      !insertmacro INSTALLOPTIONS_WRITE "ioSpecial.ini" "Settings" "Numfields" "${UMUI_INTERNAL_FNUMFIELDS_1ADDITIONALCONTROLS}"
     !endif
 
 
@@ -4831,9 +4831,9 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
   FunctionEnd
 
-  !undef UMUI_INTERNAL_FNUMFIELDS_3ADDITIONNALCONTROLS
-  !undef UMUI_INTERNAL_FNUMFIELDS_2ADDITIONNALCONTROLS
-  !undef UMUI_INTERNAL_FNUMFIELDS_1ADDITIONNALCONTROLS
+  !undef UMUI_INTERNAL_FNUMFIELDS_3ADDITIONALCONTROLS
+  !undef UMUI_INTERNAL_FNUMFIELDS_2ADDITIONALCONTROLS
+  !undef UMUI_INTERNAL_FNUMFIELDS_1ADDITIONALCONTROLS
   !undef UMUI_INTERNAL_FIELDTITLE
   !undef UMUI_INTERNAL_FIELDTEXT
   !undef UMUI_INTERNAL_FIELDTHIRD
@@ -9194,7 +9194,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 !macroend
 
 
-; Additionnal Installoptions functions
+; Additional Installoptions functions
 ; ------------------------------------
 
 !macro UMUI_INSTALLOPTIONSEX_SETFOCUS HWND

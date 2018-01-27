@@ -5,9 +5,9 @@
 
 The Ultra-Modern User Interface is a new interface with a style like the most recent installers for NSIS 3 (Nullsoft Scriptable Install System), the tool that allows programmers to create such installers for Windows. UltraModernUI and NSIS are released under an open source license.
 
-The Ultra-Modern User Interface also features new pages (Confirm, Abort, AlternativeStartMenu, AdditionnalTasks, Information, Maintenance, Update, StupType...). The interface and the graphics can be customized using the provided settings and the new skins system.
+The Ultra-Modern User Interface also features new pages (Confirm, Abort, AlternativeStartMenu, AdditionalTasks, Information, Maintenance, Update, SetupType...). The interface and the graphics can be customized using the provided settings and the new skins system.
 
-UltraModernUI include also an other User Interface named ModernUIEx. ModernUIEx is the same User Interface as the original Modern UI style but with the support of the new ultra-modern pages and thith a little more options.
+UltraModernUI include also an other User Interface named ModernUIEx. ModernUIEx is the same User Interface as the original Modern UI style but with the support of the new ultra-modern pages and with a little more options.
 
 UltraModernUI include three NSIS plug-ins:
 

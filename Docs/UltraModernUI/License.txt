@@ -1,4 +1,4 @@
-Copyright © 2005-2017 SuperPat
+Copyright ï¿½ 2005-2018 SuperPat
 
 UltraModernUI is based on the ModernUI of Joost Verburg and inspired of the ExperienceUI of dandaman32
 

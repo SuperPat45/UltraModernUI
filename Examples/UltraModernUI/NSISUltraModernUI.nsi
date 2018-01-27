@@ -1,5 +1,5 @@
 ; o-----------------------------------------------o
-; | NSIS 3.02 + Ultra-Modern User Interface 2.0b3 |
+; | NSIS 3.02 + Ultra-Modern User Interface 2.0b4 |
 ; (-----------------------------------------------)
 ; | Installer script.                             |
 ; | Written by SyperPat                           |
@@ -11,7 +11,7 @@
   !define /date NOW "%Y-%m-%d"
   !define NAME "UltraModernUI"
 
-  !define UMUI_VERSION "2.0b3"
+  !define UMUI_VERSION "2.0b4"
   !define UMUI_VERBUILD "2.0_${NOW}"
 
   !define VER_MAJOR 3
@@ -31,7 +31,7 @@
   VIAddVersionKey ProductVersion "${UMUI_VERSION}"
   VIAddVersionKey Comments "This package also include some plugins used by UMUI to extend the possibilities of NSIS."
   VIAddVersionKey LegalTrademarks "NSIS and UltraModernUI are released under the zlib/libpng license: http://nsis.sf.net/License"
-  VIAddVersionKey LegalCopyright "Copyright © 2005-2017 SuperPat"
+  VIAddVersionKey LegalCopyright "Copyright © 2005-2018 SuperPat"
   VIAddVersionKey FileDescription "NSIS (Nullsoft Scriptable Install System) with the Ultra-Modern User Interface."
   VIAddVersionKey FileVersion "${UMUI_VERBUILD}"
 
