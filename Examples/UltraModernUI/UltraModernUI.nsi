@@ -13,8 +13,8 @@
 
   ; For language file selection
   !define VER_MAJOR 3
-  !define VER_MINOR 02
-  !define VER_REV_STR ".1"
+  !define VER_MINOR 03
+  !define VER_REV_STR ""
 
   !if "${NSIS_VERSION}" != "v${VER_MAJOR}.${VER_MINOR}${VER_REV_STR}"
     !error "VER_MAJOR, VER_MINOR and VER_REV_STR defines does not match the current NSIS version: ${NSIS_VERSION}"
@@ -25,12 +25,12 @@
 
   !define /date VERIPV "200.%Y.%m.%d"
   VIProductVersion "${VERIPV}"
-  VIAddVersionKey ProductName "Ultra-Modern User Interface for NSIS (Nullsoft Scriptable Install System) version 2.42+ x86 ansi edition and NSIS version 3 x86 edition."
+  VIAddVersionKey ProductName "Ultra-Modern User Interface for NSIS (Nullsoft Scriptable Install System) version 3 x86 edition."
   VIAddVersionKey ProductVersion "${UMUI_VERSION}"
   VIAddVersionKey Comments "A new User Interface for NSIS with a style like the most recent installers. This package also include some plugins used by UMUI to extend the possibilities of NSIS."
   VIAddVersionKey LegalTrademarks "UltraModernUI is released under the zlib/libpng license: http://nsis.sf.net/License"
   VIAddVersionKey LegalCopyright "Copyright � 2005-2018 SuperPat"
-  VIAddVersionKey FileDescription "Ultra-Modern User Interface for NSIS (Nullsoft Scriptable Install System) version 2.42+ x86 ansi edition and NSIS version 3 x86 edition."
+  VIAddVersionKey FileDescription "Ultra-Modern User Interface for NSIS (Nullsoft Scriptable Install System) version 3 x86 edition."
   VIAddVersionKey FileVersion "${UMUI_VERBUILD}"
 
 
@@ -268,6 +268,7 @@
   !insertmacro MUI_LANGUAGE "Vietnamese"
   !insertmacro MUI_LANGUAGE "Welsh"
   !insertmacro MUI_LANGUAGE "Corsican"
+  !insertmacro MUI_LANGUAGE "Tatar"
 
 ; Other unicode only untranslated languages but usable even so.
   !insertmacro MUI_LANGUAGE "Georgian"

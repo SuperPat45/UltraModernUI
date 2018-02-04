@@ -1,5 +1,5 @@
 ; o-----------------------------------------------o
-; | NSIS 3.02 + Ultra-Modern User Interface 2.0b4 |
+; | NSIS 3.03 + Ultra-Modern User Interface 2.0b4 |
 ; (-----------------------------------------------)
 ; | Installer script.                             |
 ; | Written by SyperPat                           |
@@ -15,10 +15,10 @@
   !define UMUI_VERBUILD "2.0_${NOW}"
 
   !define VER_MAJOR 3
-  !define VER_MINOR 02
-  !define VER_REVISION 1
+  !define VER_MINOR 03
+  !define VER_REVISION 0
   !define VER_BUILD 0
-  !define VER_REV_STR ".1"
+  !define VER_REV_STR ""
 
   !define VERSION "${VER_MAJOR}.${VER_MINOR}${VER_REV_STR}"
   !if "${NSIS_VERSION}" != "v${VERSION}"
@@ -275,6 +275,7 @@
   !insertmacro MUI_LANGUAGE "Vietnamese"
   !insertmacro MUI_LANGUAGE "Welsh"
   !insertmacro MUI_LANGUAGE "Corsican"
+  !insertmacro MUI_LANGUAGE "Tatar"
 
 ; Other unicode only untranslated languages but usable even so.
   !insertmacro MUI_LANGUAGE "Georgian"
