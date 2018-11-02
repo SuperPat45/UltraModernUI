@@ -9597,7 +9597,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
   !endif
 
   !ifndef UMUI_MULTILANG_LANGMAP
-    !error "MUI_LANGUAGE must be inbserted before UMUI_MULTILANG_GET"
+    !error "MUI_LANGUAGE must be inserted before UMUI_MULTILANG_GET"
   !endif
 
   ClearErrors
