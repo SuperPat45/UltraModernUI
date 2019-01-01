@@ -1,10 +1,11 @@
 @echo off
 @echo Creating UltraModernUI zip archive
 
-  del /Q UltraModernUI_2.0b4.zip
+  del /Q UltraModernUI_2.0b5.zip
   rmdir /S /Q temp
 
   mkdir temp
+  copy NSISUMUI.exe temp
 
   mkdir "temp\Contrib\UltraModernUI\"
   copy Contrib\UltraModernUI\UMUI.nsh temp\Contrib\UltraModernUI
@@ -113,7 +114,7 @@ rem  mkdir "temp\Include\"
   copy Contrib\nsArray\*.* temp\Contrib\nsArray
 
   cd temp
-  "C:\Program Files\7-Zip\7z.exe" a -tzip -mx9 ..\UltraModernUI_2.0b4.zip *
+  "C:\Program Files\7-Zip\7z.exe" a -tzip -mx9 ..\UltraModernUI_2.0b5.zip *
   cd ..
 
   rmdir /S /Q temp

@@ -22,7 +22,7 @@
   ; If you want to change the header image
 ;  !define MUI_HEADERBGIMAGE_BITMAP "${NSISDIR}\Contrib\Graphics\UltraModernUI\HeaderBG.bmp"
 
-  !define UMUI_TEXT_COLOR FFFFFF
+  !define MUI_TEXTCOLOR FFFFFF
   !define MUI_BGCOLOR 6783cf
   !define UMUI_HEADERTEXT_COLOR 003366
 

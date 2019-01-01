@@ -18,7 +18,7 @@
   VIAddVersionKey ProductVersion "${VERSION}"
   VIAddVersionKey Comments "InstallOptionsEx plugin for NSIS (Nullsoft Scriptable Install System)."
   VIAddVersionKey LegalTrademarks "InstallOptionsEx is released under the zlib/libpng license: http://nsis.sf.net/License"
-  VIAddVersionKey LegalCopyright "Copyright � 2005-2018 SuperPat, Copyright � 2004-2005 Diego Pedroso"
+  VIAddVersionKey LegalCopyright "Copyright � 2005-2019 SuperPat, Copyright � 2004-2005 Diego Pedroso"
   VIAddVersionKey FileDescription "InstallOptionsEx allow you to create custom pages for NSIS installers, to prompt the user for extra information."
   VIAddVersionKey FileVersion "${VERIPV}"
   
@@ -196,8 +196,9 @@
   !insertmacro MUI_LANGUAGE "Tatar"
 
 ; Other unicode only untranslated languages but usable even so.
-  !insertmacro MUI_LANGUAGE "Georgian"
   !insertmacro MUI_LANGUAGE "Armenian"
+  !insertmacro MUI_LANGUAGE "Georgian"
+  !insertmacro MUI_LANGUAGE "Hindi"
   
 ;--------------------------------
 ; The stuff to install

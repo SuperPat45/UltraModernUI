@@ -1,0 +1,5 @@
+{
+    "files.autoGuessEncoding": true,
+    "nsis.bridlensis.nsisHome": "C:\\ProgramData\\NSIS",
+    "nsis.pathToMakensis": "C:\\ProgramData\\NSIS\\Bin\\makensis.exe"
+}

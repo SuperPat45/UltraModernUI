@@ -131,8 +131,9 @@
   !insertmacro MUI_LANGUAGE "Tatar"
 
 ; Other unicode only untranslated languages but usable even so.
-  !insertmacro MUI_LANGUAGE "Georgian"
   !insertmacro MUI_LANGUAGE "Armenian"
+  !insertmacro MUI_LANGUAGE "Georgian"
+  !insertmacro MUI_LANGUAGE "Hindi"
 
   
 ;--------------------------------

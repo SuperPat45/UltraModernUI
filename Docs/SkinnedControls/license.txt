@@ -1,8 +1,8 @@
-Copyright ï¿½ 2005-2018 SuperPat
+Copyright © 2005-2019 SuperPat
 
 Based on wansis, a Plug-in written by Saivert that skins NSIS like Winamp
 and use the wa_dlg.h courtesy of Nullsoft, Inc.
-as well as the Cool Scrollbar Library Copyright (c) J Brown 2001.
+as well as the Cool Scrollbar Library Copyright © J Brown 2001.
 
 Skinned Controls plugin is based on the wansis plugin of Saivert (http://nsis.sourceforge.net/Wansis_plug-in) and it use the wa_dlg.h courtesy of Nullsoft, Inc.
 

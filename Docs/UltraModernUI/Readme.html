@@ -29,17 +29,17 @@
     <h1>Introduction</h1>
 
     <div style="text-align: justify;">
-      <p>The Ultra-Modern User Interface is a new interface with a style like the most recent installers for NSIS 3 (Nullsoft Scriptable Install System), the tool that allows programmers to create such installers for Windows. UltraModernUI and NSIS are released under an open source license.</p>
+      <p>The Ultra-Modern User Interface is a new interface with a style like the most recent installers for NSIS 3 (Nullsoft Scriptable Install System) x86 edition, the tool that allows programmers to create such installers for Windows. Ultra-Modern UI and NSIS are released under an open source license.</p>
       <p>The Ultra-Modern User Interface also features new pages (Confirm, Abort, AlternativeStartMenu, AdditionalTasks, Information, Maintenance, Update, SetupType...). The interface and the graphics can be customized using the provided settings and the new skins system. </p>
-      <p>UltraModernUI include also an other User Interface named ModernUIEx. ModernUIEx is the same User Interface as the original Modern UI style but with the support of the new ultra-modern pages and with a little more options.</p>
-      <p>Using the UltraModernUI macros and language files, writing scripts with a ultra-modern interface is easy. A lot of examples are available to show the different features and this document contains all information about writing UltraModernUI scripts and a reference of all settings.</p>
-      <p>The issue of UltraModernUI is to be the most compatible with the existing Modern UI scripts. Because of it is based on the Modern UI of Joost Verburg, it use the same macro a define and provide new one. The new macro and define use the prefix UMUI_ instead of MUI_.</p>
-      <p>Please be aware that the UltraModernUI and the Modern UI interfaces settings are different compared to the classic interface. This means that you should not use settings like LicenseText, Icon, CheckBitmap, InstallColors etc. but the ones that are documented here.</p>
-      <p>UltraModernUI include three NSIS plug-ins:</p>
+      <p>Ultra-Modern UI include also an other User Interface named Modern UIEx. Modern UIEx is the same User Interface as the original Modern UI style but with the support of the new ultra-modern pages and with a little more options.</p>
+      <p>Using the Ultra-Modern UI macros and language files, writing scripts with a ultra-modern interface is easy. A lot of examples are available to show the different features and this document contains all information about writing Ultra-Modern UI scripts and a reference of all settings.</p>
+      <p>The issue of Ultra-Modern UI is to be the most compatible with the existing Modern UI scripts. Because of it is based on the Modern UI of Joost Verburg, it use the same macro a define and provide new one. The new macro and define use the prefix UMUI_ instead of MUI_.</p>
+      <p>Please be aware that the Ultra-Modern UI and the Modern UI interfaces settings are different compared to the classic interface. This means that you should not use settings like LicenseText, Icon, CheckBitmap, InstallColors etc. but the ones that are documented here.</p>
+      <p>Ultra-Modern UI include three NSIS plug-ins:</p>
       <ul>
-        <li><a target="_blank" href="../SkinnedControls/Readme.html">SkinnedControls</a>: a plug-in, natively integrated to UmtraModernUI, to skin all buttons and scroll bars of your installer;</li>
-        <li><a target="_blank" href="../InstallOptionsEx/Readme.html">InstallOptionsEx</a>: an extension, natively integrated to UmtraModernUI, of the original <a target="_blank" href="../InstallOptions/Readme.html">InstallOptions</a> plug-in with more feature to create custom pages;</li>
-        <li><a target="_blank" href="../nsArray/Readme.txt">nsArray</a>: needed by some UltraModernUI features, provide less out-of-the-box arrays and map features.</li>
+        <li><a target="_blank" href="../SkinnedControls/Readme.html">SkinnedControls</a>: a plug-in, natively integrated to Ultra-Modern UI, to skin all buttons and scroll bars of your installer;</li>
+        <li><a target="_blank" href="../InstallOptionsEx/Readme.html">InstallOptionsEx</a>: an extension, natively integrated to Ultra-Modern UI, of the original <a target="_blank" href="../InstallOptions/Readme.html">InstallOptions</a> plug-in with more feature to create custom pages;</li>
+        <li><a target="_blank" href="../nsArray/Readme.txt">nsArray</a>: needed by some Ultra-Modern UI features, provide less out-of-the-box arrays and map features.</li>
       </ul>
 
       <h3><img class="trigger" title="Open/Close section" alt="[+]" id="trigger_screenshots" src="images/closed.gif" onclick="loadSlider();toggle('trigger_screenshots', 'toggle_screenshots');" /> Screenshots</h3>
@@ -49,7 +49,7 @@
             <div id="slider">
                 <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/UMUI01.png" alt="Multi language page with default skin" />
                 <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/UMUI02.png" alt="Welcome page with blue skin with alternative text and alternative style options" />
-                <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/UMUI03.png" alt="Maintenace page with blue2 skin with page background image option" />
+                <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/UMUI03.png" alt="Maintenance page with blue2 skin with page background image option" />
                 <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/UMUI04.png" alt="Update page with SoftBlue skin with page background image option" />
                 <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/UMUI05.png" alt="License page with SoftRed skin" />
                 <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/UMUI06.png" alt="Information page in RTF file with SoftBrown skin" />
@@ -63,16 +63,16 @@
                 <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/UMUINoLeftImage02.png" alt="Directory page with the no left image option with SoftBule skin" />
                 <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/UMUISmall01.png" alt="Welcome page with the small page option" />
                 <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/UMUISmall02.png" alt="Directory page with the small page option" />
-                <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/MUIEx01.png" alt="Multi language page with the ModernUIEx interface" />
-                <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/MUIEx02.png" alt="Setup type page with the ModernUIEx interface" />
-                <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/MUIEx03.png" alt="Additional tasks page with the ModernUIEx interface" />
-                <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/MUIEx04.png" alt="Serial number page with the ModernUIEx interface" />
+                <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/MUIEx01.png" alt="Multi language page with the Modern UIEx interface" />
+                <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/MUIEx02.png" alt="Setup type page with the Modern UIEx interface" />
+                <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/MUIEx03.png" alt="Additional tasks page with the Modern UIEx interface" />
+                <img data-src="http://ultramodernui.sourceforge.net/images/screenshots/MUIEx04.png" alt="Serial number page with the Modern UIEx interface" />
             </div>
         </div>
 
       </div>
 
-      <p>The colors, that are used in this document, correspond to the differences between UltraModernUI / ModernUIEx and the original Modern UI:</p>
+      <p>The colors, that are used in this document, correspond to the differences between Ultra-Modern UI / Modern UIEx and the original Modern UI:</p>
       <ul>
         <li><strong>BLACK:</strong>&nbsp; macro and define that were the same;</li>
         <li><span class="red"><strong>RED:</strong></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;macro and define that were removed;</li>
@@ -82,12 +82,12 @@
 
     </div>
 
-    <h1>Writing UltraModernUI Scripts</h1>
+    <h1>Writing Ultra-Modern UI Scripts</h1>
 
     <div style="text-align: justify;">
-      <p>The UltraModernUI has a macro system, so all the code to control the interface has already been written for you.</p>
-      <p>If you want to start a new UltraModernUI script or upgrade an older script with the Modern UI or Classic UI, follow the steps below.</p>
-      <p>Taking a look at the <a href="#examples">example scripts</a> will also help you to learn more about the UltraModernUI.</p>
+      <p>The Ultra-Modern UI has a macro system, so all the code to control the interface has already been written for you.</p>
+      <p>If you want to start a new Ultra-Modern UI script or upgrade an older script with the Modern UI or Classic UI, follow the steps below.</p>
+      <p>Taking a look at the <a href="#examples">example scripts</a> will also help you to learn more about the Ultra-Modern UI.</p>
 
       <h2>Syntax</h2>
       <div>
@@ -107,7 +107,7 @@
         <pre>!include "MUI.nsh"</pre>
         <p>in your script by this one:</p>
         <pre><span class="purple">!include "UMUI.nsh"</span></pre>
-        <p>Or this one if you want to use the ModernUIEx style (The extended version of Modern UI but with the support of the new Ultra-Modern pages):</p>
+        <p>Or this one if you want to use the Modern UIEx style (The extended version of Modern UI but with the support of the new Ultra-Modern pages):</p>
         <pre><span class="purple">!include "MUIEx.nsh"</span></pre>
 
         <p>UMUI.nsh and MUIEx.nsh are in the Include directory, so you don't have to specify a path.</p>
@@ -123,7 +123,7 @@
         <p>There are some difference between UMUI and MUIEx defined in particular on the default values:</p>
 
 
-        <h3><img class="trigger" title="Open/Close section" alt="[+]" id="trigger_umui_in" src="images/closed.gif" onclick="toggle('trigger_umui_in', 'toggle_umui_in');" /> Interface Settings for UltraModernUI</h3>
+        <h3><img class="trigger" title="Open/Close section" alt="[+]" id="trigger_umui_in" src="images/closed.gif" onclick="toggle('trigger_umui_in', 'toggle_umui_in');" /> Interface Settings for Ultra-Modern UI</h3>
         <div class="toggle" id="toggle_umui_in">
 
         <h3><img class="trigger" title="Open/Close section" alt="[+]" id="trigger_umui_ac" src="images/closed.gif" onclick="toggle('trigger_umui_ac', 'toggle_umui_ac');" /> Skin Setting</h3>
@@ -135,7 +135,7 @@
           <span class="blue"><em>Default: none</em></span></p>
 
           <p><em style="font-style: normal;">Example of the "blue" skin:</em></p>
-<pre>!define /IfNDef UMUI_TEXT_COLOR FFFFFF
+<pre>!define /IfNDef MUI_TEXTCOLOR FFFFFF
 !define /IfNDef MUI_BGCOLOR 4C72B2
 !define /IfNDef UMUI_TEXT_LIGHTCOLOR FFFF00
 !define /IfNDef UMUI_HEADERTEXT_COLOR FFFFFF
@@ -259,9 +259,8 @@
 
           </div>
 
-          <p><span class="purple"><strong>UMUI_TEXT_COLOR</strong></span> <span class="parameter">(color: RRGGBBR hexadecimal)</span><br />
-          Text color for all the pages.<br />
-          The MUI_TEXT_COLOR define has been renamed in UltraModernUI in order to assure the compatibility with the former Modern UI scripts.<br />
+          <p><strong>MUI_TEXTCOLOR</strong> <span class="parameter">(color: RRGGBBR hexadecimal)</span><br />
+          Text color for all the pages.
           <span class="purple"><em>Default: FFFFFF</em></span></p>
 
           <p><span class="blue"><strong>UMUI_TEXT_LIGHTCOLOR</strong></span> <span class="parameter">(color: RRGGBBR hexadecimal)</span><br />
@@ -290,7 +289,7 @@
 
           <p><span class="blue"><strong>UMUI_HEADERTEXT_COLOR</strong></span> <span class="parameter">(color: RRGGBBR hexadecimal)</span><br />
           Header text color for all the pages.<br />
-          <span class="blue"><em>Default: ${UMUI_TEXT_COLOR}</em></span></p>
+          <span class="blue"><em>Default: ${MUI_TEXTCOLOR}</em></span></p>
 
           <p><span class="red"><strong>MUI_HEADER_TRANSPARENT_TEXT</strong></span><br />
           Set a transparent background for the  header's label controls. Useful for custom user interfaces that set a bigger header image.</p>
@@ -427,7 +426,7 @@
 
           <p><span class="purple"><strong>UMUI_UI</strong></span> <span class="parameter">ui_file</span><br />
           The interface file with the dialog resources when the <strong>UMUI_ULTRAMODERN_SMALL</strong> option not defined. Change this if you have made your own customized UI.<br />
-          The MUI_UI define has been renamed in UltraModernUI in order to assure the compatibility with the former Modern UI scripts.<br />
+          The MUI_UI define has been renamed in Ultra-Modern UI in order to assure the compatibility with the former Modern UI scripts.<br />
           <span class="purple"><em>Default: ${NSISDIR}\Contrib\UIs\UltraModernUI\UltraModern.exe</em></span></p>
 
           <p><span class="blue"><strong>UMUI_UI_SMALL</strong></span> <span class="parameter">ui_file</span><br />
@@ -496,7 +495,7 @@
 
           <p><span class="purple"><strong>UMUI_WELCOMEFINISHABORTPAGE_INI</strong></span> <span class="parameter">ini_file</span><br />
           InstallOptions INI file for the Welcome, the Finish and the Abort pages.<br />
-          The MUI_WELCOMEFINISHPAGE_INI define has been renamed in UltraModernUI in order to assure the compatibility with the former Modern UI scripts.<br />
+          The MUI_WELCOMEFINISHPAGE_INI define has been renamed in Ultra-Modern UI in order to assure the compatibility with the former Modern UI scripts.<br />
           <span class="purple"><em>Default with UMUI_WELCOMEFINISHABORTPAGE_USE_IMAGE option enabled:<br />${NSISDIR}\Contrib\UltraModernUI\Ini\WelcomeFinishAbortImage.ini<br />
           Default without UMUI_WELCOMEFINISHABORTPAGE_USE_IMAGE option enabled:<br />${NSISDIR}\Contrib\UltraModernUI\Ini\WelcomeFinishAbort.ini</em></span></p>
 
@@ -531,7 +530,7 @@
 
           <p><span class="purple"><strong>UMUI_UNWELCOMEFINISHABORTPAGE_INI</strong></span> <span class="parameter">ini_file</span><br />
           InstallOptions INI file for the uninstaller Welcome page, the Finish page and the Abort page.<br />
-          The MUI_UNWELCOMEFINISHPAGE_INI define has been renamed in UltraModernUI in order to assure the compatibility with the former Modern UI scripts.<br />
+          The MUI_UNWELCOMEFINISHPAGE_INI define has been renamed in Ultra-Modern UI in order to assure the compatibility with the former Modern UI scripts.<br />
           <span class="purple"><em>Default with UMUI_WELCOMEFINISHABORTPAGE_USE_IMAGE option enabled:<br />${NSISDIR}\Contrib\UltraModernUI\Ini\WelcomeFinishAbortImage.ini<br />
           Default without UMUI_WELCOMEFINISHABORTPAGE_USE_IMAGE option enabled:<br />${NSISDIR}\Contrib\UltraModernUI\Ini\WelcomeFinishAbort.ini</em></span></p>
 
@@ -608,7 +607,7 @@
 
           <p><strong>MUI_LICENSEPAGE_BGCOLOR</strong> <span class="parameter">(/windows | /grey | (color: RRGGBB hexadecimal))</span><br />
           The background color for the license textbox. Use /windows for the Windows text background color (usually white). Use the /grey for the window background color (usually grey).<br />
-          <span class="purple"><em>Default: FFFFFF</em></span></p>
+          <em>Default: /windows</em></p>
 
         </div>
 
@@ -640,7 +639,7 @@
 
           <p><strong>MUI_INSTFILESPAGE_COLORS</strong> <span class="parameter">(/windows | (foreground color: RRGGBB hexadecimal) (background color: RRGGBB hexadecimal))</span><br />
           The colors of the details screen. Use /windows for the default Windows colors.<br />
-          <span class="purple"><em>Default: ${UMUI_TEXT_COLOR} ${MUI_BGCOLOR}</em></span></p>
+          <span class="purple"><em>Default: ${MUI_TEXTCOLOR} ${MUI_BGCOLOR}</em></span></p>
 
           <p><strong>MUI_INSTFILESPAGE_PROGRESSBAR</strong> <span class="parameter">("" | colored | smooth)</span><br />
           The style of the progress bar. Colored makes it use the MUI_INSTALLCOLORS.<br />
@@ -702,7 +701,7 @@
       </div>
 
 
-      <h3><img class="trigger" title="Open/Close section" alt="[+]" id="trigger_muiex_in" src="images/closed.gif" onclick="toggle('trigger_muiex_in', 'toggle_muiex_in');" /> Interface Settings for ModernUIEx</h3>
+      <h3><img class="trigger" title="Open/Close section" alt="[+]" id="trigger_muiex_in" src="images/closed.gif" onclick="toggle('trigger_muiex_in', 'toggle_muiex_in');" /> Interface Settings for Modern UIEx</h3>
       <div class="toggle" id="toggle_muiex_in">
 
 
@@ -818,10 +817,9 @@
 
           </div>
 
-          <p><span class="purple"><strong>UMUI_TEXT_COLOR</strong></span> <span class="parameter">(color: RRGGBBR hexadecimal)</span><br />
-          Text color for all the pages.<br />
-          The MUI_TEXT_COLOR define has been renamed in UltraModernUI in order to assure the compatibility with the former Modern UI scripts.<br />
-          <span class="purple"><em>Default: 000000</em></span></p>
+          <p><strong>MUI_TEXTCOLOR</strong> <span class="parameter">(color: RRGGBBR hexadecimal)</span><br />
+          Text color for all the pages.
+          <em>Default: 000000</em></p>
 
           <p><span class="blue"><strong>UMUI_TEXT_LIGHTCOLOR</strong></span> <span class="parameter">(color: RRGGBBR hexadecimal)</span><br />
           Default link color for finish and abort pages.<br />
@@ -841,7 +839,7 @@
 
           <p><span class="blue"><strong>UMUI_HEADERTEXT_COLOR</strong></span> <span class="parameter">(color: RRGGBBR hexadecimal)</span><br />
           Header text color for all the pages.<br />
-          <span class="blue"><em>Default: ${UMUI_TEXT_COLOR}</em></span></p>
+          <span class="blue"><em>Default: ${MUI_TEXTCOLOR}</em></span></p>
 
           <p><span class="blue"><strong>UMUI_BUTTONIMAGE_BMP</strong></span> <span class="parameter">bmp_file</span><br />
           Bitmap image to skin all buttons of installer.<br />
@@ -963,7 +961,7 @@
 
           <p><span class="purple"><strong>UMUI_WELCOMEFINISHABORTPAGE_INI</strong></span> <span class="parameter">ini_file</span><br />
           InstallOptions INI file for the Welcome, the Finish and the Abort pages.<br />
-          The MUI_WELCOMEFINISHPAGE_INI define has been renamed in UltraModernUI in order to assure the compatibility with the former Modern UI scripts.<br />
+          The MUI_WELCOMEFINISHPAGE_INI define has been renamed in Ultra-Modern UI in order to assure the compatibility with the former Modern UI scripts.<br />
           <span class="purple"><em>Default without UMUI_WELCOMEFINISHABORTPAGE_NOTUSE_IMAGE option enabled:<br />${NSISDIR}\Contrib\UltraModernUI\Ini\WelcomeFinishAbortImage.ini<br />
           Default with UMUI_WELCOMEFINISHABORTPAGE_NOTUSE_IMAGE option enabled:<br />${NSISDIR}\Contrib\UltraModernUI\Ini\WelcomeFinishAbort.ini</em></span></p>
 
@@ -998,7 +996,7 @@
 
            <p><span class="purple"><strong>UMUI_UNWELCOMEFINISHABORTPAGE_INI</strong></span> <span class="parameter">ini_file</span><br />
            InstallOptions INI file for the uninstaller Welcome page, the Finish page and the Abort page.<br />
-           The MUI_UNWELCOMEFINISHPAGE_INI define has been renamed in UltraModernUI in order to assure the compatibility with the former Modern UI scripts.<br />
+           The MUI_UNWELCOMEFINISHPAGE_INI define has been renamed in Ultra-Modern UI in order to assure the compatibility with the former Modern UI scripts.<br />
            <span class="purple"><em>Default without UMUI_WELCOMEFINISHABORTPAGE_NOTUSE_IMAGE option enabled:<br />${NSISDIR}\Contrib\UltraModernUI\Ini\WelcomeFinishAbortImage.ini<br />
            Default with UMUI_WELCOMEFINISHABORTPAGE_NOTUSE_IMAGE option enabled:<br />${NSISDIR}\Contrib\UltraModernUI\Ini\WelcomeFinishAbort.ini</em></span></p>
 
@@ -2206,7 +2204,7 @@ FunctionEnd</pre>
       <span class="purple"><strong>UMUI_LANGUAGE_REGISTRY_VALUENAME</strong></span> <span class="parameter">value_name</span><br />
       The registry key to store the language. The users preference will be remembered. You can also use it for the uninstaller to display the right language. This value will be automatically saved to the registry on install success. Don't forget to remove this key in the uninstaller.<br />
       UMUI_LANGUAGE_REGISTRY_ROOT and UMUI_LANGUAGE_REGISTRY_KEY defines are optional when <strong>UMUI_PARAMS_REGISTRY_ROOT</strong> and <strong>UMUI_PARAMS_REGISTRY_KEY</strong> are defined.<br />
-      The MUI_LANGDLL_REGISTRY_ROOT, MUI_LANGDLL_REGISTRY_KEY and MUI_LANGDLL_REGISTRY_VALUENAME defines has been renamed in UltraModernUI.</p>
+      The MUI_LANGDLL_REGISTRY_ROOT, MUI_LANGDLL_REGISTRY_KEY and MUI_LANGDLL_REGISTRY_VALUENAME defines has been renamed in Ultra-Modern UI.</p>
 
       <p>For the uninstaller, insert the <strong>MUI_UNGETLANGUAGE</strong> macro in un.onInit to get the stored language preference:</p>
 
@@ -2303,7 +2301,7 @@ UninstPage custom un.FunctionName ;Custom page
   <h2><img class="trigger" title="Open/Close section" alt="[+]" id="trigger_io" src="images/closed.gif" onclick="toggle('trigger_io', 'toggle_io');" /> Using InstallOptions or InstallOptionsEx for custom pages</h2>
   <div class="toggle" id="toggle_io">
 
-    <p>UltraModernUI support natively two plug-ins to displays custom pages which you can create using INI files. InstallOptions and InstallOptionsEx:</p>
+    <p>Ultra-Modern UI support natively two plug-ins to displays custom pages which you can create using INI files. InstallOptions and InstallOptionsEx:</p>
 
     <p>InstallOptions is the original plug-in used by Modern UI.</p>
 
@@ -2400,9 +2398,9 @@ Function FunctionName ;FunctionName defined with Page command
   ; to all the label, checkbox, radiobutton fields
   ; Manually:
   GetDlgItem $0 $HWND 1204
-  SetCtlColors $0 ${UMUI_TEXT_COLOR} ${MUI_BGCOLOR}
+  SetCtlColors $0 ${MUI_TEXTCOLOR} ${MUI_BGCOLOR}
   ; or if you use a background image:
-  SetCtlColors $0 ${UMUI_TEXT_COLOR} "transparent"
+  SetCtlColors $0 ${MUI_TEXTCOLOR} "transparent"
   ; Or using this macro:
   GetDlgItem $0 $HWND 1205
   !insertmacro UMUI_IOPAGECTLTRANSPARENT_INIT $0
@@ -2434,11 +2432,11 @@ FunctionEnd</pre>
 
     <p>nsDialogs is the official plug-in used by Modern UI 2.</p>
 
-    <p>UltraModernUI version 2 still not use the nsDialogs plug-in to displays custom pages but InstallOptions(Ex), so usage of nsDialogs is not recommended because two concurrent plug-ins will be used in parallel due to custom UMUI pages.</p>
+    <p>Ultra-Modern UI version 2 still not use the nsDialogs plug-in to displays custom pages but InstallOptions(Ex), so usage of nsDialogs is not recommended because two concurrent plug-ins will be used in parallel due to custom UMUI pages.</p>
 
     <p>Have a look at the <a target="_blank" href="../nsDialogs/Readme.html">nsDialogs documentation</a> for info about creating nsDialogs custom pages.</p>
 
-    <p>Contrary to InstallOptions(Ex), UltraModernUI does not have macro to skin automatically your custom pages.</p>
+    <p>Contrary to InstallOptions(Ex), Ultra-Modern UI does not have macro to skin automatically your custom pages.</p>
 
     <p>If the UMUI_(UN)PAGE_ABORT page is inserted, you need to use the <strong>UMUI_ABORT_IF_INSTALLFLAG_IS</strong> macro with the ${UMUI_CANCELLED} flag to hide the page when user cancel the installation:</p>
     <p>Use the <strong>MUI_HEADER_TEXT</strong> macro to set the text on the page header:</p>
@@ -2502,9 +2500,9 @@ Function FunctionName ;FunctionName defined with Page command
   ;If you do not use MUIEx, you need to apply the right text color and background color
   ; to all the label, checkbox, radiobutton fields
   ; Manually:
-  SetCtlColors $0 ${UMUI_TEXT_COLOR} ${MUI_BGCOLOR}
+  SetCtlColors $0 ${MUI_TEXTCOLOR} ${MUI_BGCOLOR}
   ; or if you use a background image:
-  SetCtlColors $0 ${UMUI_TEXT_COLOR} "transparent"
+  SetCtlColors $0 ${MUI_TEXTCOLOR} "transparent"
   ; Or using this macro:
   !insertmacro UMUI_IOPAGECTLTRANSPARENT_INIT $0
   </span>
@@ -2533,11 +2531,11 @@ FunctionEnd</pre>
 
 
 
-<h1><a id="customFunctions"></a>Customize UltraModernUI Functions</h1>
+<h1><a id="customFunctions"></a>Customize Ultra-Modern UI Functions</h1>
 <div>
 
-  <p>If you want add your own code to functions inserted by the UltraModernUI, such as the .onGUIInit function and the Page functions, create your own function and let the UltraModernUI functions call them. Use the defines to define the name of your functions.</p>
-  <p>Contrary to Modern UI, UltraModernUI may also define itself, if background skin is used, the .onGUIEnd and the un.onGUIEnd functions. Consequently, you may not be able to declare them in your script, and, in this case, you must used this customization.</p>
+  <p>If you want add your own code to functions inserted by the Ultra-Modern UI, such as the .onGUIInit function and the Page functions, create your own function and let the Ultra-Modern UI functions call them. Use the defines to define the name of your functions.</p>
+  <p>Contrary to Modern UI, Ultra-Modern UI may also define itself, if background skin is used, the .onGUIEnd and the un.onGUIEnd functions. Consequently, you may not be able to declare them in your script, and, in this case, you must used this customization.</p>
 
   <p>Example:</p>
 
@@ -2638,8 +2636,9 @@ FunctionEnd</span></pre>
     <li>File&disk request page: <a target="_blank" href="../../Examples/UltraModernUI/FileDiskRequest.nsi">FileDiskRequest.nsi</a></li>
     <li>Custom pages: <a target="_blank" href="../../Examples/UltraModernUI/InstallOptions.nsi">InstallOptions.nsi</a></li>
     <li>Custom pages: <a target="_blank" href="../../Examples/UltraModernUI/nsDialogs.nsi">nsDialogs.nsi</a></li>
-    <li>UltraModernUI installer: <a target="_blank" href="../../Examples/UltraModernUI/UltraModernUI.nsi">UltraModernUI.nsi</a></li>
-    <li>NSIS+UltraModernUI installer: <a target="_blank" href="../../Examples/UltraModernUI/NSISUltraModernUI.nsi">NSISUltraModernUI.nsi</a></li>
+    <li>NSIS menu with Ultra-Modern UI: <a target="_blank" href="../../Examples/UltraModernUI/NSISUMUIMenu.nsi">NSISUMUIMenu.nsi</a></li>
+    <li>Ultra-Modern UI installer: <a target="_blank" href="../../Examples/UltraModernUI/UltraModernUI.nsi">UltraModernUI.nsi</a></li>
+    <li>NSIS+Ultra-Modern UI installer: <a target="_blank" href="../../Examples/UltraModernUI/NSISUltraModernUI.nsi">NSISUltraModernUI.nsi</a></li>
   </ul>
 </div>
 
@@ -2647,6 +2646,18 @@ FunctionEnd</span></pre>
 
 <h1>Version History</h1>
 <ul>
+
+  <li><strong>Version 2.0 beta 5</strong> - January 01, 2019
+  <ul>
+    <li>Ultra-Modern UI is resynchronized under Modern UI version 1.81.</li>
+    <li>Consequently, The UMUI_TEXT_COLOR define was renamed in MUI_TEXTCOLOR.</li>
+    <li>UMUI now provide an extended NSIS Menu with links for UMUI and extra plugins documentations.</li>
+    <li>Consequently, UMUI installers no more create extra shortcuts on the start menu, but replace the original NSIS menu shortcuts.</li>
+    <li>Fixed bug when the Additional Tasks page is skipped, options where not affected...</li>
+    <li>Fixed bug when the Licence page text is unreadable with the Windows high contrast mode.</li>
+    <li>Minor Fixes.</li>
+  </ul>
+  </li>
 
   <li><strong>Version 2.0 beta 4</strong> - February 04, 2018
   <ul>
@@ -2669,7 +2680,7 @@ FunctionEnd</span></pre>
     <li>Updated the SkinnedControls plug-in to version 1.4 with support of the new NSIS plug-in API, optional unskinit method calls and ignore case parameters name support.</li>
     <li>Fixed: Links on RichText information pages are now clickable;</li>
     <li>Fixed: Missing MUI_PAGE_CUSTOMFUNCTION_PRE support missing for some Ultra-Modern pages (by Bodenseematze);</li>
-    <li>Fixed: Most of the time, command line parameters were not transfered to Exec calls (thanks Bodenseematze);</li>
+    <li>Fixed: Most of the time, command line parameters were not transferred to Exec calls (thanks Bodenseematze);</li>
     <li>Several new and completed language files and other minor fixes by Bodenseematze:</li>
     <ul>
       <li>Completed: German language file;</li>
@@ -2687,7 +2698,7 @@ FunctionEnd</span></pre>
 
   <li><strong>Version 2.0 beta 1</strong> - August 27, 2016
   <ul>
-    <li>UltraModernUI is now fully compatible with NSIS version 3 x86 edition and now with the large string special build;
+    <li>Ultra-Modern UI is now fully compatible with NSIS version 3 x86 edition and now with the large string special build;
     <li>The NSISArray plug-in was replaced by the new nsArray plug-in in version 1.1.1.7 who is faster and uses less memory;</li>
     <li>Updated the InstallOptionsEx plug-in to version 2.4.5 beta 3 with full unicode support;</li>
     <li>Updated the SkinnedControls plug-in to version 1.3 with unicode support, bug fixed, rewritten documentation, button image size no more limited to allow smoother gradients...;</li>
@@ -2698,7 +2709,7 @@ FunctionEnd</span></pre>
     <li>Reduced weight of skin images;</li>
     <li>Updated and almost completed documentation;</li>
     <li>Added an example for nsDialogs based custom page and documentation;</li>
-    <li>The default install directory for the NSIS + UltraModernUI package is now C:\ProgramData on Windows Vista and upper to allow examples to be compiled without access rights errors;</li>
+    <li>The default install directory for the NSIS + Ultra-Modern UI package is now C:\ProgramData on Windows Vista and upper to allow examples to be compiled without access rights errors;</li>
     <li>A lot of bug fixes and optimizations;</li>
     <li>Source code now on GitHub: <a target="_blank" href="https://github.com/SuperPat45/UltraModernUI">https://github.com/SuperPat45/UltraModernUI</a>.</li>
   </ul>
@@ -2707,14 +2718,14 @@ FunctionEnd</span></pre>
   <li><strong>Version 1.00 beta 2</strong> - November 11, 2010
   <ul>
     <li>Second public beta release after more than three development years.</li>
-    <li>UltraModernUI use the new NSIS Doc directory used since the version 2.07 and UMUI.nsh is resynchronised under Modern UI version 1.8.</li>
-    <li>UltraModernUI include also a second Unser Interface named ModernUIEx. ModernUIEx is an extended version of Modern UI but with the new UltraModern pages support.</li>
+    <li>Ultra-Modern UI use the new NSIS Doc directory used since the version 2.07 and UMUI.nsh is resynchronised under Modern UI version 1.8.</li>
+    <li>Ultra-Modern UI include also a second Unser Interface named Modern UIEx. Modern UIEx is an extended version of Modern UI but with the new UltraModern pages support.</li>
 
-    <li>UltraModernUI included henceforth three plug-ins that are supported natively :
+    <li>Ultra-Modern UI included henceforth three plug-ins that are supported natively :
       <ul>
         <li>The SkinnedControls plug-in. SkinnedScrollControls is based on the wansis plug-in of Saivert and can skin all buttons and scroll bars of your NSIS installer like the most recent installers as well as the scrollbars (only for Windows 2000/XP/2003/Vista/2008).</li>
-        <li>The fixed version of the InstallOptionEx plug-in. InstallOptionEx is writen by Diego Pedroso (deguix) and is an expanded version of InstallOptions containing many new features, with size drawback. This version, debugged by SuperPat, contain a lot of bug fixes necessary to the correct operation of some UltraModernUI pages.</li>
-        <li>The NSISArray plug-in. This plug-in written by Afrow UK, allows the support of the array in NSIS. It comes with plenty of functions for managing your arrays. This plug-in is used with the AlternativeStartMenu and MultiLanguages Pages of UltraModernUI.</li>
+        <li>The fixed version of the InstallOptionEx plug-in. InstallOptionEx is writen by Diego Pedroso (deguix) and is an expanded version of InstallOptions containing many new features, with size drawback. This version, debugged by SuperPat, contain a lot of bug fixes necessary to the correct operation of some Ultra-Modern UI pages.</li>
+        <li>The NSISArray plug-in. This plug-in written by Afrow UK, allows the support of the array in NSIS. It comes with plenty of functions for managing your arrays. This plug-in is used with the AlternativeStartMenu and MultiLanguages Pages of Ultra-Modern UI.</li>
       </ul>
     </li>
 
@@ -2757,7 +2768,7 @@ FunctionEnd</span></pre>
 <div>
 
   <p>Made by SuperPat<br />
-  - Based on Modern UI 1.8 Copyright 2002-2018 Joost Verburg.<br />
+  - Based on Modern UI 1.81 Copyright 2002-2019 Joost Verburg.<br />
   - And inspired of the ExperienceUI of dandaman32.</p>
 
   <p>Skins by SuperPat<br />
@@ -2779,13 +2790,13 @@ FunctionEnd</span></pre>
 <h1>License</h1>
 <div>
 
-  <p>The zlib/libpng license applies to the UltraModernUI.</p>
+  <p>The zlib/libpng license applies to Ultra-Modern UI.</p>
 
 
   <h2><img class="trigger" title="Open/Close section" alt="[+]" id="trigger_lic" src="images/closed.gif" onclick="toggle('trigger_lic', 'toggle_lic');" /> License Terms</h2>
   <div class="toggle" id="toggle_lic">
 
-  <pre>Copyright &copy; 2005-2018 SuperPat</pre>
+  <pre>Copyright &copy; 2005-2019 SuperPat</pre>
 
   <pre>This software is provided 'as-is', without any express or implied
 warranty. In no event will the authors be held liable for any damages
@@ -2809,7 +2820,7 @@ it freely, subject to the following restrictions:</pre>
 
 </div>
 
-  <div class="footer">&copy; 2005-2018 SuperPat</div>
+  <div class="footer">&copy; 2005-2019 SuperPat</div>
 
   </div>
 

@@ -1,33 +1,34 @@
 /*
 
-NSIS UltraModern User Interface version 2.0 beta 4
-Copyright 2005-2018 SuperPat
+NSIS Ultra-Modern User Interface version 2.0 beta 5
+Copyright 2005-2019 SuperPat
 
 Based on:
-    NSIS Modern User Interface version 1.8 (Git version: d20b99c082a99304a542c2fa6cf4abd381ca263a)
-    Copyright 2002-2018 Joost Verburg
+    NSIS Modern User Interface version 1.81 (Git version: 6b4148e215433dddd1a954291364ef52e44d12e5)
+    Copyright 2002-2019 Joost Verburg
 
 */
 
 !ifndef MUI_INCLUDED
-!echo "NSIS Ultra-Modern User Interface version 2.0 beta 4 - Copyright 2005-2018 SuperPat"
+!verbose push 3
+!define MUI_INCLUDED
+!define UMUI_SYSVERSION "2.0 beta 5"
+!define MUI_SYSVERSION "1.81"
+!verbose pop
+!echo "NSIS Ultra-Modern User Interface version 2.0 beta 5 - Copyright 2005-2019 SuperPat"
 !echo "  (Bugfixes and some additions: 2015-2016 - Bodenseematze)"
-!echo "Based on: NSIS Modern User Interface version 1.8 - Copyright 2002-2018 Joost Verburg"
+!echo "Based on: NSIS Modern User Interface version 1.81 - Copyright 2002-2019 Joost Verburg"
 
 ;--------------------------------
 !verbose push 3
 !define /IfNDef MUI_VERBOSE 3
 !verbose ${MUI_VERBOSE}
 
-!define MUI_INCLUDED
-
-!define UMUI_SYSVERSION "2.0 beta 4"
-!define MUI_SYSVERSION "1.8"
-
 ;--------------------------------
 ;HEADER FILES, DECLARATIONS
 
 !include WinMessages.nsh
+!include LogicLib.nsh
 
 !define UMUI_HIDEFIRSTBACKBUTTON    ;don't show the "Back" button on the first shown page,
                                     ;even if it is not the first page defined
@@ -180,15 +181,18 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
       !define UMUI_LANGUAGE_REGISTRY_VALUENAME "${MUI_LANGDLL_REGISTRY_VALUENAME}"
     !endif
 
-    !ifndef UMUI_TEXT_COLOR
-      !ifdef MUI_TEXT_COLOR
-        !warning "Deprecated: The MUI_TEXT_COLOR define was renamed in UMUI_TEXT_COLOR since UltraModernUI 1.00 beta 2"
-        !define UMUI_TEXT_COLOR "${MUI_TEXT_COLOR}"
+    !ifndef MUI_TEXTCOLOR
+      !ifdef UMUI_TEXT_COLOR
+        !warning "Deprecated: The UMUI_TEXT_COLOR define was renamed in MUI_TEXTCOLOR since Ultra-Modern UI 2.0 beta 5"
+        !define MUI_TEXTCOLOR "${UMUI_TEXT_COLOR}"
+      !else ifdef MUI_TEXT_COLOR
+        !warning "Deprecated: The MUI_TEXT_COLOR define was renamed in MUI_TEXTCOLOR since Ultra-Modern UI 1.00 beta 2"
+        !define MUI_TEXTCOLOR "${MUI_TEXT_COLOR}"
       !endif
     !endif
 
     !ifdef UMUI_UI_COMPONENTSPAGE_SMALLDESC | UMUI_UI_COMPONENTSPAGE_NODESC
-      !warning "Deprecated: The UMUI_UI_COMPONENTSPAGE_SMALLDESC and UMUI_UI_COMPONENTSPAGE_NODESC define were renamed in MUI_UI_COMPONENTSPAGE_SMALLDESC and MUI_UI_COMPONENTSPAGE_NODESC since UltraModernUI 1.00 beta 2"
+      !warning "Deprecated: The UMUI_UI_COMPONENTSPAGE_SMALLDESC and UMUI_UI_COMPONENTSPAGE_NODESC define were renamed in MUI_UI_COMPONENTSPAGE_SMALLDESC and MUI_UI_COMPONENTSPAGE_NODESC since Ultra-Modern UI 1.00 beta 2"
       !ifdef UMUI_UI_COMPONENTSPAGE_SMALLDESC
         !define /IfNDef MUI_UI_COMPONENTSPAGE_SMALLDESC "${UMUI_UI_COMPONENTSPAGE_SMALLDESC}"
       !endif
@@ -217,7 +221,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !endif
 
     !ifdef UMUI_HEADERIMAGE_BMP | UMUI_UNHEADERIMAGE_BMP
-      !warning "Deprecated: The UMUI_HEADERIMAGE_BMP and UMUI_UNHEADERIMAGE_BMP defines were renamed by UMUI_HEADERBGIMAGE_BMP and UMUI_UNHEADERBGIMAGE_BMP since UltraModernUI 1.00 beta 2."
+      !warning "Deprecated: The UMUI_HEADERIMAGE_BMP and UMUI_UNHEADERIMAGE_BMP defines were renamed by UMUI_HEADERBGIMAGE_BMP and UMUI_UNHEADERBGIMAGE_BMP since Ultra-Modern UI 1.00 beta 2."
       !ifdef UMUI_HEADERIMAGE_BMP
         !define /IfNDef UMUI_HEADERBGIMAGE_BMP "${UMUI_HEADERIMAGE_BMP}"
       !endif
@@ -263,13 +267,13 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !define /IfNDef MUI_ICON "${NSISDIR}\Contrib\Graphics\UltraModernUI\Icon.ico"
     !define /IfNDef MUI_UNICON "${NSISDIR}\Contrib\Graphics\UltraModernUI\UnIcon.ico"
 
-    !define /IfNDef UMUI_TEXT_COLOR FFFFFF
     !define /IfNDef MUI_BGCOLOR 4C72B2
+    !define /IfNDef MUI_TEXTCOLOR FFFFFF
     !define /IfNDef UMUI_TEXT_LIGHTCOLOR FFFF00
-    !define /IfNDef UMUI_HEADERTEXT_COLOR "${UMUI_TEXT_COLOR}"
+    !define /IfNDef UMUI_HEADERTEXT_COLOR "${MUI_TEXTCOLOR}"
 
-    !define /IfNDef MUI_LICENSEPAGE_BGCOLOR FFFFFF
-    !define /IfNDef MUI_INSTFILESPAGE_COLORS "${UMUI_TEXT_COLOR} ${MUI_BGCOLOR}"
+    !define /IfNDef MUI_LICENSEPAGE_BGCOLOR "/windows"
+    !define /IfNDef MUI_INSTFILESPAGE_COLORS "${MUI_TEXTCOLOR} ${MUI_BGCOLOR}"
     !define /IfNDef MUI_INSTFILESPAGE_PROGRESSBAR "smooth"
 
     !define /IfNDef UMUI_LEFTIMAGE_BMP "${NSISDIR}\Contrib\UltraModernUI\Skins\blue\Left.bmp"
@@ -340,7 +344,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 ;-------
 
     !ifdef UMUI_SKIN
-      !warning "The UMUI_SKIN define is not used in ModernUIEx. Define ignored."
+      !warning "The UMUI_SKIN define is not used in Modern UIEx. Define ignored."
       !undef UMUI_SKIN
     !endif
     !insertmacro MUI_UNSET UMUI_PAGEBGIMAGE
@@ -371,10 +375,10 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !define /IfNDef MUI_INSTFILESPAGE_COLORS "/windows"
     !define /IfNDef MUI_INSTFILESPAGE_PROGRESSBAR "smooth"
 
-    !define /IfNDef UMUI_TEXT_COLOR "000000"
     !define /IfNDef MUI_BGCOLOR "FFFFFF"
+    !define /IfNDef MUI_TEXTCOLOR "000000"
     !define /IfNDef UMUI_TEXT_LIGHTCOLOR "000000"
-    !define /IfNDef UMUI_HEADERTEXT_COLOR "${UMUI_TEXT_COLOR}"
+    !define /IfNDef UMUI_HEADERTEXT_COLOR "${MUI_TEXTCOLOR}"
 
     !define /IfNDef UMUI_HEADERBGIMAGE_BMP "${NSISDIR}\Contrib\Graphics\UltraModernUI\HeaderBG.bmp"
     !define /IfNDef UMUI_UNHEADERBGIMAGE_BMP "${UMUI_HEADERBGIMAGE_BMP}"
@@ -559,7 +563,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 !ifndef USE_MUIEx
 ;----------------
   FindWindow $MUI_TEMP1 "#32770" "" $HWNDPARENT
-  SetCtlColors $MUI_TEMP1 ${MUI_BGCOLOR} ${MUI_BGCOLOR}
+  SetCtlColors $MUI_TEMP1 "${MUI_BGCOLOR}" "${MUI_BGCOLOR}"
 !endif
 ;-----
 !macroend
@@ -572,7 +576,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
   !ifdef UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}PAGEBGIMAGE
     SetCtlColors $MUI_TEMP1 "transparent" "transparent"
   !else
-    SetCtlColors $MUI_TEMP1 ${MUI_BGCOLOR} ${MUI_BGCOLOR}
+    SetCtlColors $MUI_TEMP1 "${MUI_BGCOLOR}" "${MUI_BGCOLOR}"
   !endif
 !endif
 ;-----
@@ -584,7 +588,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 ;-----------------
   FindWindow $MUI_TEMP1 "#32770" "" $HWNDPARENT
   GetDlgItem $MUI_TEMP1 $MUI_TEMP1 ${ID}
-  SetCtlColors $MUI_TEMP1 ${UMUI_TEXT_COLOR} ${MUI_BGCOLOR}
+  SetCtlColors $MUI_TEMP1 "${MUI_TEXTCOLOR}" "${MUI_BGCOLOR}"
 !endif
 ;-----
 !macroend
@@ -596,9 +600,9 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
   FindWindow $MUI_TEMP1 "#32770" "" $HWNDPARENT
   GetDlgItem $MUI_TEMP1 $MUI_TEMP1 ${ID}
   !ifdef UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}PAGEBGIMAGE
-    SetCtlColors $MUI_TEMP1 ${UMUI_TEXT_COLOR} "transparent"
+    SetCtlColors $MUI_TEMP1 "${MUI_TEXTCOLOR}" "transparent"
   !else
-    SetCtlColors $MUI_TEMP1 ${UMUI_TEXT_COLOR} ${MUI_BGCOLOR}
+    SetCtlColors $MUI_TEMP1 "${MUI_TEXTCOLOR}" "${MUI_BGCOLOR}"
   !endif
 !endif
 ;-----
@@ -610,7 +614,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 ;-----------------
   FindWindow $MUI_TEMP1 "#32770" "" $HWNDPARENT
   GetDlgItem $MUI_TEMP1 $MUI_TEMP1 ${ID}
-  SetCtlColors $MUI_TEMP1 ${UMUI_TEXT_LIGHTCOLOR} ${MUI_BGCOLOR}
+  SetCtlColors $MUI_TEMP1 "${UMUI_TEXT_LIGHTCOLOR}" "${MUI_BGCOLOR}"
 !endif
 ;-----
 !macroend
@@ -622,9 +626,9 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
   FindWindow $MUI_TEMP1 "#32770" "" $HWNDPARENT
   GetDlgItem $MUI_TEMP1 $MUI_TEMP1 ${ID}
   !ifdef UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}PAGEBGIMAGE
-    SetCtlColors $MUI_TEMP1 ${UMUI_TEXT_LIGHTCOLOR} "transparent"
+    SetCtlColors $MUI_TEMP1 "${UMUI_TEXT_LIGHTCOLOR}" "transparent"
   !else
-    SetCtlColors $MUI_TEMP1 ${UMUI_TEXT_LIGHTCOLOR} ${MUI_BGCOLOR}
+    SetCtlColors $MUI_TEMP1 "${UMUI_TEXT_LIGHTCOLOR}" "${MUI_BGCOLOR}"
   !endif
 !endif
 ;-----
@@ -634,7 +638,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 !macro UMUI_PAGEINPUTCTL_INIT ID
   FindWindow $MUI_TEMP1 "#32770" "" $HWNDPARENT
   GetDlgItem $MUI_TEMP1 $MUI_TEMP1 ${ID}
-  SetCtlColors $MUI_TEMP1 ${UMUI_TEXT_INPUTCOLOR} ${UMUI_BGINPUTCOLOR}
+  SetCtlColors $MUI_TEMP1 "${UMUI_TEXT_INPUTCOLOR}" "${UMUI_BGINPUTCOLOR}"
 !macroend
 
 ; Change the background on the Welcome/Finish/Abort Pages
@@ -645,14 +649,14 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !ifndef UMUI_NO_WFA_BGTRANSPARENT
       SetCtlColors ${HWND} "" "transparent"
     !else
-      SetCtlColors ${HWND} "" ${MUI_BGCOLOR}
+      SetCtlColors ${HWND} "${MUI_TEXTCOLOR}" "${MUI_BGCOLOR}"
     !endif
   !else
-    SetCtlColors ${HWND} "" ${MUI_BGCOLOR}
+    SetCtlColors ${HWND} "${MUI_TEXTCOLOR}" "${MUI_BGCOLOR}"
   !endif
 !else
 ;-----
-  SetCtlColors ${HWND} "" ${MUI_BGCOLOR}
+  SetCtlColors ${HWND} "${MUI_TEXTCOLOR}" "${MUI_BGCOLOR}"
 !endif
 ;-----
 !macroend
@@ -665,10 +669,10 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !ifndef UMUI_IONOBGTRANSPARENT
       SetCtlColors ${HWND} "" "transparent"
     !else
-      SetCtlColors ${HWND} "" ${MUI_BGCOLOR}
+      SetCtlColors ${HWND} "${MUI_TEXTCOLOR}" "${MUI_BGCOLOR}"
     !endif
   !else
-    SetCtlColors ${HWND} "" ${MUI_BGCOLOR}
+    SetCtlColors ${HWND} "${MUI_TEXTCOLOR}" "${MUI_BGCOLOR}"
   !endif
 !endif
 ;-----
@@ -679,7 +683,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 !macro UMUI_IOPAGEBG_INIT HWND
 !ifndef USE_MUIEx
 ;----------------
-  SetCtlColors ${HWND} "" ${MUI_BGCOLOR}
+  SetCtlColors ${HWND} "${MUI_TEXTCOLOR}" "${MUI_BGCOLOR}"
 !endif
 ;-----
 !macroend
@@ -689,30 +693,30 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 !ifndef USE_MUIEx
 ;-----------------
   !ifdef UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}PAGEBGIMAGE
-    SetCtlColors ${HWND} ${UMUI_TEXT_COLOR} "transparent"
+    SetCtlColors ${HWND} "${MUI_TEXTCOLOR}" "transparent"
   !else
-    SetCtlColors ${HWND} ${UMUI_TEXT_COLOR} ${MUI_BGCOLOR}
+    SetCtlColors ${HWND} "${MUI_TEXTCOLOR}" "${MUI_BGCOLOR}"
   !endif
 !else
 ;-----
-  SetCtlColors ${HWND} ${UMUI_TEXT_COLOR} ${MUI_BGCOLOR}
+  SetCtlColors ${HWND} "${MUI_TEXTCOLOR}" "${MUI_BGCOLOR}"
 !endif
 ;-----
 !macroend
 
 ; Change the background color of the IO Controls
 !macro UMUI_IOPAGECTL_INIT HWND
-  SetCtlColors ${HWND} ${UMUI_TEXT_COLOR} ${MUI_BGCOLOR}
+  SetCtlColors ${HWND} "${MUI_TEXTCOLOR}" "${MUI_BGCOLOR}"
 !macroend
 
 ; Set the background and text colors of the IO Input Controls
 !macro UMUI_IOPAGEINPUTCTL_INIT HWND
-  SetCtlColors ${HWND} ${UMUI_TEXT_INPUTCOLOR} ${UMUI_BGINPUTCOLOR}
+  SetCtlColors ${HWND} "${UMUI_TEXT_INPUTCOLOR}" "${UMUI_BGINPUTCOLOR}"
 !macroend
 
 ; Set the background color and the light text color of the IO Controls
 !macro UMUI_IOPAGECTLLIGHT_INIT HWND
-  SetCtlColors ${HWND} ${UMUI_TEXT_LIGHTCOLOR} ${MUI_BGCOLOR}
+  SetCtlColors ${HWND} "${UMUI_TEXT_LIGHTCOLOR}" "${MUI_BGCOLOR}"
 !macroend
 
 ; Set transparent the background and the light text color of the IO Controls
@@ -720,13 +724,13 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 !ifndef USE_MUIEx
 ;-----------------
   !ifdef UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}PAGEBGIMAGE
-    SetCtlColors ${HWND} ${UMUI_TEXT_LIGHTCOLOR} "transparent"
+    SetCtlColors ${HWND} "${UMUI_TEXT_LIGHTCOLOR}" "transparent"
   !else
-    SetCtlColors ${HWND} ${UMUI_TEXT_LIGHTCOLOR} ${MUI_BGCOLOR}
+    SetCtlColors ${HWND} "${UMUI_TEXT_LIGHTCOLOR}" "${MUI_BGCOLOR}"
   !endif
 !else
 ;-----
-  SetCtlColors ${HWND} ${UMUI_TEXT_LIGHTCOLOR} ${MUI_BGCOLOR}
+  SetCtlColors ${HWND} "${UMUI_TEXT_LIGHTCOLOR}" "${MUI_BGCOLOR}"
 !endif
 ;-----
 !macroend
@@ -1042,10 +1046,10 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
   GetDlgItem $MUI_TEMP1 $HWNDPARENT 1037
   CreateFont $MUI_TEMP2 "$(^Font)" "$(^FontSize)" "700"
   SendMessage $MUI_TEMP1 ${WM_SETFONT} $MUI_TEMP2 0
-  SetCtlColors $MUI_TEMP1 ${UMUI_HEADERTEXT_COLOR} "transparent"
+  SetCtlColors $MUI_TEMP1 "${UMUI_HEADERTEXT_COLOR}" "transparent"
 
   GetDlgItem $MUI_TEMP1 $HWNDPARENT 1038
-  SetCtlColors $MUI_TEMP1 ${UMUI_HEADERTEXT_COLOR} "transparent"
+  SetCtlColors $MUI_TEMP1 "${UMUI_HEADERTEXT_COLOR}" "transparent"
 
   GetDlgItem $MUI_TEMP1 $HWNDPARENT 1028
   CreateFont $MUI_TEMP2 Arial 10 1400
@@ -1059,7 +1063,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
   SendMessage $MUI_TEMP1 ${WM_SETFONT} "$MUI_TEMP2" 0
   SendMessage $MUI_TEMP1 ${WM_SETTEXT} 0 "STR:$(^Branding) "
 
-  SetCtlColors $HWNDPARENT ${MUI_BGCOLOR} ${MUI_BGCOLOR}
+  SetCtlColors $HWNDPARENT "${MUI_BGCOLOR}" "${MUI_BGCOLOR}"
 
   !ifndef UMUI_${UNPREFIX}UNIQUEBGIMAGE
 
@@ -1078,7 +1082,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
       SetBrandingImage /IMGID=1034 /RESIZETOFIT "$PLUGINSDIR\Header.bmp"
     !else
       GetDlgItem $MUI_TEMP1 $HWNDPARENT 1034
-      SetCtlColors $MUI_TEMP1 ${UMUI_TEXT_COLOR} "${MUI_BGCOLOR}"
+      SetCtlColors $MUI_TEMP1 "${MUI_TEXTCOLOR}" "${MUI_BGCOLOR}"
     !endif
 
     !ifdef UMUI_${UNPREFIX}BOTTOMIMAGE_BMP
@@ -1121,10 +1125,10 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
   !endif
 
   GetDlgItem $MUI_TEMP1 $HWNDPARENT 1018
-  SetCtlColors $MUI_TEMP1 ${UMUI_TEXT_COLOR} ${MUI_BGCOLOR}
+  SetCtlColors $MUI_TEMP1 "${MUI_TEXTCOLOR}" "${MUI_BGCOLOR}"
   GetDlgItem $MUI_TEMP1 $HWNDPARENT 1045
   ShowWindow $MUI_TEMP1 ${SW_HIDE}
-  SetCtlColors $MUI_TEMP1 ${UMUI_TEXT_COLOR} ${MUI_BGCOLOR}
+  SetCtlColors $MUI_TEMP1 "${MUI_TEXTCOLOR}" "${MUI_BGCOLOR}"
 
 !else
 ;-----------------
@@ -1135,17 +1139,17 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
   !ifndef MUI_HEADER_TRANSPARENT_TEXT
 
-    SetCtlColors $MUI_TEMP1 ${UMUI_HEADERTEXT_COLOR} "${MUI_BGCOLOR}"
+    SetCtlColors $MUI_TEMP1 "${UMUI_HEADERTEXT_COLOR}" "${MUI_BGCOLOR}"
 
     GetDlgItem $MUI_TEMP1 $HWNDPARENT 1038
-    SetCtlColors $MUI_TEMP1 ${UMUI_HEADERTEXT_COLOR} "${MUI_BGCOLOR}"
+    SetCtlColors $MUI_TEMP1 "${UMUI_HEADERTEXT_COLOR}" "${MUI_BGCOLOR}"
 
   !else
 
-    SetCtlColors $MUI_TEMP1 ${UMUI_HEADERTEXT_COLOR} "transparent"
+    SetCtlColors $MUI_TEMP1 "${UMUI_HEADERTEXT_COLOR}" "transparent"
 
     GetDlgItem $MUI_TEMP1 $HWNDPARENT 1038
-    SetCtlColors $MUI_TEMP1 ${UMUI_HEADERTEXT_COLOR} "transparent"
+    SetCtlColors $MUI_TEMP1 "${UMUI_HEADERTEXT_COLOR}" "transparent"
 
   !endif
 
@@ -1158,14 +1162,14 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
   !else
 
-    GetDlgItem $MUI_TEMP1 $HWNDPARENT 1034
-    SetCtlColors $MUI_TEMP1 ${UMUI_TEXT_COLOR} "${MUI_BGCOLOR}"
+    GetDlgItem $MUI_TEMP1 $HWNDPARENT 1034 ; Header background
+    SetCtlColors $MUI_TEMP1 "${MUI_TEXTCOLOR}" "${MUI_BGCOLOR}"
 
   !endif
 
 
-  GetDlgItem $MUI_TEMP1 $HWNDPARENT 1039
-  SetCtlColors $MUI_TEMP1 ${UMUI_TEXT_COLOR} "${MUI_BGCOLOR}"
+  GetDlgItem $MUI_TEMP1 $HWNDPARENT 1039 ; Header image
+  SetCtlColors $MUI_TEMP1 "${MUI_TEXTCOLOR}" "${MUI_BGCOLOR}"
 
   GetDlgItem $MUI_TEMP1 $HWNDPARENT 1028
   SetCtlColors $MUI_TEMP1 /BRANDING
@@ -1689,6 +1693,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
       !endif
     !endif
 
+    ClearErrors
     ReadRegStr $MUI_TEMP2 ${UMUI_SHELLVARCONTEXT_REGISTRY_ROOT} "${UMUI_SHELLVARCONTEXT_REGISTRY_KEY}" "${UMUI_SHELLVARCONTEXT_REGISTRY_VALUENAME}"
     IfErrors +2 0
       StrCpy $MUI_TEMP1 $MUI_TEMP2
@@ -1745,6 +1750,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !endif
 
     Push $R0
+    ClearErrors
     ReadRegStr $R0 ${UMUI_INSTALLDIR_REGISTRY_ROOT} "${UMUI_INSTALLDIR_REGISTRY_KEY}" "${UMUI_INSTALLDIR_REGISTRY_VALUENAME}"
     IfErrors +2 0
       StrCpy $INSTDIR $R0
@@ -2279,6 +2285,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
 !macro UMUI_MAINTENANCE_PARAMETERS_GET
 
+  ClearErrors
   !insertmacro UMUI_PARAMETERISSET "/remove"
   Pop $MUI_TEMP1
   IfErrors noremove 0
@@ -2534,7 +2541,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
 !macro UMUI_PAGE_LEFTMESSAGEBOX A B C
 
-  !warning "The UMUI_PAGE_LEFTMESSAGEBOX and UMUI_UNPAGE_LEFTMESSAGEBOX macros were removed since UltraModernUI 1.00 beta 2."
+  !warning "The UMUI_PAGE_LEFTMESSAGEBOX and UMUI_UNPAGE_LEFTMESSAGEBOX macros were removed since Ultra-Modern UI 1.00 beta 2."
   !insertmacro MUI_UNSET UMUI_LEFTMESSAGEBOX_VAR
   !insertmacro MUI_UNSET UMUI_LEFTMESSAGEBOX_LEFTFUNC
 
@@ -2542,13 +2549,13 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
 !macro UMUI_LEFT_TEXTE A B
 
-  !warning "The UMUI_LEFT_TEXTE macro was removed since UltraModernUI 1.00 beta 2."
+  !warning "The UMUI_LEFT_TEXTE macro was removed since Ultra-Modern UI 1.00 beta 2."
 
 !macroend
 
 !macro UMUI_LEFT_SETTIME A
 
-  !warning "The UMUI_LEFT_SETTIME macro was removed since UltraModernUI 1.00 beta 2."
+  !warning "The UMUI_LEFT_SETTIME macro was removed since Ultra-Modern UI 1.00 beta 2."
 
 !macroend
 
@@ -4010,9 +4017,10 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !insertmacro UMUI_PAGECTLLIGHT_INIT 1020
 
     !ifdef MUI_DIRECTORYPAGE_BGCOLOR
+      !insertmacro MUI_DEFAULT MUI_DIRECTORYPAGE_TEXTCOLOR ""
       FindWindow $MUI_TEMP1 "#32770" "" $HWNDPARENT
       GetDlgItem $MUI_TEMP1 $MUI_TEMP1 1019
-      SetCtlColors $MUI_TEMP1 "" "${MUI_DIRECTORYPAGE_BGCOLOR}"
+      SetCtlColors $MUI_TEMP1 "${MUI_DIRECTORYPAGE_TEXTCOLOR}" "${MUI_DIRECTORYPAGE_BGCOLOR}"
     !else
       !insertmacro UMUI_PAGEINPUTCTL_INIT 1019
     !endif
@@ -4085,10 +4093,11 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 ;-----
 
     !ifdef MUI_STARTMENUPAGE_BGCOLOR
+      !insertmacro MUI_DEFAULT MUI_STARTMENUPAGE_TEXTCOLOR ""
       GetDlgItem $MUI_TEMP1 $MUI_HWND 1002
-      SetCtlColors $MUI_TEMP1 "" "${MUI_STARTMENUPAGE_BGCOLOR}"
+      SetCtlColors $MUI_TEMP1 "${MUI_STARTMENUPAGE_TEXTCOLOR}" "${MUI_STARTMENUPAGE_BGCOLOR}"
       GetDlgItem $MUI_TEMP1 $MUI_HWND 1004
-      SetCtlColors $MUI_TEMP1 "" "${MUI_STARTMENUPAGE_BGCOLOR}"
+      SetCtlColors $MUI_TEMP1 "${MUI_STARTMENUPAGE_TEXTCOLOR}" "${MUI_STARTMENUPAGE_BGCOLOR}"
     !else
       GetDlgItem $MUI_TEMP1 $MUI_HWND 1002
       !insertmacro UMUI_IOPAGEINPUTCTL_INIT $MUI_TEMP1
@@ -4232,10 +4241,10 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
   !ifndef MUI_UNINSTALLER
     !ifdef UMUI_PREUNINSTALL_FUNCTION
 
-      !ifndef UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}SECTION_PREUNINSTALL
-        !define UMUI_${MUI_PAGE_UNINSTALLER_PREFIX}SECTION_PREUNINSTALL
+      !ifndef UMUI_SECTION_PREUNINSTALL
+        !define UMUI_SECTION_PREUNINSTALL
 
-        Section "${MUI_PAGE_UNINSTALLER_FUNCPREFIX}"
+        Section ""
           ClearErrors
           IfFileExists $INSTDIR 0 end
 
@@ -4721,6 +4730,29 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
       mui.finish_show:
     !endif
 
+    !if "${UMUI_XPSTYLE}" == "On"
+      !ifndef MUI_FORCECLASSICCONTROLS
+        ${If} ${IsHighContrastModeActive}
+      !endif
+        ; SetCtlColors does not change the check/radio text color (bug #443)
+        !ifndef MUI_FINISHPAGE_NOREBOOTSUPPORT
+          GetDlgItem $MUI_TEMP1 $MUI_HWND ${UMUI_INTERNAL_FIDTHIRD}
+          System::Call 'UXTHEME::SetWindowTheme(p$MUI_TEMP1,w" ",w" ")'
+          GetDlgItem $MUI_TEMP1 $MUI_HWND ${UMUI_INTERNAL_FIDFOURTH}
+          System::Call 'UXTHEME::SetWindowTheme(p$MUI_TEMP1,w" ",w" ")'
+        !else ifdef MUI_FINISHPAGE_RUN | MUI_FINISHPAGE_SHOWREADME
+          GetDlgItem $MUI_TEMP1 $MUI_HWND ${UMUI_INTERNAL_FIDTHIRD}
+          System::Call 'UXTHEME::SetWindowTheme(p$MUI_TEMP1,w" ",w" ")'
+          !ifdef MUI_FINISHPAGE_RUN & MUI_FINISHPAGE_SHOWREADME
+            GetDlgItem $MUI_TEMP1 $MUI_HWND ${UMUI_INTERNAL_FIDFOURTH}
+            System::Call 'UXTHEME::SetWindowTheme(p$MUI_TEMP1,w" ",w" ")'
+          !endif
+        !endif
+      !ifndef MUI_FORCECLASSICCONTROLS
+        ${EndIf}
+      !endif
+    !endif
+
     GetDlgItem $MUI_TEMP1 $HWNDPARENT 3
     ShowWindow $MUI_TEMP1 ${SW_HIDE}
     GetDlgItem $MUI_TEMP1 $HWNDPARENT 2
@@ -5000,8 +5032,9 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     StrCpy $UMUI_TEMP3 $LANGUAGE
 
     StrCmp $UMUI_LANGLIST "" 0 +2
-      MessageBox MB_OK|MB_ICONSTOP "UltraModernUI error: You have forgotten to insert the UMUI_MULTILANG_GET macro in your ${MUI_PAGE_UNINSTALLER_FUNCPREFIX}.oninit function."
+      MessageBox MB_OK|MB_ICONSTOP "Ultra-Modern UI error: You have forgotten to insert the UMUI_MULTILANG_GET macro in your ${MUI_PAGE_UNINSTALLER_FUNCPREFIX}.oninit function."
 
+    ClearErrors
     ; Get the current language id
     nsArray::Get LangMap $LANGUAGE
     Pop $MUI_TEMP1
@@ -6193,11 +6226,12 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
   IntOp $UMUI_TEMP4 $UMUI_TEMP4 + 12
   !insertmacro INSTALLOPTIONS_WRITE "$MUI_TEMP1" "Field $UMUI_TEMP3" Bottom "$UMUI_TEMP4"
 
+  !insertmacro INSTALLOPTIONS_READ $MUI_TEMP2 "$MUI_TEMP1" "Field $UMUI_TEMP3" State
+  !insertmacro INSTALLOPTIONS_WRITE "AdditionalTasksList.ini" "Task ${ID}" State "$MUI_TEMP2"
+
   !insertmacro INSTALLOPTIONS_READ $MUI_TEMP2 "AdditionalTasksList.ini" "Settings" NumTasks
   StrCmp $MUI_TEMP2 "" 0 +2
     StrCpy $MUI_TEMP2 0
-
-  !insertmacro INSTALLOPTIONS_WRITE "AdditionalTasksList.ini" "Task ${ID}" State ""
   !insertmacro INSTALLOPTIONS_WRITE "AdditionalTasksList.ini" "$MUI_TEMP2" TaskID "${ID}"
   IntOp $MUI_TEMP2 $MUI_TEMP2 + 1
   !insertmacro INSTALLOPTIONS_WRITE "AdditionalTasksList.ini" "Settings" NumTasks "$MUI_TEMP2"
@@ -6242,11 +6276,12 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
     !undef UMUI_NEWGROUP
   !endif
 
+  !insertmacro INSTALLOPTIONS_READ $MUI_TEMP2 "$MUI_TEMP1" "Field $UMUI_TEMP3" State
+  !insertmacro INSTALLOPTIONS_WRITE "AdditionalTasksList.ini" "Task ${ID}" State "$MUI_TEMP2"
+
   !insertmacro INSTALLOPTIONS_READ $MUI_TEMP2 "AdditionalTasksList.ini" "Settings" NumTasks
   StrCmp $MUI_TEMP2 "" 0 +2
     StrCpy $MUI_TEMP2 0
-
-  !insertmacro INSTALLOPTIONS_WRITE "AdditionalTasksList.ini" "Task ${ID}" State ""
   !insertmacro INSTALLOPTIONS_WRITE "AdditionalTasksList.ini" "$MUI_TEMP2" TaskID "${ID}"
   IntOp $MUI_TEMP2 $MUI_TEMP2 + 1
   !insertmacro INSTALLOPTIONS_WRITE "AdditionalTasksList.ini" "Settings" NumTasks "$MUI_TEMP2"
@@ -6528,6 +6563,7 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
       ; $3            : back/next field number
       ; $4            : HWND of the back/next field
 
+      ClearErrors
       !insertmacro INSTALLOPTIONS_READ $MUI_TEMP1 "SerialNumber_${SERIAL_FUNC}.ini" "Settings" State
       StrCmp $MUI_TEMP1 "0" ok 0
 
@@ -6595,20 +6631,20 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
 
 !macro UMUI_SERIALNUMBERPAGE_GET_WINDOWS_REGISTRED_OWNER VAR
+    ClearErrors
     ; Windows NT
     ReadRegStr $${VAR} HKLM "SOFTWARE\Microsoft\Windows NT\CurrentVersion" "RegisteredOwner"
-    IfErrors 0 +3
-        ClearErrors
+    IfErrors 0 +2
         ; Windows 9x
         ReadRegStr $${VAR} HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion" "RegisteredOwner"
     ClearErrors
 !macroend
 
 !macro UMUI_SERIALNUMBERPAGE_GET_WINDOWS_REGISTRED_ORGANIZATION VAR
+    ClearErrors
     ; Windows NT
     ReadRegStr $${VAR} HKLM "SOFTWARE\Microsoft\Windows NT\CurrentVersion" "RegisteredOrganization"
-    IfErrors 0 +3
-        ClearErrors
+    IfErrors 0 +2
         ; Windows 9x
         ReadRegStr $${VAR} HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion" "RegisteredOrganization"
     ClearErrors
@@ -6693,7 +6729,6 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
         !insertmacro INSTALLOPTIONS_READ $9 "${FILE}" "Field $9" NextField
         IfErrors 0 loopSerialApplyFlags
-          ClearErrors
 
     Goto loopApplyFlags
   endApplyFlags:
@@ -9522,7 +9557,9 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
 
   ; MUI_PAGE_UNINSTALLER_PREFIX is undefined by uninstaller pages so we check MUI_UNINSTALLER as well
   !ifndef MUI_PAGE_UNINSTALLER_PREFIX && MUI_UNINSTALLER
-    !warning "MUI_LANGUAGE should be inserted after the [U]MUI_[UN]PAGE_* macros"
+    !ifndef MUI_DISABLE_INSERT_LANGUAGE_AFTER_PAGES_WARNING ; Define this to avoid the warning if you only have custom pages
+      !warning "MUI_LANGUAGE should be inserted after the MUI_[UN]PAGE_* macros"
+    !endif
   !endif
 
   !insertmacro MUI_INSERT

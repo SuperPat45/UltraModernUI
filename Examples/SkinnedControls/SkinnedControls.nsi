@@ -16,7 +16,7 @@
   VIProductVersion "${VERIPV}.0.0"
   VIAddVersionKey "ProductName" "SkinnedControls plugin for NSIS (Nullsoft Scriptable Install System)."
   VIAddVersionKey "LegalTrademarks" "SkinnedControls is released under the zlib/libpng license"
-  VIAddVersionKey "LegalCopyright" "Copyright � 2005-2018 SuperPat, Based on wansis @ Saivert"
+  VIAddVersionKey "LegalCopyright" "Copyright � 2005-2019 SuperPat, Based on wansis @ Saivert"
   VIAddVersionKey "FileDescription" "SkinnedControls allow you to can skin all buttons and scroll bars of your installer."
   VIAddVersionKey "FileVersion" "${VERIPV}"
   
@@ -192,8 +192,9 @@
   !insertmacro MUI_LANGUAGE "Tatar"
 
 ; Other unicode only untranslated languages but usable even so.
-  !insertmacro MUI_LANGUAGE "Georgian"
   !insertmacro MUI_LANGUAGE "Armenian"
+  !insertmacro MUI_LANGUAGE "Georgian"
+  !insertmacro MUI_LANGUAGE "Hindi"
 
 ;--------------------------------
 ; The stuff to install

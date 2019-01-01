@@ -83,8 +83,15 @@ Function addtasks_function
   ; only if a directory has been selected in the STARTMENU page
   !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
     !insertmacro UMUI_ADDITIONALTASKSPAGE_ADD_LABEL "$(UMUI_TEXT_SHELL_VAR_CONTEXT)"
-    !insertmacro UMUI_ADDITIONALTASKSPAGE_ADD_TASK_RADIO ALL 1 "$(UMUI_TEXT_SHELL_VAR_CONTEXT_FOR_ALL_USERS)"
-    !insertmacro UMUI_ADDITIONALTASKSPAGE_ADD_TASK_RADIO CURRENT 0 "$(UMUI_TEXT_SHELL_VAR_CONTEXT_ONLY_FOR_CURRENT_USER)"
+    UserInfo::GetAccountType
+    Pop $R0
+    StrCmp $R0 "Guest" 0 notLimited
+      !insertmacro UMUI_ADDITIONALTASKSPAGE_ADD_TASK_RADIO CURRENT 1 "$(UMUI_TEXT_SHELL_VAR_CONTEXT_ONLY_FOR_CURRENT_USER)"
+      Goto endShellVarContext
+    notLimited:
+      !insertmacro UMUI_ADDITIONALTASKSPAGE_ADD_TASK_RADIO ALL 1 "$(UMUI_TEXT_SHELL_VAR_CONTEXT_FOR_ALL_USERS)"
+      !insertmacro UMUI_ADDITIONALTASKSPAGE_ADD_TASK_RADIO CURRENT 0 "$(UMUI_TEXT_SHELL_VAR_CONTEXT_ONLY_FOR_CURRENT_USER)"
+    endShellVarContext:
   !insertmacro MUI_STARTMENU_WRITE_END
 
 FunctionEnd
@@ -186,10 +193,11 @@ Section "Dummy Section" SecDummy
 
   
   ;set shellvar context
+  ; only if all user is selected
   !insertmacro UMUI_ADDITIONALTASKS_IF_CKECKED ALL
     SetShellVarContext all
   !insertmacro UMUI_ADDITIONALTASKS_ENDIF
-
+  ; only if current user is selected
   !insertmacro UMUI_ADDITIONALTASKS_IF_CKECKED CURRENT
     SetShellVarContext current
   !insertmacro UMUI_ADDITIONALTASKS_ENDIF

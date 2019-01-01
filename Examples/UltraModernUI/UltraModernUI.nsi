@@ -1,5 +1,5 @@
 ; o----------------------------------------o
-; | NSIS Ultra-Modern User Interface 2.0b4 |
+; | NSIS Ultra-Modern User Interface 2.0b5 |
 ; (----------------------------------------)
 ; | Installer script.                      |
 ; | Written by SyperPat                    |
@@ -13,14 +13,14 @@
 
   ; For language file selection
   !define VER_MAJOR 3
-  !define VER_MINOR 03
+  !define VER_MINOR 04
   !define VER_REV_STR ""
 
   !if "${NSIS_VERSION}" != "v${VER_MAJOR}.${VER_MINOR}${VER_REV_STR}"
     !error "VER_MAJOR, VER_MINOR and VER_REV_STR defines does not match the current NSIS version: ${NSIS_VERSION}"
   !endif
 
-  !define UMUI_VERSION "2.0b4"
+  !define UMUI_VERSION "2.0b5"
   !define UMUI_VERBUILD "2.0_${NOW}"
 
   !define /date VERIPV "200.%Y.%m.%d"
@@ -28,8 +28,8 @@
   VIAddVersionKey ProductName "Ultra-Modern User Interface for NSIS (Nullsoft Scriptable Install System) version 3 x86 edition."
   VIAddVersionKey ProductVersion "${UMUI_VERSION}"
   VIAddVersionKey Comments "A new User Interface for NSIS with a style like the most recent installers. This package also include some plugins used by UMUI to extend the possibilities of NSIS."
-  VIAddVersionKey LegalTrademarks "UltraModernUI is released under the zlib/libpng license: http://nsis.sf.net/License"
-  VIAddVersionKey LegalCopyright "Copyright ï¿½ 2005-2018 SuperPat"
+  VIAddVersionKey LegalTrademarks "Ultra-Modern UI is released under the zlib/libpng license: http://nsis.sf.net/License"
+  VIAddVersionKey LegalCopyright "Copyright © 2005-2019 SuperPat"
   VIAddVersionKey FileDescription "Ultra-Modern User Interface for NSIS (Nullsoft Scriptable Install System) version 3 x86 edition."
   VIAddVersionKey FileVersion "${UMUI_VERBUILD}"
 
@@ -58,7 +58,7 @@
 
 
 ;--------------------------------
-;Include UltraModernUI between others
+;Include Ultra-Modern UI between others
 
   !include "UMUI.nsh"
 
@@ -116,9 +116,6 @@
 ;--------------------------------
 ;Pages
 
-  Var STARTMENU_FOLDER
-
-
   !insertmacro UMUI_PAGE_MULTILANGUAGE
 
     !define UMUI_MAINTENANCEPAGE_MODIFY
@@ -151,11 +148,8 @@
     !define UMUI_COMPONENTSPAGE_REGISTRY_VALUENAME "UMUI_Components"
   !insertmacro MUI_PAGE_COMPONENTS
 
-    !define UMUI_ALTERNATIVESTARTMENUPAGE_SETSHELLVARCONTEXT
-    !define UMUI_ALTERNATIVESTARTMENUPAGE_USE_TREEVIEW
-    !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME "UMUI_StartMenuFolder"
-    !define MUI_STARTMENUPAGE_DEFAULTFOLDER "NSIS\Contrib"
-  !insertmacro UMUI_PAGE_ALTERNATIVESTARTMENU Application $STARTMENU_FOLDER
+    !define UMUI_ADDITIONALTASKS_REGISTRY_VALUENAME "UMUI_Tasks"
+  !insertmacro UMUI_PAGE_ADDITIONALTASKS addtasks_function
 
     !define UMUI_CONFIRMPAGE_TEXTBOX confirm_function
   !insertmacro UMUI_PAGE_CONFIRM
@@ -163,11 +157,11 @@
   !insertmacro MUI_PAGE_INSTFILES
 
     !define MUI_FINISHPAGE_SHOWREADME "${NSISDIR}\Docs\UltraModernUI\Readme.html"
-    !define MUI_FINISHPAGE_LINK "UltraModernUI Home Page"
+    !define MUI_FINISHPAGE_LINK "Ultra-Modern UI Home Page"
     !define MUI_FINISHPAGE_LINK_LOCATION "http://ultramodernui.sourceforge.net/"
   !insertmacro MUI_PAGE_FINISH
 
-    !define UMUI_ABORTPAGE_LINK "UltraModernUI Home Page"
+    !define UMUI_ABORTPAGE_LINK "Ultra-Modern UI Home Page"
     !define UMUI_ABORTPAGE_LINK_LOCATION "http://ultramodernui.sourceforge.net/"
   !insertmacro UMUI_PAGE_ABORT
 
@@ -186,11 +180,11 @@
 
   !insertmacro MUI_UNPAGE_INSTFILES
 
-    !define MUI_FINISHPAGE_LINK "UltraModernUI Home Page"
+    !define MUI_FINISHPAGE_LINK "Ultra-Modern UI Home Page"
     !define MUI_FINISHPAGE_LINK_LOCATION "http://ultramodernui.sourceforge.net/"
   !insertmacro MUI_UNPAGE_FINISH
 
-    !define UMUI_ABORTPAGE_LINK "UltraModernUI Home Page"
+    !define UMUI_ABORTPAGE_LINK "Ultra-Modern UI Home Page"
     !define UMUI_ABORTPAGE_LINK_LOCATION "http://ultramodernui.sourceforge.net/"
   !insertmacro UMUI_UNPAGE_ABORT
 
@@ -271,8 +265,9 @@
   !insertmacro MUI_LANGUAGE "Tatar"
 
 ; Other unicode only untranslated languages but usable even so.
-  !insertmacro MUI_LANGUAGE "Georgian"
   !insertmacro MUI_LANGUAGE "Armenian"
+  !insertmacro MUI_LANGUAGE "Georgian"
+  !insertmacro MUI_LANGUAGE "Hindi"
 */
 
 ;--------------------------------
@@ -289,12 +284,19 @@ InstType "$(UMUI_TEXT_SETUPTYPE_COMPLETE_TITLE)"
 Section "$(^NameDA)" SecUMUI
 
   SetDetailsPrint textonly
-  DetailPrint "Installing UltraModernUI..."
+  DetailPrint "Installing Ultra-Modern UI..."
   SetDetailsPrint listonly
 
   SectionIn RO
 
   SectionIn 1 2 3
+
+  SetOutPath "$INSTDIR"
+  !if ! /FileExists "..\..\NSISUMUI.exe"
+    !define NO_NSISMENU_HTML 1
+    !makensis '-v2 "NSISUMUIMenu.nsi" "-XOutFile ..\..\NSISUMUI.exe"' = 0
+  !endif
+  File ..\..\NSISUMUI.exe
 
   SetOutPath "$INSTDIR\Contrib\UltraModernUI\"
   File "..\..\Contrib\UltraModernUI\UMUI.nsh"
@@ -330,11 +332,24 @@ Section "$(^NameDA)" SecUMUI
   File "..\..\Include\UMUI.nsh"
   File "..\..\Include\MUIEx.nsh"
 
-  !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
-     SetOutPath "$SMPROGRAMS\$STARTMENU_FOLDER\"
-     CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\UltraModernUI Readme.lnk" "$INSTDIR\Docs\UltraModernUI\Readme.html"
-     CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Uninstall UltraModernUI.lnk" "$INSTDIR\UninstallUMUI.exe"
-  !insertmacro MUI_STARTMENU_WRITE_END
+
+  ;CreateShortCuts
+  ; only if all user is selected
+  !insertmacro UMUI_ADDITIONALTASKS_IF_CKECKED ALL
+    SetShellVarContext all
+  !insertmacro UMUI_ADDITIONALTASKS_ENDIF
+  ; only if current user is selected
+  !insertmacro UMUI_ADDITIONALTASKS_IF_CKECKED CURRENT
+    SetShellVarContext current
+  !insertmacro UMUI_ADDITIONALTASKS_ENDIF 
+
+  SetOutPath "$INSTDIR\"
+  CreateShortCut "$SMPROGRAMS\NSIS.lnk" "$INSTDIR\NSISUMUI.exe"
+
+  !insertmacro UMUI_ADDITIONALTASKS_IF_CKECKED DESKTOP
+    CreateShortCut "$DESKTOP\NSIS.lnk" "$INSTDIR\NSISUMUI.exe"
+  !insertmacro UMUI_ADDITIONALTASKS_ENDIF
+
 
   ;Create uninstaller
   WriteUninstaller "$INSTDIR\UninstallUMUI.exe"
@@ -351,10 +366,10 @@ Section "$(^NameDA)" SecUMUI
 
 SectionEnd
 
-Section "Skins for UltraModernUI" SecSkins
+Section "Skins for Ultra-Modern UI" SecSkins
 
   SetDetailsPrint textonly
-  DetailPrint "Installing UltraModernUI | Skins..."
+  DetailPrint "Installing Ultra-Modern UI | Skins..."
   SetDetailsPrint listonly
 
   SectionIn 2 3
@@ -427,10 +442,10 @@ Section "Skins for UltraModernUI" SecSkins
 
 SectionEnd
 
-Section "BackGround Skins for UltraModernUI" SecBGSkins
+Section "BackGround Skins for Ultra-Modern UI" SecBGSkins
 
   SetDetailsPrint textonly
-  DetailPrint "Installing UltraModernUI | BackGround Skins..."
+  DetailPrint "Installing Ultra-Modern UI | BackGround Skins..."
   SetDetailsPrint listonly
 
   SectionIn 2 3
@@ -515,7 +530,7 @@ SectionGroup /e "Plugins" SecGroupPlugins
   Section "SkinnedControls plugin version 1.4" SecSkinnedControls
 
     SetDetailsPrint textonly
-    DetailPrint "Installing UltraModernUI | Plugins | SkinnedControls..."
+    DetailPrint "Installing Ultra-Modern UI | Plugins | SkinnedControls..."
     SetDetailsPrint listonly
 
     SectionIn RO
@@ -544,18 +559,12 @@ SectionGroup /e "Plugins" SecGroupPlugins
     File "..\..\Docs\SkinnedControls\images\*.png"
     File "..\..\Docs\SkinnedControls\images\*.gif"
 
-    !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
-       SetOutPath "$SMPROGRAMS\$STARTMENU_FOLDER\"
-
-       CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\SkinnedControls Readme.lnk" "$INSTDIR\Docs\SkinnedControls\Readme.html"
-    !insertmacro MUI_STARTMENU_WRITE_END
-
   SectionEnd
 
   Section "SkinnedControls plugin Sources Code" SecSkinnedControlsSources
 
     SetDetailsPrint textonly
-    DetailPrint "Installing UltraModernUI | Plugins | SkinnedControls Soucres Code..."
+    DetailPrint "Installing Ultra-Modern UI | Plugins | SkinnedControls Soucres Code..."
     SetDetailsPrint listonly
 
     SectionIn 3
@@ -577,7 +586,7 @@ SectionGroup /e "Plugins" SecGroupPlugins
   Section "InstallOptionsEx plugin version 2.4.5 beta 3" SecInstallOptionsEx
 
     SetDetailsPrint textonly
-    DetailPrint "Installing UltraModernUI | Plugins | InstallOptionsEx..."
+    DetailPrint "Installing Ultra-Modern UI | Plugins | InstallOptionsEx..."
     SetDetailsPrint listonly
 
     SectionIn 2 3
@@ -595,17 +604,12 @@ SectionGroup /e "Plugins" SecGroupPlugins
     SetOutPath $INSTDIR\Docs\InstallOptionsEx
     File "..\..\Docs\InstallOptionsEx\*.*"
 
-    !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
-      SetOutPath "$SMPROGRAMS\$STARTMENU_FOLDER\Contrib\"
-      CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Contrib\InstallOptionsEx Readme.lnk" "$INSTDIR\Docs\InstallOptionsEx\Readme.html"
-    !insertmacro MUI_STARTMENU_WRITE_END
-
   SectionEnd
 
   Section "InstallOptionsEx plugin Sources Code" SecInstallOptionsExSources
 
     SetDetailsPrint textonly
-    DetailPrint "Installing UltraModernUI | Plugins | InstallOptionsEx Soucres Code..."
+    DetailPrint "Installing Ultra-Modern UI | Plugins | InstallOptionsEx Soucres Code..."
     SetDetailsPrint listonly
 
     SectionIn 3
@@ -626,7 +630,7 @@ SectionGroup /e "Plugins" SecGroupPlugins
   Section "nsArray plugin version 1.1.1.7" SecnsArray
 
     SetDetailsPrint textonly
-    DetailPrint "Installing UltraModernUI | Plugins | nsArray..."
+    DetailPrint "Installing Ultra-Modern UI | Plugins | nsArray..."
     SetDetailsPrint listonly
 
     SectionIn 2 3
@@ -646,17 +650,12 @@ SectionGroup /e "Plugins" SecGroupPlugins
     SetOutPath $INSTDIR\Examples\nsArray
     File "..\nsArray\*.nsi"
 
-    !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
-      SetOutPath "$SMPROGRAMS\$STARTMENU_FOLDER\"
-      CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\nsArray Readme.lnk" "$INSTDIR\Docs\nsArray\Readme.txt"
-    !insertmacro MUI_STARTMENU_WRITE_END
-
   SectionEnd
 
   Section "nsArray plugin Sources Code" SecnsArraySources
 
     SetDetailsPrint textonly
-    DetailPrint "Installing UltraModernUI | Plugins | nsArray Soucres Code..."
+    DetailPrint "Installing Ultra-Modern UI | Plugins | nsArray Soucres Code..."
     SetDetailsPrint listonly
 
     SectionIn 3
@@ -731,7 +730,6 @@ SectionEnd
     RMDir "$INSTDIR\Docs\NSISArray"
     Delete "$INSTDIR\Examples\NSISArray\*.nsi"
     RMDir "$INSTDIR\Examples\NSISArray"
-    Delete "$SMPROGRAMS\$STARTMENU_FOLDER\NSISArray Readme.lnk"
   noNSISArray:
 
   Delete "$INSTDIR\Include\UMUI.nsh"
@@ -877,6 +875,7 @@ SectionEnd
   RMDir "$INSTDIR\Contrib\Graphics\UltraModernUI\"
   RMDir "$INSTDIR\Contrib\Graphics"
 
+  Delete "$INSTDIR\NSISUMUI.exe"
   Delete "$INSTDIR\UninstallUMUI.exe"
 
 !macroend
@@ -884,23 +883,33 @@ SectionEnd
 Section Uninstall
 
   SetDetailsPrint textonly
-  DetailPrint "Uninstalling UltraModernUI..."
+  DetailPrint "Uninstalling Ultra-Modern UI..."
   SetDetailsPrint listonly
+
+  IfFileExists $INSTDIR\NSISUMUI.exe umui_installed
+    MessageBox MB_YESNO "It does not appear that Ultra-Modern UI is installed in the directory '$INSTDIR'.$\r$\nContinue anyway (not recommended)?" IDYES umui_installed
+    Abort "Uninstall aborted by user"
+  umui_installed:
 
   !insertmacro removeUMUIfiles
 
   RMDir "$INSTDIR"
 
-  !insertmacro MUI_STARTMENU_GETFOLDER Application $STARTMENU_FOLDER
+  Delete "$SMPROGRAMS\NSIS.lnk"
+  
+  StrCpy $R0 "nok"
+  IfFileExists "$DESKTOP\NSIS.lnk" "" dektopNotExists
+    Delete "$DESKTOP\NSIS.lnk"
+    StrCpy $R0 "ok"
+  dektopNotExists:
 
-  Delete "$SMPROGRAMS\$STARTMENU_FOLDER\UltraModernUI Readme.lnk"
-  Delete "$SMPROGRAMS\$STARTMENU_FOLDER\SkinnedControls Readme.lnk"
-  Delete "$SMPROGRAMS\$STARTMENU_FOLDER\nsArray Readme.lnk"
-  Delete "$SMPROGRAMS\$STARTMENU_FOLDER\InstallOptionsEx Readme.lnk"
-  Delete "$SMPROGRAMS\$STARTMENU_FOLDER\Uninstall UltraModernUI.lnk"
-  Delete "$SMPROGRAMS\$STARTMENU_FOLDER\..\Uninstall UltraModernUI.lnk"
-  RMDir "$SMPROGRAMS\$STARTMENU_FOLDER"
-  RMDir "$SMPROGRAMS\$STARTMENU_FOLDER\.."
+  ; Recreate NSIS sortcuts
+  IfFileExists "$INSTDIR\NSIS.exe" "" nsisRemoved
+    SetOutPath "$INSTDIR\"
+    CreateShortCut "$SMPROGRAMS\NSIS.lnk" "$INSTDIR\NSIS.exe"
+    StrCmp $R0 "ok" "" nsisRemoved
+      CreateShortCut "$DESKTOP\NSIS.lnk" "$INSTDIR\NSIS.exe"
+  nsisRemoved:
 
   DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}"
 
@@ -909,7 +918,7 @@ Section Uninstall
   DeleteRegValue ${UMUI_PARAMS_REGISTRY_ROOT} "${UMUI_PARAMS_REGISTRY_KEY}" "UMUI_SetupType" ;"${UMUI_SETUPTYPEPAGE_REGISTRY_VALUENAME}"
   DeleteRegValue ${UMUI_PARAMS_REGISTRY_ROOT} "${UMUI_PARAMS_REGISTRY_KEY}" "UMUI_InstType" ;"${UMUI_COMPONENTSPAGE_INSTTYPE_REGISTRY_VALUENAME}"
   DeleteRegValue ${UMUI_PARAMS_REGISTRY_ROOT} "${UMUI_PARAMS_REGISTRY_KEY}" "UMUI_Components" ;"${UMUI_COMPONENTSPAGE_REGISTRY_VALUENAME}"
-  DeleteRegValue ${UMUI_PARAMS_REGISTRY_ROOT} "${UMUI_PARAMS_REGISTRY_KEY}" "${MUI_STARTMENUPAGE_Application_REGISTRY_VALUENAME}" ;"${MUI_STARTMENUPAGE_REGISTRY_VALUENAME}" this define was removed after the inclusion of the (ALTERNATIVE)STARTMENU_PAGE
+  DeleteRegValue ${UMUI_PARAMS_REGISTRY_ROOT} "${UMUI_PARAMS_REGISTRY_KEY}" "${UMUI_ADDITIONALTASKS_REGISTRY_VALUENAME}"
   DeleteRegValue ${UMUI_PARAMS_REGISTRY_ROOT} "${UMUI_PARAMS_REGISTRY_KEY}" "${UMUI_VERSION_REGISTRY_VALUENAME}"
   DeleteRegValue ${UMUI_PARAMS_REGISTRY_ROOT} "${UMUI_PARAMS_REGISTRY_KEY}" "${UMUI_VERBUILD_REGISTRY_VALUENAME}"
   DeleteRegValue ${UMUI_PARAMS_REGISTRY_ROOT} "${UMUI_PARAMS_REGISTRY_KEY}" "${UMUI_INSTALLERFULLPATH_REGISTRY_VALUENAME}"
@@ -940,12 +949,12 @@ SectionEnd
   !insertmacro MUI_DESCRIPTION_TEXT ${SecUMUI} "The Utra-Modern User Interface for NSIS."
   !insertmacro MUI_DESCRIPTION_TEXT ${SecSkins} "A lot of skins for the Utra-Modern User Interface."
   !insertmacro MUI_DESCRIPTION_TEXT ${SecBGSkins} "A lot of background skins for the Utra-Modern User Interface."
-  !insertmacro MUI_DESCRIPTION_TEXT ${SecGroupPlugins} "Install very useful NSIS plugins used by UltraModernUI to extend the possibilities of NSIS."
+  !insertmacro MUI_DESCRIPTION_TEXT ${SecGroupPlugins} "Install very useful NSIS plugins used by Ultra-Modern UI to extend the possibilities of NSIS."
   !insertmacro MUI_DESCRIPTION_TEXT ${SecSkinnedControls} "This NSIS plugin, writing by SuperPat, allow you to skin all buttons and scrollbars of your installer.$\n$\rIt's used by default with the UltraModern style."
   !insertmacro MUI_DESCRIPTION_TEXT ${SecSkinnedControlsSources} "The Sources code of the SkinnedControls plugin."
-  !insertmacro MUI_DESCRIPTION_TEXT ${SecInstallOptionsEx} "This NSIS plugin, writing by deguix and SuperPat is an expanded version of the original InstallOptions plugin containing a lot of new features.$\nThis plugin is supported natively by UltraModernUI."
+  !insertmacro MUI_DESCRIPTION_TEXT ${SecInstallOptionsEx} "This NSIS plugin, writing by deguix and SuperPat is an expanded version of the original InstallOptions plugin containing a lot of new features.$\nThis plugin is supported natively by Ultra-Modern UI."
   !insertmacro MUI_DESCRIPTION_TEXT ${SecInstallOptionsExSources} "The Sources code of the InstallOptionsEx plugin."
-  !insertmacro MUI_DESCRIPTION_TEXT ${SecnsArray} "This NSIS plugin, writing by Afrow UK, add the support of the array in NSIS. It comes with plenty of functions for managing your arrays.$\nThis plugin is used with the AlternativeStartMenu and MultiLanguages pages of UltraModernUI."
+  !insertmacro MUI_DESCRIPTION_TEXT ${SecnsArray} "This NSIS plugin, writing by Afrow UK, add the support of the array in NSIS. It comes with plenty of functions for managing your arrays.$\nThis plugin is used with the AlternativeStartMenu and MultiLanguages pages of Ultra-Modern UI."
   !insertmacro MUI_DESCRIPTION_TEXT ${SecnsArraySources} "The Sources code of the nsArray plugin."
   !insertmacro MUI_DESCRIPTION_TEXT ${SecNSISLanguagesFiles} "Update the NSIS language files of your installation by those of the version ${NSIS_VERSION} of NSIS.$\nThese language files contain a lot of translation fix and add the lastest translated languages."
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
@@ -953,6 +962,34 @@ SectionEnd
 
 ;--------------------------------
 ; Pages functions
+
+Function addtasks_function
+  !insertmacro UMUI_ADDITIONALTASKSPAGE_ADD_LABEL "$(UMUI_TEXT_ADDITIONALTASKS_ADDITIONAL_ICONS)"
+  !insertmacro UMUI_ADDITIONALTASKSPAGE_ADD_TASK DESKTOP 1 "$(UMUI_TEXT_ADDITIONALTASKS_CREATE_DESKTOP_ICON)"
+
+  !insertmacro UMUI_ADDITIONALTASKSPAGE_ADD_LINE
+
+  !insertmacro UMUI_ADDITIONALTASKSPAGE_ADD_LABEL "$(UMUI_TEXT_SHELL_VAR_CONTEXT)"
+
+  UserInfo::GetAccountType
+  Pop $R0
+  StrCmp $R0 "Guest" 0 notLimited
+    !insertmacro UMUI_ADDITIONALTASKSPAGE_ADD_TASK_RADIO CURRENT 1 "$(UMUI_TEXT_SHELL_VAR_CONTEXT_ONLY_FOR_CURRENT_USER)"
+    Goto endShellVarContext
+  notLimited:
+    !insertmacro UMUI_GETSHELLVARCONTEXT
+    Pop $R0
+    StrCmp $R0 "current" 0 allShellVarContext
+      !insertmacro UMUI_ADDITIONALTASKSPAGE_ADD_TASK_RADIO ALL 0 "$(UMUI_TEXT_SHELL_VAR_CONTEXT_FOR_ALL_USERS)"
+      !insertmacro UMUI_ADDITIONALTASKSPAGE_ADD_TASK_RADIO CURRENT 1 "$(UMUI_TEXT_SHELL_VAR_CONTEXT_ONLY_FOR_CURRENT_USER)"
+      Goto endShellVarContext
+    allShellVarContext:
+      !insertmacro UMUI_ADDITIONALTASKSPAGE_ADD_TASK_RADIO ALL 1 "$(UMUI_TEXT_SHELL_VAR_CONTEXT_FOR_ALL_USERS)"
+      !insertmacro UMUI_ADDITIONALTASKSPAGE_ADD_TASK_RADIO CURRENT 0 "$(UMUI_TEXT_SHELL_VAR_CONTEXT_ONLY_FOR_CURRENT_USER)"
+  endShellVarContext:
+  ClearErrors
+
+FunctionEnd
 
 !macro confirm_addline section
 
@@ -970,27 +1007,6 @@ Function confirm_function
   !insertmacro UMUI_CONFIRMPAGE_TEXTBOX_ADDLINE "$(UMUI_TEXT_INSTCONFIRM_TEXTBOX_DESTINATION_LOCATION)"
   !insertmacro UMUI_CONFIRMPAGE_TEXTBOX_ADDLINE "      $INSTDIR"
   !insertmacro UMUI_CONFIRMPAGE_TEXTBOX_ADDLINE ""
-
-  ;Only if StartMenu Folder is selected
-  !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
-
-    !insertmacro UMUI_CONFIRMPAGE_TEXTBOX_ADDLINE "$(UMUI_TEXT_INSTCONFIRM_TEXTBOX_START_MENU_FOLDER)"
-    !insertmacro UMUI_CONFIRMPAGE_TEXTBOX_ADDLINE "      $STARTMENU_FOLDER"
-    !insertmacro UMUI_CONFIRMPAGE_TEXTBOX_ADDLINE ""
-
-    ;ShellVarContext
-    !insertmacro UMUI_CONFIRMPAGE_TEXTBOX_ADDLINE "$(UMUI_TEXT_SHELL_VAR_CONTEXT)"
-    !insertmacro UMUI_GETSHELLVARCONTEXT
-    Pop $1
-    StrCmp $1 "all" 0 current
-      !insertmacro UMUI_CONFIRMPAGE_TEXTBOX_ADDLINE "      $(UMUI_TEXT_SHELL_VAR_CONTEXT_FOR_ALL_USERS)"
-      Goto endsvc
-    current:
-      !insertmacro UMUI_CONFIRMPAGE_TEXTBOX_ADDLINE "      $(UMUI_TEXT_SHELL_VAR_CONTEXT_ONLY_FOR_CURRENT_USER)"
-    endsvc:
-    !insertmacro UMUI_CONFIRMPAGE_TEXTBOX_ADDLINE ""
-
-  !insertmacro MUI_STARTMENU_WRITE_END
 
 
   ;For the setuptype page
@@ -1014,29 +1030,82 @@ Function confirm_function
   !insertmacro confirm_addline nsArraySources
   !insertmacro confirm_addline NSISLanguagesFiles
 
+
+  !insertmacro UMUI_CONFIRMPAGE_TEXTBOX_ADDLINE ""
+  !insertmacro UMUI_CONFIRMPAGE_TEXTBOX_ADDLINE "$(UMUI_TEXT_ADDITIONALTASKS_TITLE):"
+  ;Only if one at least of additional icon check is checked  
+  !insertmacro UMUI_ADDITIONALTASKS_IF_CKECKED DESKTOP
+  !insertmacro UMUI_CONFIRMPAGE_TEXTBOX_ADDLINE "      $(UMUI_TEXT_ADDITIONALTASKS_ADDITIONAL_ICONS)"
+  !insertmacro UMUI_CONFIRMPAGE_TEXTBOX_ADDLINE "            $(UMUI_TEXT_ADDITIONALTASKS_CREATE_DESKTOP_ICON)"
+  !insertmacro UMUI_ADDITIONALTASKS_ENDIF
+  ;ShellVarContext
+  !insertmacro UMUI_CONFIRMPAGE_TEXTBOX_ADDLINE "      $(UMUI_TEXT_SHELL_VAR_CONTEXT)"
+  ; only if for all user radio is selected
+  !insertmacro UMUI_ADDITIONALTASKS_IF_CKECKED ALL
+    !insertmacro UMUI_CONFIRMPAGE_TEXTBOX_ADDLINE "            $(UMUI_TEXT_SHELL_VAR_CONTEXT_FOR_ALL_USERS)"
+  !insertmacro UMUI_ADDITIONALTASKS_ENDIF
+  ; only if for current user is selected
+  !insertmacro UMUI_ADDITIONALTASKS_IF_CKECKED CURRENT
+    !insertmacro UMUI_CONFIRMPAGE_TEXTBOX_ADDLINE "            $(UMUI_TEXT_SHELL_VAR_CONTEXT_ONLY_FOR_CURRENT_USER)"
+  !insertmacro UMUI_ADDITIONALTASKS_ENDIF 
+
 FunctionEnd
 
 
 Function preuninstall_function
 
+  IfFileExists $INSTDIR\makensis.exe nsis_installed
+    MessageBox MB_YESNO "It does not appear that NSIS is installed in the directory '$INSTDIR'.$\r$\nContinue anyway (not recommended)?" IDYES nsis_installed
+    Abort "Install aborted by user"
+  nsis_installed:
+
   SetDetailsPrint textonly
-  DetailPrint "Uninstalling UltraModernUI..."
+  DetailPrint "Uninstalling Ultra-Modern UI..."
   SetDetailsPrint none
 
   !insertmacro removeUMUIfiles
 
-  RMDir "$INSTDIR"
-  
-  !insertmacro MUI_STARTMENU_GETFOLDER Application $STARTMENU_FOLDER
+  Delete "$SMPROGRAMS\NSIS.lnk"
+  Delete "$DESKTOP\NSIS.lnk"
 
-  Delete "$SMPROGRAMS\$STARTMENU_FOLDER\UltraModernUI Readme.lnk"
-  Delete "$SMPROGRAMS\$STARTMENU_FOLDER\SkinnedControls Readme.lnk"
-  Delete "$SMPROGRAMS\$STARTMENU_FOLDER\nsArray Readme.lnk"
-  Delete "$SMPROGRAMS\$STARTMENU_FOLDER\InstallOptionsEx Readme.lnk"
-  Delete "$SMPROGRAMS\$STARTMENU_FOLDER\Uninstall UltraModernUI.lnk"
-  Delete "$SMPROGRAMS\$STARTMENU_FOLDER\..\Uninstall UltraModernUI.lnk"
-  RMDir "$SMPROGRAMS\$STARTMENU_FOLDER"
-  RMDir "$SMPROGRAMS\$STARTMENU_FOLDER\.."
+  ClearErrors
+  ReadRegStr $R0 ${UMUI_PARAMS_REGISTRY_ROOT} "${UMUI_PARAMS_REGISTRY_KEY}" "UMUI_StartMenuFolder"
+  IfErrors checkNext 0
+    StrCpy $R1 $R0 "" -8 ; copy last height chars
+    StrCmpS $R1 "\Contrib" 0 removeShortcuts
+      StrCpy $R0 $R0 -8  ; remove \Contrib
+      Goto removeShortcuts
+  checkNext:
+    ReadRegStr $R0 ${UMUI_PARAMS_REGISTRY_ROOT} "${UMUI_PARAMS_REGISTRY_KEY}" "StartMenuFolder"
+    IfErrors noStartMenu removeShortcuts
+    removeShortcuts:
+      SetShellVarContext all
+      Delete "$SMPROGRAMS\$R0\Contrib\UltraModernUI Readme.lnk"
+      Delete "$SMPROGRAMS\$R0\Contrib\NSISArray Readme.lnk"
+      Delete "$SMPROGRAMS\$R0\Contrib\SkinnedControls Readme.lnk"
+      Delete "$SMPROGRAMS\$R0\Contrib\nsArray Readme.lnk"
+      Delete "$SMPROGRAMS\$R0\Contrib\InstallOptionsEx Readme.lnk"
+      Delete "$SMPROGRAMS\$R0\Contrib\InstallOptions Readme.lnk"
+      Delete "$SMPROGRAMS\$R0\Contrib\Uninstall UltraModernUI.lnk"
+      RMDir "$SMPROGRAMS\$R0\Contrib"
+      Delete "$SMPROGRAMS\$R0\Uninstall UltraModernUI.lnk"
+      Delete "$SMPROGRAMS\$R0\NSIS.lnk"
+      RMDir "$SMPROGRAMS\$R0"
+
+      SetShellVarContext current
+      Delete "$SMPROGRAMS\$R0\Contrib\UltraModernUI Readme.lnk"
+      Delete "$SMPROGRAMS\$R0\Contrib\NSISArray Readme.lnk"
+      Delete "$SMPROGRAMS\$R0\Contrib\SkinnedControls Readme.lnk"
+      Delete "$SMPROGRAMS\$R0\Contrib\nsArray Readme.lnk"
+      Delete "$SMPROGRAMS\$R0\Contrib\InstallOptionsEx Readme.lnk"
+      Delete "$SMPROGRAMS\$R0\Contrib\InstallOptions Readme.lnk"
+      Delete "$SMPROGRAMS\$R0\Contrib\Uninstall UltraModernUI.lnk"
+      RMDir "$SMPROGRAMS\$R0\Contrib"
+      Delete "$SMPROGRAMS\$R0\Uninstall UltraModernUI.lnk"
+      Delete "$SMPROGRAMS\$R0\NSIS.lnk"
+      RMDir "$SMPROGRAMS\$R0"
+  noStartMenu:
+
 
   DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}"
 
@@ -1045,11 +1114,18 @@ Function preuninstall_function
   DeleteRegValue ${UMUI_PARAMS_REGISTRY_ROOT} "${UMUI_PARAMS_REGISTRY_KEY}" "UMUI_SetupType" ;"${UMUI_SETUPTYPEPAGE_REGISTRY_VALUENAME}"
   DeleteRegValue ${UMUI_PARAMS_REGISTRY_ROOT} "${UMUI_PARAMS_REGISTRY_KEY}" "UMUI_InstType" ;"${UMUI_COMPONENTSPAGE_INSTTYPE_REGISTRY_VALUENAME}"
   DeleteRegValue ${UMUI_PARAMS_REGISTRY_ROOT} "${UMUI_PARAMS_REGISTRY_KEY}" "UMUI_Components" ;"${UMUI_COMPONENTSPAGE_REGISTRY_VALUENAME}"
-  DeleteRegValue ${UMUI_PARAMS_REGISTRY_ROOT} "${UMUI_PARAMS_REGISTRY_KEY}" "${MUI_STARTMENUPAGE_Application_REGISTRY_VALUENAME}" ;"${MUI_STARTMENUPAGE_REGISTRY_VALUENAME}" this define was removed after the inclusion of the (ALTERNATIVE)STARTMENU_PAGE
+  DeleteRegValue ${UMUI_PARAMS_REGISTRY_ROOT} "${UMUI_PARAMS_REGISTRY_KEY}" "${UMUI_ADDITIONALTASKS_REGISTRY_VALUENAME}"
   DeleteRegValue ${UMUI_PARAMS_REGISTRY_ROOT} "${UMUI_PARAMS_REGISTRY_KEY}" "${UMUI_VERSION_REGISTRY_VALUENAME}"
   DeleteRegValue ${UMUI_PARAMS_REGISTRY_ROOT} "${UMUI_PARAMS_REGISTRY_KEY}" "${UMUI_VERBUILD_REGISTRY_VALUENAME}"
   DeleteRegValue ${UMUI_PARAMS_REGISTRY_ROOT} "${UMUI_PARAMS_REGISTRY_KEY}" "${UMUI_INSTALLERFULLPATH_REGISTRY_VALUENAME}"
   DeleteRegValue ${UMUI_PARAMS_REGISTRY_ROOT} "${UMUI_PARAMS_REGISTRY_KEY}" "${UMUI_UNINSTALLPATH_REGISTRY_VALUENAME}"
+  ; No more used registry keys
+  DeleteRegValue ${UMUI_PARAMS_REGISTRY_ROOT} "${UMUI_PARAMS_REGISTRY_KEY}" "UMUI_StartMenuFolder"
+  DeleteRegValue ${UMUI_PARAMS_REGISTRY_ROOT} "${UMUI_PARAMS_REGISTRY_KEY}" "StartMenuFolder"
+
+  RMDir "$INSTDIR"
+
+  SetDetailsPrint both
 
 FunctionEnd
 
@@ -1062,6 +1138,7 @@ Function .onInit
   !insertmacro UMUI_MULTILANG_GET
 
   ; Check NSIS Version
+  ClearErrors
   ReadRegDword $0 HKLM Software\NSIS "VersionMajor"
   IfErrors errorNSIS 0
     ReadRegDword $1 HKLM Software\NSIS "VersionMinor"
@@ -1073,13 +1150,11 @@ Function .onInit
           Quit
 
   okNSIS:
-  ClearErrors
 
   IntCmp $1 0 okNSISMin 0 okNSISMin
-    MessageBox MB_OK|MB_ICONSTOP "Your version of NSIS is not compatible with UltraModernUI.$\r$\nPlease, update NSIS (http://nsis.sourceforge.net) and then re-execute this install.$\n$\rThis install will stop."
+    MessageBox MB_OK|MB_ICONSTOP "Your version of NSIS is not compatible with Ultra-Modern UI.$\r$\nPlease, update NSIS (http://nsis.sourceforge.net) and then re-execute this install.$\n$\rThis install will stop."
     Quit
   okNSISMin:
-  ClearErrors
 
   ; ReadOnly Unselect if NSIS != VER_MAJOR && NSIS >= VER_MINOR
   IntCmp $0 ${VER_MAJOR} 0 unselectROlangFiles unselectROlangFiles
@@ -1091,7 +1166,6 @@ Function .onInit
     SectionSetFlags ${SecNSISLanguagesFiles} $2
     !insertmacro ClearSectionInInstType ${SecNSISLanguagesFiles} 4 ;4 complete
   end1:
-  ClearErrors
 
 FunctionEnd
 
