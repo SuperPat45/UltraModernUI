@@ -163,7 +163,7 @@
   ${LangFileString} UMUI_TEXT_MAINTENANCE_REPAIR_TITLE "Reparieren"
   ${LangFileString} UMUI_TEXT_MAINTENANCE_REPAIR_TEXT "Reinstallation aller bereits installierten $(^NameDA) Komponenten."
   ${LangFileString} UMUI_TEXT_MAINTENANCE_REMOVE_TITLE "Entfernen"
-  ${LangFileString} UMUI_TEXT_MAINTENANCE_REMOVE_TEXT "Deinstallation der $(^NameDA) vom Computer."
+  ${LangFileString} UMUI_TEXT_MAINTENANCE_REMOVE_TEXT "Deinstallation von $(^NameDA) vom Computer."
   ${LangFileString} UMUI_TEXT_MAINTENANCE_CONTINUE_TITLE "Installation fortsetzen"
   ${LangFileString} UMUI_TEXT_MAINTENANCE_CONTINUE_TEXT "Installation wie üblich fortsetzen. Verwenden Sie diese Option, wenn die Neuinstallation eine bereits existierende Installation überschreiben soll oder um eine Neuinstallation in einem anderen Verzeichnis durchzuführen."
 !endif
