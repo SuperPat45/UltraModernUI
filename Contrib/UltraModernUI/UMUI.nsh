@@ -3903,72 +3903,72 @@ Var UMUI_INSTALLFLAG                ; Contains a OR of all the flags define here
   Push $3    ; Len to compare
   Push $4    ; Counter
 
-  StrCmp $MUI_TEMP1 "save" 0 read${SEC}
+  StrCmp "$MUI_TEMP1" "save" 0 "read${SEC}"
   ;Save choosen components
-    SectionGetFlags "${${SEC}}" $UMUI_TEMP3
-    IntOp $UMUI_TEMP3 $UMUI_TEMP3 & 1      ; 1 is ${SF_SELECTED}
-    StrCmp $UMUI_TEMP3 1 0 end${SEC}
+    SectionGetFlags "${${SEC}}" "$UMUI_TEMP3"
+    IntOp "$UMUI_TEMP3" "$UMUI_TEMP3" & 1      ; 1 is ${SF_SELECTED}
+    StrCmp "$UMUI_TEMP3" 1 0 "end${SEC}"
 
       ;delete "${SEC}=*|" from $MUI_TEMP2 if already in
       StrLen $0 "${SEC}="
-      StrCpy $2 $MUI_TEMP2
+      StrCpy $2 "$MUI_TEMP2"
       StrCpy $4 0
 
-      loops${SEC}:
+      "loops${SEC}:"
         StrCpy $1 $2 $0
         StrLen $3 $2
-        IntCmp $3 $0 0 notfounds${SEC} 0
-          StrCmp $1 "${SEC}=" founds${SEC}
+        IntCmp $3 $0 0 "notfounds${SEC}" 0
+          StrCmp "$1" "${SEC}=" "founds${SEC}"
             StrCpy $2 $2 "" 1
             IntOp $4 $4 + 1
-            Goto loops${SEC}
-      founds${SEC}:
+            Goto "loops${SEC}"
+      "founds${SEC}:"
         ;$0 the temporary new $MUI_TEMP2 string
-        StrCpy $0 $MUI_TEMP2 $4
-        loopsc${SEC}:
+        StrCpy $0 "$MUI_TEMP2" $4
+        "loopsc${SEC}:"
           StrCpy $1 $2 1
-          StrCmp $1 "|" foundsc${SEC}
+          StrCmp $1 "|" "foundsc${SEC}"
             StrCpy $2 $2 "" 1
-            Goto loopsc${SEC}
-        foundsc${SEC}:
+            Goto "loopsc${SEC}"
+        "foundsc${SEC}:"
           StrCpy $2 $2 "" 1
-          StrCpy $MUI_TEMP2 "$0$2"
-      notfounds${SEC}:
+          StrCpy "$MUI_TEMP2" "$0$2"
+      "notfounds${SEC}:"
         !ifdef UMUI_COMPONENT_VERSION
-          StrCpy $MUI_TEMP2 "$MUI_TEMP2${SEC}=${VER}|"
+          StrCpy "$MUI_TEMP2" "$MUI_TEMP2${SEC}=${VER}|"
         !else
-          StrCpy $MUI_TEMP2 "$MUI_TEMP2${SEC}=|"
+          StrCpy "$MUI_TEMP2" "$MUI_TEMP2${SEC}=|"
         !endif
-        Goto end${SEC}
+        Goto "end${SEC}"
 
   ;Read choosen components
-  read${SEC}:
+  "read${SEC}:"
 
     StrLen $0 "${SEC}="
-    StrCpy $2 $MUI_TEMP1
+    StrCpy $2 "$MUI_TEMP1"
 
-    loop${SEC}:
+    "loop${SEC}:"
       StrCpy $1 $2 $0
       StrLen $3 $2
-      IntCmp $3 $0 0 notfound${SEC} 0
-        StrCmp $1 "${SEC}=" found${SEC}
+      IntCmp $3 $0 0 "notfound${SEC}" 0
+        StrCmp $1 "${SEC}=" "found${SEC}"
           StrCpy $2 $2 "" 1
-          Goto loop${SEC}
+          Goto "loop${SEC}"
 
-    found${SEC}:
+    "found${SEC}:"
       ; select component
       SectionGetFlags "${${SEC}}" $0
       IntOp $0 $0 | 1              ; 0x00000001 is ${SF_SELECTED}
       SectionSetFlags "${${SEC}}" $0
 
-      Goto end${SEC}
-    notfound${SEC}:
+      Goto "end${SEC}"
+    "notfound${SEC}:"
       ; unselect component
       SectionGetFlags "${${SEC}}" $0
       IntOp $0 $0 & 0xFFFFFFFE    ; 0xFFFFFFFE is ${SECTION_OFF}
       SectionSetFlags "${${SEC}}" $0
 
-  end${SEC}:
+  "end${SEC}:"
 
   Pop $4
   Pop $3
