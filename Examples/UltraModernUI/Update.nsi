@@ -154,7 +154,7 @@ FunctionEnd
 
   ;Language strings
   LangString DESC_SecDummy ${LANG_ENGLISH} "A test section."
-  LangString DESC_SecDummy2 ${LANG_ENGLISH} "An other test section."
+  LangString DESC_SecDummy2 ${LANG_ENGLISH} "Another test section."
 
   ;Declare all the components (Needed by UMUI_COMPONENTSPAGE_REGISTRY_VALUENAME)
   !insertmacro UMUI_DECLARECOMPONENTS_BEGIN

@@ -31,9 +31,9 @@
     <div style="text-align: justify;">
       <p>The Ultra-Modern User Interface is a new interface with a style like the most recent installers for NSIS 3 (Nullsoft Scriptable Install System) x86 edition, the tool that allows programmers to create such installers for Windows. Ultra-Modern UI and NSIS are released under an open source license.</p>
       <p>The Ultra-Modern User Interface also features new pages (Confirm, Abort, AlternativeStartMenu, AdditionalTasks, Information, Maintenance, Update, SetupType...). The interface and the graphics can be customized using the provided settings and the new skins system. </p>
-      <p>Ultra-Modern UI include also an other User Interface named Modern UIEx. Modern UIEx is the same User Interface as the original Modern UI style but with the support of the new ultra-modern pages and with a little more options.</p>
-      <p>Using the Ultra-Modern UI macros and language files, writing scripts with a ultra-modern interface is easy. A lot of examples are available to show the different features and this document contains all information about writing Ultra-Modern UI scripts and a reference of all settings.</p>
-      <p>The issue of Ultra-Modern UI is to be the most compatible with the existing Modern UI scripts. Because of it is based on the Modern UI of Joost Verburg, it use the same macro a define and provide new one. The new macro and define use the prefix UMUI_ instead of MUI_.</p>
+      <p>Ultra-Modern UI include also another User Interface named Modern UIEx. Modern UIEx is the same User Interface as the original Modern UI style but with the support of the new ultra-modern pages and with a little more options.</p>
+      <p>Using the Ultra-Modern UI macros and language files, writing scripts with an ultra-modern interface is easy. A lot of examples are available to show the different features and this document contains all information about writing Ultra-Modern UI scripts and a reference of all settings.</p>
+      <p>The issue of Ultra-Modern UI is to be the most compatible with the existing Modern UI scripts. Because of it is based on the Modern UI of Joost Verburg, it uses the same macro and define and provide new one. The new macro and define use the prefix UMUI_ instead of MUI_.</p>
       <p>Please be aware that the Ultra-Modern UI and the Modern UI interfaces settings are different compared to the classic interface. This means that you should not use settings like LicenseText, Icon, CheckBitmap, InstallColors etc. but the ones that are documented here.</p>
       <p>Ultra-Modern UI include three NSIS plug-ins:</p>
       <ul>
@@ -1543,7 +1543,7 @@ FunctionEnd</pre>
       serialID: A unique identifiant for this serial number<br />
       type: How many chars and how many inputs to show on the line. Example: 555 for 3 inputs of 5 characters each, 0 for unlimited chars<br />
       flags: Can be one or many (separated by |) of "", NODASHS, TOUPPER, TOLOWER, NUMBERS, CANBEEMPTY<br />
-      default: The défault value if not already saved in the registry.<br />
+      default: The default value if not already saved in the registry.<br />
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example XXXXX-XXXXX-XXXXX or XXXXXXXXXXXXXXX<br />
       A define are available on these macro :<br />
       <span class="blue"><strong>UMUI_SERIALNUMBERPAGE_SERIAL_REGISTRY_ROOT</strong></span> <span class="parameter">root</span><br />
@@ -2329,7 +2329,7 @@ FunctionEnd</pre>
     <p>You can call InstallOptions in the function defined with the Page or UninstPage command using the MUI_INSTALLOPTIONS_DISPLAY macro. 
     This macro skin automatically your custom pages. It can also automatically convert, on the fly, your custom InstallOptions INI into an InstallOptionsEx INI.</p>
 
-    <p>If the UMUI_(UN)PAGE_ABORT page is inserted, you need to use the <strong>UMUI_ABORT_IF_INSTALLFLAG_IS</strong> macro with the ${UMUI_CANCELLED} flag to hide the page when user cancel the installation:</p>
+    <p>If the UMUI_(UN)PAGE_ABORT page is inserted, you need to use the <strong>UMUI_ABORT_IF_INSTALLFLAG_IS</strong> macro with the ${UMUI_CANCELLED} flag to hide your custom pages when user cancel the installation:</p>
     <p>Use the <strong>MUI_HEADER_TEXT</strong> macro to set the text on the page header:</p>
 
 <pre>LangString TEXT_IO_TITLE ${LANG_ENGLISH} "Install Options Page Title"
@@ -2438,7 +2438,7 @@ FunctionEnd</pre>
 
     <p>Contrary to InstallOptions(Ex), Ultra-Modern UI does not have macro to skin automatically your custom pages.</p>
 
-    <p>If the UMUI_(UN)PAGE_ABORT page is inserted, you need to use the <strong>UMUI_ABORT_IF_INSTALLFLAG_IS</strong> macro with the ${UMUI_CANCELLED} flag to hide the page when user cancel the installation:</p>
+    <p>If the UMUI_(UN)PAGE_ABORT page is inserted, you need to use the <strong>UMUI_ABORT_IF_INSTALLFLAG_IS</strong> macro with the ${UMUI_CANCELLED} flag to hide your custom pages when user cancel the installation:</p>
     <p>Use the <strong>MUI_HEADER_TEXT</strong> macro to set the text on the page header:</p>
 
 <pre>!include nsDialogs.nsh
@@ -2647,14 +2647,21 @@ FunctionEnd</span></pre>
 <h1>Version History</h1>
 <ul>
 
+  <li><strong>Version 2.0 beta 6</strong> - ??? ??, 2019
+    <ul>
+      <li>Support multi-word section define (By Tobias B. Besemer).</li>
+      <li>Minor Fixes.</li>
+    </ul>
+    </li>
+  
   <li><strong>Version 2.0 beta 5</strong> - January 01, 2019
   <ul>
     <li>Ultra-Modern UI is resynchronized under Modern UI version 1.81.</li>
     <li>Consequently, The UMUI_TEXT_COLOR define was renamed in MUI_TEXTCOLOR.</li>
     <li>UMUI now provide an extended NSIS Menu with links for UMUI and extra plugins documentations.</li>
     <li>Consequently, UMUI installers no more create extra shortcuts on the start menu, but replace the original NSIS menu shortcuts.</li>
-    <li>Fixed bug when the Additional Tasks page is skipped, options where not affected...</li>
-    <li>Fixed bug when the Licence page text is unreadable with the Windows high contrast mode.</li>
+    <li>Fixed bug when the Additional Tasks page is skipped, options were not affected...</li>
+    <li>Fixed bug when the License page text is unreadable with the Windows high contrast mode.</li>
     <li>Minor Fixes.</li>
   </ul>
   </li>
@@ -2772,7 +2779,7 @@ FunctionEnd</span></pre>
   - And inspired of the ExperienceUI of dandaman32.</p>
 
   <p>Skins by SuperPat<br />
-  UltraModern Icons and WXP BackGround skin is taken again on ExperineceUI of dandaman32.</p>
+  Ultra-Modern Icons and WXP BackGround skin is taken again on ExperineceUI of dandaman32.</p>
 
 </div>
 

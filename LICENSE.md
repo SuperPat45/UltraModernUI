@@ -1,6 +1,6 @@
 Copyright © 2005-2019 SuperPat
 
-UltraModernUI is based on the ModernUI of Joost Verburg and inspired of the ExperienceUI of dandaman32
+Ultra-Modern UI is based on the Modern UI of Joost Verburg and inspired of the ExperienceUI of dandaman32
 
 This software is provided 'as-is', without any express or implied warranty. In no event will the authors be held liable for any damages arising from the use of this software.
 

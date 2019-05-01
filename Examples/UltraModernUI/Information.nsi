@@ -51,7 +51,7 @@
 ;  Optional "information.txt" for untranslated language files (if "informationXXXX.txt" not found)
   !insertmacro UMUI_PAGE_INFORMATION "information*.txt"
   
-;  An other english only RTF information page (InstallOptionsEx only)
+;  Another english only RTF information page (InstallOptionsEx only)
   !define UMUI_INFORMATIONPAGE_USE_RICHTEXTFORMAT
   !insertmacro UMUI_PAGE_INFORMATION "${NSISDIR}\Docs\UltraModernUI\ReadMe.rtf"
 

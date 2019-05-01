@@ -150,7 +150,7 @@
   ${LangFileString} UMUI_TEXT_UPDATE_REMOVE_TITLE "Remove"
   ${LangFileString} UMUI_TEXT_UPDATE_REMOVE_TEXT "Uninstall the version $OLDVERSION from your computer."
   ${LangFileString} UMUI_TEXT_UPDATE_CONTINUE_TITLE "Continue setup"
-  ${LangFileString} UMUI_TEXT_UPDATE_CONTINUE_TEXT "Continue the setup as usual. Use this option if you want to install this newer version in an other folder in parallel with the preceding setup."
+  ${LangFileString} UMUI_TEXT_UPDATE_CONTINUE_TEXT "Continue the setup as usual. Use this option if you want to install this newer version in another folder in parallel with the preceding setup."
 !endif
 
 

@@ -1,5 +1,5 @@
 ; o-----------------------------------------------o
-; | NSIS 3.03 + Ultra-Modern User Interface 2.0b5 |
+; | NSIS 3.04 + Ultra-Modern User Interface 2.0b5 |
 ; (-----------------------------------------------)
 ; | Installer script.                             |
 ; | Written by SyperPat                           |
@@ -321,18 +321,17 @@ Section "NSIS Core Files (required)" SecCore
       File "..\..\NSIS.exe.manifest"
     !endif
   !else
-    !define NO_NSISMENU_HTML 1
-    !makensis '-v2 "NSISMenu.nsi" "-XOutFile ..\..\NSIS.exe"' = 0
+    !makensis '-v2 "..\NSISMenu.nsi" "-XOutFile ..\..\NSIS.exe"' = 0
   !endif
   File ..\..\NSIS.exe
 
   SetOutPath $INSTDIR\Bin
   File ..\..\Bin\makensis.exe
-!ifdef USE_NEW_ZLIB
-  File ..\..\Bin\zlib.dll
-!else
-  File ..\..\Bin\zlib1.dll
-!endif
+  !if /FileExists "..\..\Bin\zlib1.dll"
+    File ..\..\Bin\zlib1.dll
+  !else
+    File ..\..\Bin\zlib.dll
+  !endif
 
   SetOutPath $INSTDIR\Stubs
   File ..\..\Stubs\uninst
@@ -381,7 +380,7 @@ Section "NSIS Core Files (required)" SecCore
   SetOutPath $INSTDIR\Docs\makensisw
   File ..\..\Docs\makensisw\*.txt
 
-  !ifndef NO_NSISMENU_HTML
+  !if /FileExists "..\..\Menu\index.html"
     SetOutPath $INSTDIR\Menu
     File ..\..\Menu\*.html
     SetOutPath $INSTDIR\Menu\images
@@ -1380,15 +1379,15 @@ SectionGroup /e "Plugins" SecGroupPlugins
 
     SectionIn 3
 
-  SetOutPath $INSTDIR\Contrib\InstallOptionsEx
-  File "..\..\Contrib\InstallOptionsEx\*.cpp"
-  File "..\..\Contrib\InstallOptionsEx\*.c"
-  File "..\..\Contrib\InstallOptionsEx\*.h"
-  File "..\..\Contrib\InstallOptionsEx\ioptdll.rc"
-  File "..\..\Contrib\InstallOptionsEx\io.sln"
-  File "..\..\Contrib\InstallOptionsEx\io.vcproj"
-  SetOutPath $INSTDIR\Contrib\InstallOptionsEx\Controls
-  File "..\..\Contrib\InstallOptionsEx\Controls\*.h"
+    SetOutPath $INSTDIR\Contrib\InstallOptionsEx
+    File "..\..\Contrib\InstallOptionsEx\*.cpp"
+    File "..\..\Contrib\InstallOptionsEx\*.c"
+    File "..\..\Contrib\InstallOptionsEx\*.h"
+    File "..\..\Contrib\InstallOptionsEx\ioptdll.rc"
+    File "..\..\Contrib\InstallOptionsEx\io.sln"
+    File "..\..\Contrib\InstallOptionsEx\io.vcproj"
+    SetOutPath $INSTDIR\Contrib\InstallOptionsEx\Controls
+    File "..\..\Contrib\InstallOptionsEx\Controls\*.h"
 
   SectionEnd
 
