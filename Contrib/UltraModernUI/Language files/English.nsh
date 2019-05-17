@@ -27,10 +27,10 @@
 
 
 !ifdef UMUI_SERIALNUMBERPAGE | UMUI_UNSERIALNUMBERPAGE
-  ${LangFileString} UMUI_TEXT_SERIALNUMBER_TITLE "Enter your serial number of $(^NameDA)"
-  ${LangFileString} UMUI_TEXT_SERIALNUMBER_SUBTITLE "Please inform the various fields below."
-  ${LangFileString} UMUI_TEXT_SERIALNUMBER_INFO_TEXT "Please inform the various fields below. $_CLICK"
-  ${LangFileString} UMUI_TEXT_SERIALNUMBER_INVALIDATE_TEXT "$UMUI_SNTEXT is invalid. Please reverify information that you have just entered."
+  ${LangFileString} UMUI_TEXT_SERIALNUMBER_TITLE "Enter your serial number for $(^NameDA)"
+  ${LangFileString} UMUI_TEXT_SERIALNUMBER_SUBTITLE "Please complete the various fields below."
+  ${LangFileString} UMUI_TEXT_SERIALNUMBER_INFO_TEXT "Please complete the various fields below. $_CLICK"
+  ${LangFileString} UMUI_TEXT_SERIALNUMBER_INVALIDATE_TEXT "$UMUI_SNTEXT is invalid. Please verify that you have entered the serial number correctly."
   ${LangFileString} UMUI_TEXT_SERIALNUMBER_NAME "Name"
   ${LangFileString} UMUI_TEXT_SERIALNUMBER_ORGANIZATION "Organization"
   ${LangFileString} UMUI_TEXT_SERIALNUMBER_SERIALNUMBER "Serial Number"
@@ -42,7 +42,7 @@
 !ifdef UMUI_CONFIRMPAGE
   ${LangFileString} UMUI_TEXT_INSTCONFIRM_SUBTITLE "Setup has finished gathering information and is ready to install $(^NameDA)."
   ${LangFileString} UMUI_TEXT_INSTCONFIRM_TITLE "Confirm Installation"
-  ${LangFileString} UMUI_TEXT_INSTCONFIRM_TEXT_TOP "Setup is ready to install $(^NameDA) on your computer.$\r$\nIf you want to review or change any of your installation settings, click $(^BackBtn). $_CLICK"
+  ${LangFileString} UMUI_TEXT_INSTCONFIRM_TEXT_TOP "Setup is ready to install $(^NameDA) to your computer.$\r$\nIf you want to review or change any of your installation settings, click $(^BackBtn). $_CLICK"
 !endif
 
 !ifdef UMUI_UNCONFIRMPAGE
@@ -73,21 +73,21 @@
 !ifdef UMUI_SETUPTYPEPAGE
   ${LangFileString} UMUI_TEXT_SETUPTYPE_TITLE "Setup Type"
   ${LangFileString} UMUI_TEXT_SETUPTYPE_SUBTITLE "Choose the setup type that best suits your needs."
-  ${LangFileString} UMUI_TEXT_SETUPTYPE_INFO_TEXT "Please select a setup type."
-  ${LangFileString} UMUI_TEXT_SETUPTYPE_MINIMAL_TEXT "Only the necessary features will be installed. (Requires the less disk space)"
-  ${LangFileString} UMUI_TEXT_SETUPTYPE_STANDARD_TEXT "All the main features will be installed. Recommended for the majority of the users."
-  ${LangFileString} UMUI_TEXT_SETUPTYPE_COMPLETE_TEXT "All program features will be installed. (Requires the most disk space)"
-  ${LangFileString} UMUI_TEXT_SETUPTYPE_CUSTOM_TEXT "Choose which programm features you want installed and where they will be installed. Recommended for advanced users."
+  ${LangFileString} UMUI_TEXT_SETUPTYPE_INFO_TEXT "Please select a setup type:"
+  ${LangFileString} UMUI_TEXT_SETUPTYPE_MINIMAL_TEXT "Only required features will be installed (Requires the least disk space)."
+  ${LangFileString} UMUI_TEXT_SETUPTYPE_STANDARD_TEXT "The most common features will be installed. Recommended for most users."
+  ${LangFileString} UMUI_TEXT_SETUPTYPE_COMPLETE_TEXT "All program features will be installed (Requires the most disk space)."
+  ${LangFileString} UMUI_TEXT_SETUPTYPE_CUSTOM_TEXT "Choose which program features you want to install, and to which location. Recommended only for advanced users."
 !endif
 
 !ifdef UMUI_UNSETUPTYPEPAGE
   ${LangFileString} UMUI_UNTEXT_SETUPTYPE_TITLE "Uninstall Type"
   ${LangFileString} UMUI_UNTEXT_SETUPTYPE_SUBTITLE "Choose the uninstall type that best suits your needs."
-  ${LangFileString} UMUI_UNTEXT_SETUPTYPE_INFO_TEXT "Please select an uninstall type."
-  ${LangFileString} UMUI_UNTEXT_SETUPTYPE_MINIMAL_TEXT "Only the main features will be kept."
-  ${LangFileString} UMUI_UNTEXT_SETUPTYPE_STANDARD_TEXT "Only the necessary features will be kept."
-  ${LangFileString} UMUI_UNTEXT_SETUPTYPE_COMPLETE_TEXT "All program will be uninstalled."
-  ${LangFileString} UMUI_UNTEXT_SETUPTYPE_CUSTOM_TEXT "Choose which programm features you want uninstall."
+  ${LangFileString} UMUI_UNTEXT_SETUPTYPE_INFO_TEXT "Please select an uninstall type:"
+  ${LangFileString} UMUI_UNTEXT_SETUPTYPE_MINIMAL_TEXT "Only the common features will be kept."
+  ${LangFileString} UMUI_UNTEXT_SETUPTYPE_STANDARD_TEXT "Only required features will be kept."
+  ${LangFileString} UMUI_UNTEXT_SETUPTYPE_COMPLETE_TEXT "All program features will be uninstalled."
+  ${LangFileString} UMUI_UNTEXT_SETUPTYPE_CUSTOM_TEXT "Choose which program features you want to uninstall."
 !endif
 
 !ifdef UMUI_SETUPTYPEPAGE | UMUI_UNSETUPTYPEPAGE
@@ -99,35 +99,35 @@
 
 
 !ifdef UMUI_INFORMATIONPAGE
-  ${LangFileString} UMUI_TEXT_INFORMATION_SUBTITLE "Please take note of informations concerning the installation of $(^NameDA)."
+  ${LangFileString} UMUI_TEXT_INFORMATION_SUBTITLE "Please take note of the following regarding the installation and use of $(^NameDA)."
 !endif
 
 !ifdef UMUI_UNINFORMATIONPAGE
-  ${LangFileString} UMUI_UNTEXT_INFORMATION_SUBTITLE "Please take note of informations concerning the uninstallation of $(^NameDA)."
+  ${LangFileString} UMUI_UNTEXT_INFORMATION_SUBTITLE "Please take note of the following regarding the uninstallation of $(^NameDA)."
 !endif
 
 !ifdef UMUI_INFORMATIONPAGE | UMUI_UNINFORMATIONPAGE
   ${LangFileString} UMUI_TEXT_INFORMATION_TITLE "Information"
-  ${LangFileString} UMUI_TEXT_INFORMATION_INFO_TEXT "Informations concerning $(^NameDA)."
+  ${LangFileString} UMUI_TEXT_INFORMATION_INFO_TEXT "Information regarding $(^NameDA):"
 !endif
 
 
 !ifdef UMUI_ADDITIONALTASKSPAGE
-  ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_INFO_TEXT "Select additional tasks that setup must carry out during the setup process of $(^NameDA). $_CLICK"
+  ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_INFO_TEXT "Select additional tasks that setup should carry out during the installation of $(^NameDA). $_CLICK"
 !endif
 
 !ifdef UMUI_UNADDITIONALTASKSPAGE
-  ${LangFileString} UMUI_UNTEXT_ADDITIONALTASKS_INFO_TEXT "Select additional tasks that setup must carry out during the uninstall process of $(^NameDA). $_CLICK"
+  ${LangFileString} UMUI_UNTEXT_ADDITIONALTASKS_INFO_TEXT "Select additional tasks that setup should carry out during the uninstallation of $(^NameDA). $_CLICK"
 !endif
 
 !ifdef UMUI_ADDITIONALTASKSPAGE | UMUI_UNADDITIONALTASKSPAGE
   ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_TITLE "Additional Tasks"
-  ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_SUBTITLE "Which are the additional tasks which must be carried out?"
+  ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_SUBTITLE "Which additional tasks should be performed?"
   ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_ADDITIONAL_ICONS "Additional Icons:"
   ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_CREATE_DESKTOP_ICON "Create a desktop icon"
   ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_CREATE_QUICK_LAUNCH_ICON "Create a Quick Launch icon"
   ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_ADVANCED_PARAMETERS "Advanced parameters:"
-  ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_LAUNCH_PROGRAM_AT_WINDOWS_STARTUP "Launch $(^NameDA) at the windows startup"
+  ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_LAUNCH_PROGRAM_AT_WINDOWS_STARTUP "Launch $(^NameDA) at Windows startup"
   ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_FILE_ASSOCIATION "File Association:"
   ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_ASSOCIATE_WITH "Associate $(^NameDA) with the "
   ${LangFileString} UMUI_TEXT_ADDITIONALTASKS_ASSOCIATE_WITH_END " file type"
@@ -135,7 +135,7 @@
 
 
 !ifdef UMUI_CONFIRMPAGE | UMUI_UNCONFIRMPAGE | UMUI_ALTERNATIVESTARTMENUPAGE | UMUI_UNALTERNATIVESTARTMENUPAGE
-  ${LangFileString} UMUI_TEXT_SHELL_VAR_CONTEXT "How the shortcuts will be created:"
+  ${LangFileString} UMUI_TEXT_SHELL_VAR_CONTEXT "For whom will shortcuts be created?"
   ${LangFileString} UMUI_TEXT_SHELL_VAR_CONTEXT_FOR_ALL_USERS "For all users"
   ${LangFileString} UMUI_TEXT_SHELL_VAR_CONTEXT_ONLY_FOR_CURRENT_USER "Only for the current user"
 !endif
@@ -144,13 +144,13 @@
 !ifdef UMUI_UPDATEPAGE
   ${LangFileString} UMUI_TEXT_UPDATE_TITLE "Update"
   ${LangFileString} UMUI_TEXT_UPDATE_SUBTITLE "Update a previous version of the program."
-  ${LangFileString} UMUI_TEXT_UPDATE_INFO_TEXT "Welcome to the $(^NameDA) update wizard.$\r$\nThis program lets you update the version $OLDVERSION which was found on your computer."
+  ${LangFileString} UMUI_TEXT_UPDATE_INFO_TEXT "Welcome to the $(^NameDA) update wizard.$\r$\nThis program allows you to update the prior version $OLDVERSION which was found on your computer."
   ${LangFileString} UMUI_TEXT_UPDATE_UPDATE_TITLE "Update"
-  ${LangFileString} UMUI_TEXT_UPDATE_UPDATE_TEXT "Update all $(^NameDA) components already installed to the version $NEWVERSION."
+  ${LangFileString} UMUI_TEXT_UPDATE_UPDATE_TEXT "Update all $(^NameDA) components already installed to version $NEWVERSION."
   ${LangFileString} UMUI_TEXT_UPDATE_REMOVE_TITLE "Remove"
-  ${LangFileString} UMUI_TEXT_UPDATE_REMOVE_TEXT "Uninstall the version $OLDVERSION from your computer."
+  ${LangFileString} UMUI_TEXT_UPDATE_REMOVE_TEXT "Uninstall version $OLDVERSION from your computer."
   ${LangFileString} UMUI_TEXT_UPDATE_CONTINUE_TITLE "Continue setup"
-  ${LangFileString} UMUI_TEXT_UPDATE_CONTINUE_TEXT "Continue the setup as usual. Use this option if you want to install this newer version in another folder in parallel with the preceding setup."
+  ${LangFileString} UMUI_TEXT_UPDATE_CONTINUE_TEXT "Continue setup as usual. Use this option if you want to install this newer version in another folder in parallel with the previous install."
 !endif
 
 
@@ -165,7 +165,7 @@
   ${LangFileString} UMUI_TEXT_MAINTENANCE_REMOVE_TITLE "Remove"
   ${LangFileString} UMUI_TEXT_MAINTENANCE_REMOVE_TEXT "Uninstall $(^NameDA) from your computer."
   ${LangFileString} UMUI_TEXT_MAINTENANCE_CONTINUE_TITLE "Continue setup"
-  ${LangFileString} UMUI_TEXT_MAINTENANCE_CONTINUE_TEXT "Continue the setup as usual. Use this option if you want to reinstall this program over an existing install or to install it a new time in a different folder."
+  ${LangFileString} UMUI_TEXT_MAINTENANCE_CONTINUE_TEXT "Continue the setup as usual. Use this option if you want to reinstall this program over an existing install or to install it again to a different folder."
 !endif
 
 
