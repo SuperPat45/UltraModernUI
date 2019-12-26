@@ -20,6 +20,9 @@
   ;Get installation folder from registry if available
   InstallDirRegKey HKCU "Software\Modern UI Ex Test" ""
 
+  ;Generate unicode installer
+  Unicode True
+
   ;Request application privileges for Windows Vista
   RequestExecutionLevel user
   

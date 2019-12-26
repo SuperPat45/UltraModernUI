@@ -13,6 +13,14 @@ InstallButtonText " "
 CompletedText " "
 LangString ^ClickInstall 0 " "
 Caption "$(^Name)"
+!ifdef VER_MAJOR & VER_MINOR & VER_REVISION & VER_BUILD
+!searchreplace VERSTR "${NSIS_VERSION}" "v" ""
+VIProductVersion ${VER_MAJOR}.${VER_MINOR}.${VER_REVISION}.${VER_BUILD}
+VIAddVersionKey "ProductName" "NSIS"
+VIAddVersionKey "ProductVersion" "${VERSTR}"
+VIAddVersionKey "FileVersion" "${VERSTR}"
+VIAddVersionKey "FileDescription" "NSIS Menu with UMUI"
+!endif
 
 !include nsDialogs.nsh
 !include WinMessages.nsh
@@ -23,21 +31,46 @@ Caption "$(^Name)"
 !define PD "Docs" ; Local with WWW fallback (located at the same relative path)
 !define WWW "http://nsis.sf.net"
 
-!define CB_HEADER 0x755585
+!define CB_HEADER '0x755585 0x222222'
 !define UY_HEADER 28
-!define CB_PAGE 0xffffff
-!define CT_SECTION 0x666666
-!define CB_SECTION ${CB_PAGE}
+!define CT_PAGE '0x000000 0xaaaaaa'
+!define CB_PAGE '0xffffff 0x111111'
+!define CT_SECTION '0x666666 0xeeeeee'
+!define CB_SECTION '${CB_PAGE}'
 !define UY_SECTION 11 ; Height of a section
 !define UY_SECTIONBPAD 2 ; Extra padding on the bottom of section headers
 !define UY_TXT 9 ; Height of a normal item
 !define UY_TXTBPAD 0 ; Extra padding on the bottom of normal items
 !define UX_COLPAD 7 ; Spacing between columns
 !define UY_ROW2 104 ; Absolute position of the 2nd row
-!define CT_LINK 0x0c6e97 ; SYSCLR:HOTLIGHT
+!define CT_LINK '0x0c6e97 0x0c6e97' ; SYSCLR:HOTLIGHT
 !define /Math UX_PAGE 00 + ${UX_COLPAD}
 !define /Math UY_PAGE ${UY_HEADER} + 10
 !define UX ${UX_PAGE}
+!define CB_FOOTERLINE '0xc4c4c4 0x333333'
+!define CT_FOOTER '0xbbbbbb 0x444444'
+
+Var UseLightTheme
+
+Function .onGUIInit
+ReadRegDWORD $UseLightTheme HKCU "Software\NSIS" "UseLightTheme"
+StrCmp $UseLightTheme "" 0 +2
+ReadRegDWORD $UseLightTheme HKCU "Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" "AppsUseLightTheme"
+StrCmp $UseLightTheme "" 0 +2
+StrCpy $UseLightTheme 1 ; Default
+
+StrCmp $UseLightTheme "0" 0 +2
+System::Call 'USER32::SetProp(p$hWndParent,t"UseImmersiveDarkModeColors",i1)'
+FunctionEnd
+
+!define SetCtlColors "!insertmacro SetCtlColors "
+!macro SetCtlColors hWnd ctlig ctdar cblig cbdar
+StrCmp $UseLightTheme "0" 0 +3
+SetCtlColors ${hWnd} "${ctdar}" ${cbdar}
+Goto +2
+SetCtlColors ${hWnd} "${ctlig}" ${cblig}
+!macroend
+
 
 Function PageLeave
 System::Call 'USER32::GetFocus()p.r0'
@@ -60,7 +93,7 @@ System::Call 'USER32::MoveWindow(pr0,i0,i0,ir3,ir4,i0)'
 
 nsDialogs::Create ${IDC_CHILDRECT}
 Pop $R9
-SetCtlColors $R9 000000 ${CB_PAGE}
+${SetCtlColors} $R9 ${CT_PAGE} ${CB_PAGE}
 
 !macro StartColumn W
 !define /ReDef UY ${UY_PAGE}
@@ -77,7 +110,7 @@ SetCtlColors $R9 000000 ${CB_PAGE}
 !define /ReDef /Math W ${W} + 4 ; Make it slightly wider
 ${NSD_CreateLabel} ${UX}u ${UY}u ${W}u ${UY_SECTION}u "${Txt}"
 Pop $0
-SetCtlColors $0  ${CT_SECTION} transparent
+${SetCtlColors} $0 ${CT_SECTION} transparent transparent
 SendMessage $0 ${WM_SETFONT} ${HF_HEADER} 1
 !define /ReDef /Math UY ${UY} + ${UY_SECTION}
 !define /ReDef /Math UY ${UY} + ${UY_SECTIONBPAD}
@@ -102,29 +135,20 @@ CreateFont ${HF_HEADER} "Arial" ${UY_SECTION} 700
 
 nsDialogs::CreateControl ${__NSD_Label_CLASS} ${__NSD_Label_STYLE} ${__NSD_Label_EXSTYLE} 33u 0 -33u ${UY_HEADER}u ""
 Pop $0
-SetCtlColors $0 0xffffff ${CB_HEADER} 
+${SetCtlColors} $0 0xffffff 0xffffff ${CB_HEADER}
 
 nsDialogs::CreateControl ${__NSD_Icon_CLASS} ${__NSD_Icon_STYLE}|${SS_CENTERIMAGE}|${SS_CENTER} ${__NSD_Icon_EXSTYLE} 0 0 33u ${UY_HEADER}u ""
 Pop $0
-SetCtlColors $0 "" ${CB_HEADER}
+${SetCtlColors} $0 "" "" ${CB_HEADER}
 ${NSD_SetIconFromInstaller} $0 $1
 
-ReadRegDword $R0 HKLM Software\NSIS "VersionMajor"
-IfErrors endVersion 0
-  ReadRegDword $R1 HKLM Software\NSIS "VersionMinor"
-  IfErrors endVersion 0
-    IntCmp $R1 9 0 0 +3
-      StrCpy $R0 "$R0.0$R1"
-      Goto endVersion
-      StrCpy $R0 "$R0.$R1"
-endVersion:
-
 CreateFont $1 "Trebuchet MS" 17
-nsDialogs::CreateControl ${__NSD_Label_CLASS} ${__NSD_Label_STYLE}|${SS_CENTERIMAGE}|${SS_ENDELLIPSIS} ${__NSD_Label_EXSTYLE} 34u 1u -34u ${UY_HEADER}u "nullsoft scriptable install system $R0"
+!searchreplace VERSTR "${NSIS_VERSION}" "v" ""
+nsDialogs::CreateControl ${__NSD_Label_CLASS} ${__NSD_Label_STYLE}|${SS_CENTERIMAGE}|${SS_ENDELLIPSIS} ${__NSD_Label_EXSTYLE} 34u 1u -34u ${UY_HEADER}u "nullsoft scriptable install system ${VERSTR}"
 Pop $0
 SetCtlColors $0 0x3A2A42 transparent
 SendMessage $0 ${WM_SETFONT} $1 1
-nsDialogs::CreateControl ${__NSD_Label_CLASS} ${__NSD_Label_STYLE}|${SS_CENTERIMAGE}|${SS_ENDELLIPSIS} ${__NSD_Label_EXSTYLE} 33u 0 -33u ${UY_HEADER}u "nullsoft scriptable install system $R0"
+nsDialogs::CreateControl ${__NSD_Label_CLASS} ${__NSD_Label_STYLE}|${SS_CENTERIMAGE}|${SS_ENDELLIPSIS} ${__NSD_Label_EXSTYLE} 33u 0 -33u ${UY_HEADER}u "nullsoft scriptable install system ${VERSTR}"
 Pop $0
 SetCtlColors $0 0xffffff transparent
 SendMessage $0 ${WM_SETFONT} $1 1
@@ -142,7 +166,7 @@ SendMessage $0 ${WM_SETFONT} $1 1
 !define /ReDef UY_MULTILINE 42
 !insertmacro CreateControl Label "Many more examples, tutorials, plug-ins and NSIS-releted software are available at the online Developer Center." ${UX_W} ${UY_MULTILINE}
 Pop $0
-SetCtlColors $0 00000000 ${CB_PAGE}
+${SetCtlColors} $0 ${CT_PAGE} ${CB_PAGE}
 
 
 !insertmacro StartColumn 80
@@ -162,7 +186,7 @@ SetCtlColors $0 00000000 ${CB_PAGE}
 !insertmacro CreateSimpleLink "Bug Tracker" "http://sourceforge.net/tracker/?group_id=22049&atid=373085" ${UX_W}
 !insertmacro CreateSimpleLink "Stackoverflow" "http://stackoverflow.com/questions/tagged/nsis" ${UX_W}
 !insertmacro CreateSimpleLink "Slack collaboration hub" "${WWW}/r/Slack" ${UX_W}
-!insertmacro CreateSimpleLink "IRC channel" "irc://irc.landoleet.org/nsis" ${UX_W}
+;!insertmacro CreateSimpleLink "IRC channel" "irc://irc.landoleet.org/nsis" ${UX_W}
 ;"Pastebin" "http://nsis.pastebin.com/index/1FtyKP89"
 ;"Search" "http://www.google.com/cse/home?cx=005317984255499820329:c_glv1-6a6a"
 
@@ -194,16 +218,24 @@ Call AdjustLinkPair
 !insertmacro CreatePluginLink "nsArray"   "use arrays in scripts"       "${PD}\nsArray\Readme.txt"
 !insertmacro CreatePluginLink "SkinnedControls" "skin buttons/scrollbars" "${PD}\SkinnedControls\Readme.html"
 
+
 ; --- Footer ---
 ${NSD_CreateLabel} 0 -22u 100% 1 ""
 Pop $0
-SetCtlColors $0 000000 0xc4c4c4
+${SetCtlColors} $0 000000 000000 ${CB_FOOTERLINE}
 
 nsDialogs::CreateControl ${__NSD_Label_CLASS} ${__NSD_Label_STYLE}|${SS_CENTERIMAGE}|${SS_NOTIFY} ${__NSD_Label_EXSTYLE} -110u -20u 100% 20u "nsis.sourceforge.net"
 Pop $0
-SetCtlColors $0 0xbbbbbb transparent
+${SetCtlColors} $0 ${CT_FOOTER} transparent transparent
 SendMessage $0 ${WM_SETFONT} ${HF_HEADER} 1
 nsDialogs::SetUserData $0 "http://nsis.sourceforge.net"
+${NSD_OnClick} $0 OnLinkClick
+
+nsDialogs::CreateControl ${__NSD_Label_CLASS} ${__NSD_Label_STYLE}|${SS_CENTERIMAGE}|${SS_NOTIFY} ${__NSD_Label_EXSTYLE} 5u -20u 100% 20u "ultramodernui.sourceforge.net"
+Pop $0
+${SetCtlColors} $0 ${CT_FOOTER} transparent transparent
+SendMessage $0 ${WM_SETFONT} ${HF_HEADER} 1
+nsDialogs::SetUserData $0 "http://ultramodernui.sourceforge.net/"
 ${NSD_OnClick} $0 OnLinkClick
 
 nsDialogs::Show
@@ -259,7 +291,7 @@ FunctionEnd
 Function ConfigureLink
 Pop $1 ; HWND
 ${NSD_OnClick} $1 OnLinkClick
-SetCtlColors $1 ${CT_LINK} ${CB_PAGE}
+${SetCtlColors} $1 ${CT_LINK} ${CB_PAGE}
 ${NSD_GetText} $1 $4
 Push $4
 Call SplitPipe
@@ -284,7 +316,7 @@ FunctionEnd
 
 Function AdjustLinkPair
 Pop $2 ; Label
-SetCtlColors $2 00000000 ${CB_PAGE}
+${SetCtlColors} $2 ${CT_PAGE} ${CB_PAGE}
 Call ConfigureLink
 FunctionEnd
 

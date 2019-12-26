@@ -1,5 +1,5 @@
 ; o-----------------------------------------------o
-; | NSIS 3.04 + Ultra-Modern User Interface 2.0b5 |
+; | NSIS 3.05 + Ultra-Modern User Interface 2.0b6 |
 ; (-----------------------------------------------)
 ; | Installer script.                             |
 ; | Written by SyperPat                           |
@@ -11,11 +11,11 @@
   !define /date NOW "%Y-%m-%d"
   !define NAME "UltraModernUI"
 
-  !define UMUI_VERSION "2.0b5"
+  !define UMUI_VERSION "2.0b6"
   !define UMUI_VERBUILD "2.0_${NOW}"
 
   !define VER_MAJOR 3
-  !define VER_MINOR 04
+  !define VER_MINOR 05
   !define VER_REVISION 0
   !define VER_BUILD 0
   !define VER_REV_STR ""

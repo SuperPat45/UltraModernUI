@@ -19,6 +19,9 @@
   ;Default installation folder
   InstallDir "$DESKTOP\UltraModernUI Test"
   
+  ;Generate unicode installer
+  Unicode True
+
   ;Request application privileges for Windows Vista
   RequestExecutionLevel user
 

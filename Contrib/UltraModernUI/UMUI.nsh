@@ -1,6 +1,6 @@
 /*
 
-NSIS Ultra-Modern User Interface version 2.0 beta 5
+NSIS Ultra-Modern User Interface version 2.0 beta 6
 Copyright 2005-2019 SuperPat
 
 Based on:
@@ -12,10 +12,10 @@ Based on:
 !ifndef MUI_INCLUDED
 !verbose push 3
 !define MUI_INCLUDED
-!define UMUI_SYSVERSION "2.0 beta 5"
+!define UMUI_SYSVERSION "2.0 beta 6"
 !define MUI_SYSVERSION "1.81"
 !verbose pop
-!echo "NSIS Ultra-Modern User Interface version 2.0 beta 5 - Copyright 2005-2019 SuperPat"
+!echo "NSIS Ultra-Modern User Interface version 2.0 beta 6 - Copyright 2005-2019 SuperPat"
 !echo "  (Bugfixes and some additions: 2015-2016 - Bodenseematze)"
 !echo "Based on: NSIS Modern User Interface version 1.81 - Copyright 2002-2019 Joost Verburg"
 
